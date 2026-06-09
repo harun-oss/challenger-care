@@ -1,23 +1,30 @@
+# How to Add a New Workflow Skill
+
+This is the reference template for adding a new skill to the Challenger Care plugin.
+
+## Steps
+
+1. Copy this file structure into `skills/<your-skill-name>/SKILL.md`
+2. Replace every `<placeholder>` with real content
+3. Run `python3 scripts/validate.py` from the plugin root
+4. Commit + push · skill installs on next Cowork sync
+
+## Migration discipline reminders
+
+- Never reference MCP UUIDs directly · pull from `CONFIG.md`
+- Never write `mcp__skills__*` anywhere · breaks artifact import
+- Reference knowledge files via relative paths · `../../assets/file.md`
+- Declare permission tier explicitly · drives who can run this
+
+## Template — copy everything below this line into your new `skills/<your-skill-name>/SKILL.md`
+
+```markdown
 ---
 name: skill-name-in-kebab-case
 description: One sentence describing what this skill does for the Challenger Care team. MANDATORY TRIGGER any mention of [list 3-5 phrases]. Do NOT use for [list scenarios that should route to a different skill].
 ---
 
 # Skill Title in Title Case
-
-<!--
-HOW TO USE THIS TEMPLATE:
-1. Copy this folder · rename to your skill name in kebab-case
-2. Replace every <placeholder> with real content
-3. Run python3 ../../scripts/validate.py
-4. Commit + push · skill installs on next Cowork sync
-
-Migration discipline reminders:
-- Never reference MCP UUIDs directly · pull from CONFIG.md
-- Never write mcp__skills__* anywhere · breaks artifact import
-- Reference knowledge files via relative paths · ../../assets/file.md
-- Declare permission tier explicitly · drives who can run this
--->
 
 ## When to use this workflow
 
@@ -75,3 +82,4 @@ Explain the contract: what changes, what's reversible.
 - When brand voice evolves
 - When a connected tool changes what's possible
 - When team feedback surfaces a gap in the output
+```

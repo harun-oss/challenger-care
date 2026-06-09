@@ -76,7 +76,7 @@ When things break, start here. Common failure modes per tool, with the exact thi
 1. Run `python3 scripts/validate.py` locally
 2. Read each error · they tell you exactly what's wrong
 3. Common issues:
-   - Missing frontmatter on a new SKILL.md → use `skills/_template/SKILL.md` as reference
+   - Missing frontmatter on a new SKILL.md → see `docs/skill-template.md` for the format
    - Hardcoded UUID outside CONFIG.md → move it to CONFIG.md
    - Broken relative link in markdown → fix the path
 

@@ -121,7 +121,7 @@ Walk through top-to-bottom:
 *Open `skills/launch-new-product/SKILL.md`* · show the format · explain how to tweak the output list.
 
 ### Add a new workflow
-*Open `skills/_template/SKILL.md`* · explain the copy-and-rename pattern · run validate.py to confirm it works.
+*Open `docs/skill-template.md`* · explain the copy-and-rename pattern · run validate.py to confirm it works.
 
 ### Edit via Claude
 *"Hayden, update CONFIG.md to set AOV target to $55"* — show Claude opening the file, making the change, committing. Easier than the web UI for most edits.

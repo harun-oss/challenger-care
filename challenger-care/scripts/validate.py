@@ -38,7 +38,7 @@ RESET = "\033[0m"
 BOLD = "\033[1m"
 
 # System skills don't need MANDATORY TRIGGER (they're invoked by code, not by Claude)
-SYSTEM_SKILLS = {"briefing-generator", "orchestrator", "anomaly-detector", "_template"}
+SYSTEM_SKILLS = {"briefing-generator", "orchestrator", "anomaly-detector"}
 
 # Folders skills might reference - flag these if they don't exist
 GHOST_FOLDER_PATTERNS = [
@@ -155,8 +155,6 @@ def check_skill_frontmatter(root, errors, warnings):
     issues = 0
     for skill_md in skills_dir.glob("*/SKILL.md"):
         skill_name = skill_md.parent.name
-        if skill_name == "_template":
-            continue
         count += 1
         content = skill_md.read_text(errors='ignore')
         if not content.startswith("---\n"):
@@ -294,8 +292,6 @@ def check_markdown_links(root, errors, warnings):
     found_broken = False
     for md in root.rglob("*.md"):
         if "/outputs/" in str(md) or "/.cache/" in str(md):
-            continue
-        if "/_template" in str(md):
             continue
         try:
             content = md.read_text(errors='ignore')

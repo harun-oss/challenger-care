@@ -89,7 +89,7 @@ GitHub web UI works fine for these. No code needed.
 Edit `skills/<workflow-name>/SKILL.md`. Update the body content. Commit. Done.
 
 ### Add a brand-new workflow
-1. Copy `skills/_template/` folder
+1. Copy the template from `docs/skill-template.md`
 2. Rename to your workflow name in kebab-case (e.g., `launch-black-friday`)
 3. Fill in every section of the SKILL.md
 4. Run `python3 scripts/validate.py` to confirm it's correct
@@ -135,7 +135,7 @@ You can just tell Claude: *"Update CONFIG.md to set AOV target to $55"* — Clau
 - **Plugin updates** — GrowthHit pushes them via PR · you review + merge
 - **Token costs** — already optimized · Haiku for routine work, Sonnet for creative
 - **Connector UUIDs** — set in CONFIG.md once, never touched again
-- **Skill format** — `_template/SKILL.md` shows the pattern · validator catches errors
+- **Skill format** — `docs/skill-template.md` shows the pattern · validator catches errors
 
 ---
 
@@ -147,7 +147,7 @@ You can just tell Claude: *"Update CONFIG.md to set AOV target to $55"* — Clau
 | Change a number | Edit `CONFIG.md` |
 | Update brand voice | Edit `assets/brand-strategy.md` |
 | Add a claim | Edit `assets/claim-library.md` |
-| Add a workflow | Copy `skills/_template/` |
+| Add a workflow | See `docs/skill-template.md` |
 | Refresh VOC | Drop new CSV in `assets/voc/exports/` · run `scripts/voc-processor.py` |
 | Validate before commit | Run `python3 scripts/validate.py` |
 | Get help | harun@growthhit.com |

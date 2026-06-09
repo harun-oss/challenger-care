@@ -65,7 +65,7 @@ Designed so the team can edit + extend without GrowthHit involvement:
 
 1. **All editable values live in one place** — `CONFIG.md`
 2. **Every knowledge file has a "When to update this doc" section**
-3. **A `_template/` folder** shows the format for new workflows
+3. **`docs/skill-template.md`** shows the format for new workflows
 4. **`scripts/validate.py`** catches broken edits before they ship
 5. **GitHub web UI handles 95% of edits** — no Git knowledge needed for markdown
 
@@ -93,5 +93,5 @@ See `assets/team-roles.md` for who can run what.
 | Team member added | `assets/team-roles.md` |
 | Connector UUID | `CONFIG.md` → `connector.<tool>_uuid` |
 | Workflow tweak | `skills/<workflow>/SKILL.md` |
-| New workflow | Copy `skills/_template/` |
+| New workflow | Copy the template in `docs/skill-template.md` |
 | Dashboard threshold | `CONFIG.md` |
