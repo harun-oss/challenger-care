@@ -256,6 +256,59 @@ section { margin-bottom: 48px; }
 .pill-dot.planning { background: var(--ink-4); }
 .pill-dot.live { background: var(--ink); }
 .work-note { font-size: 11px; color: var(--ink-4); font-style: italic; margin-left: 8px; }
+
+/* SETTINGS SLIDE-OVER */
+.settings-backdrop { position: fixed; inset: 0; background: rgba(10,10,10,0.4); z-index: 90; display: none; }
+.settings-backdrop.open { display: block; }
+.settings-panel { position: fixed; top: 0; right: 0; width: min(540px, 100vw); height: 100vh; background: var(--bg); z-index: 100; transform: translateX(100%); transition: transform 0.25s ease; display: flex; flex-direction: column; box-shadow: -8px 0 32px rgba(0,0,0,0.08); }
+.settings-panel.open { transform: translateX(0); }
+.settings-head { display: flex; align-items: center; justify-content: space-between; padding: 22px 28px 16px; border-bottom: 1px solid var(--line); }
+.settings-title { font-size: 16px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink); }
+.settings-close { font-size: 18px; cursor: pointer; padding: 6px 10px; border-radius: 4px; color: var(--ink-3); }
+.settings-close:hover { background: var(--surface-2); color: var(--ink); }
+.settings-body { flex: 1; overflow-y: auto; padding: 8px 28px 32px; }
+.settings-section { margin-top: 28px; }
+.settings-section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+.settings-section-meta { font-size: 10.5px; color: var(--ink-4); font-weight: 500; text-transform: none; letter-spacing: 0; }
+.settings-row { padding: 14px 0; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 6px; }
+.settings-row:last-child { border-bottom: none; }
+.settings-row-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.settings-row-name { font-size: 13px; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+.settings-row-status { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; padding: 3px 8px; border-radius: 3px; }
+.settings-row-status.live { background: var(--surface-2); color: var(--green); border: 1px solid var(--green); }
+.settings-row-status.pending { background: var(--amber-soft); color: var(--amber); border: 1px solid var(--amber); }
+.settings-row-status.off { background: var(--surface-2); color: var(--ink-4); border: 1px solid var(--line-2); }
+.settings-row-desc { font-size: 12px; color: var(--ink-3); line-height: 1.5; }
+.settings-row-config { font-size: 11px; color: var(--ink-4); font-family: -apple-system, "SF Mono", Menlo, monospace; padding-top: 2px; }
+.settings-row-actions { display: flex; gap: 8px; margin-top: 6px; }
+.settings-btn { font-size: 11px; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-weight: 600; letter-spacing: 0.04em; border: 1px solid var(--line-2); background: var(--surface); color: var(--ink); }
+.settings-btn:hover { background: var(--surface-2); }
+.settings-btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+.settings-btn.primary:hover { background: var(--ink-2); }
+.settings-checklist-num { display: inline-flex; width: 22px; height: 22px; border-radius: 50%; background: var(--surface-2); color: var(--ink); align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+.settings-checklist-num.done { background: var(--green); color: white; }
+.settings-checklist-num.pending { background: var(--amber); color: white; }
+.settings-help { font-size: 11.5px; color: var(--ink-3); padding: 10px 12px; background: var(--surface-2); border-radius: 4px; line-height: 1.55; margin-top: 6px; }
+.settings-help code { background: var(--bg); padding: 1px 5px; border-radius: 2px; font-size: 11px; color: var(--ink-2); }
+
+
+.wf-tier { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 1px 6px; border-radius: 2px; }
+.wf-tier.generate { background: var(--surface-2); color: var(--ink-2); }
+.wf-tier.stage { background: var(--amber-soft); color: var(--amber); }
+.wf-tier.execute { background: var(--red-soft); color: var(--red); }
+
+.cw-empty { padding: 24px; text-align: center; }
+.cw-empty-title { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.cw-empty-body { font-size: 12px; color: var(--ink-3); margin-bottom: 14px; line-height: 1.5; }
+.cw-empty-body code { background: var(--surface-2); padding: 1px 6px; border-radius: 3px; font-size: 11px; }
+.cw-run-btn { font-size: 11px; padding: 8px 14px; border-radius: 4px; background: var(--ink); color: white; border: none; cursor: pointer; font-weight: 600; letter-spacing: 0.04em; }
+.cw-run-btn:hover { background: var(--ink-2); }
+.cw-finding { padding: 12px 0; border-bottom: 1px solid var(--line); }
+.cw-finding:last-child { border-bottom: none; }
+.cw-finding-head { display: flex; gap: 8px; align-items: baseline; margin-bottom: 4px; }
+.cw-finding-rank { font-size: 10px; font-weight: 700; color: var(--ink-3); background: var(--surface-2); padding: 1px 6px; border-radius: 2px; }
+.cw-finding-text { font-size: 12.5px; color: var(--ink); line-height: 1.5; }
+.cw-finding-response { font-size: 11.5px; color: var(--ink-3); margin-top: 4px; line-height: 1.5; padding-left: 8px; border-left: 2px solid var(--tan); }
 </style>
 </head>
 <body>
@@ -270,10 +323,7 @@ section { margin-bottom: 48px; }
       </div>
       <div class="nav-tabs">
         <div class="nav-tab active">Today</div>
-        <div class="nav-tab">Workflows</div>
-        <div class="nav-tab">Channels</div>
-        <div class="nav-tab">Customers</div>
-        <div class="nav-tab">Knowledge</div>
+        <div class="nav-tab" data-open-settings>Settings</div>
       </div>
     </div>
     <div class="nav-right">
@@ -500,22 +550,13 @@ section { margin-bottom: 48px; }
   <section>
     <div class="sect-label">
       <span>Competitor Watch</span>
-      <span class="sect-meta"><span class="dot pending"></span>Pending · activates with weekly scan</span>
+      <span class="sect-meta" data-cw-meta><span class="dot pending"></span>Checking Drive for latest scan…</span>
     </div>
-    <div class="cw-card">
-      <div class="cw-grid">
-        <div>
-          <div class="cw-brand-head"><div class="cw-brand-name">Based</div><div class="cw-status pending">Not scanning</div></div>
-          <div class="cw-event">Weekly scan kicks off once the competitor-scan task is scheduled in your Claude.</div>
-        </div>
-        <div>
-          <div class="cw-brand-head"><div class="cw-brand-name">Hanz De Fuko</div><div class="cw-status pending">Not scanning</div></div>
-          <div class="cw-event">Pulls Meta Ad Library, PDPs, Reddit mentions each Sunday at 9am.</div>
-        </div>
-        <div>
-          <div class="cw-brand-head"><div class="cw-brand-name">Paul Mitchell</div><div class="cw-status pending">Not scanning</div></div>
-          <div class="cw-event">Surfaces new SKUs, pricing shifts, recent activity.</div>
-        </div>
+    <div class="cw-card" data-competitor-watch>
+      <div class="cw-empty">
+        <div class="cw-empty-title">No scans yet</div>
+        <div class="cw-empty-body">Once you run the <code>whats-the-competitor-doing</code> workflow, results will land here.</div>
+        <button class="cw-run-btn" data-cw-run>Run competitor scan</button>
       </div>
     </div>
   </section>
@@ -536,21 +577,6 @@ section { margin-bottom: 48px; }
         <div class="ch-name"><span class="ch-state" data-ch="klaviyo-state"></span>Klaviyo</div>
         <div class="ch-val num" data-ch="klaviyo-rev">—</div>
         <div class="ch-meta" data-ch="klaviyo-meta">Loading…</div>
-      </div>
-      <div class="ch pending">
-        <div class="ch-name"><span class="ch-state off"></span>Reddit</div>
-        <div class="ch-val off num">—</div>
-        <div class="ch-meta">connect to enable</div>
-      </div>
-      <div class="ch pending">
-        <div class="ch-name"><span class="ch-state off"></span>Meta Ads</div>
-        <div class="ch-val off num">—</div>
-        <div class="ch-meta">paused · BM cleanup</div>
-      </div>
-      <div class="ch pending">
-        <div class="ch-name"><span class="ch-state off"></span>TikTok</div>
-        <div class="ch-val off num">—</div>
-        <div class="ch-meta">launching · Implicit</div>
       </div>
     </div>
   </section>
@@ -594,6 +620,8 @@ const CONFIG = {
   KLAVIYO_UUID: '__KLAVIYO_UUID__',
   ASANA_UUID: '__ASANA_UUID__',
   ASANA_PROJECT_GID: '__ASANA_PROJECT_GID__',
+  DRIVE_UUID: '__DRIVE_UUID__',
+  DRIVE_DASHBOARD_FOLDER_ID: '__DRIVE_DASHBOARD_FOLDER_ID__',
 };
 
 // Fail loud if CONFIG was never synced from CONFIG.md
@@ -611,6 +639,8 @@ const TOOL = {
   klaviyo_campaign_report: 'mcp__' + CONFIG.KLAVIYO_UUID + '__klaviyo_get_campaign_report',
   // Asana · runtime concatenation keeps UUID literals out of HTML source
   asana_get_tasks: 'mcp__' + CONFIG.ASANA_UUID + '__get_tasks',
+  // Drive · for reading cached scan outputs
+  drive_search: 'mcp__' + CONFIG.DRIVE_UUID + '__search_files',
 };
 
 // Klaviyo metric IDs · stable across the account · safe to embed
@@ -618,39 +648,41 @@ const KLAVIYO = {
   PLACED_ORDER_METRIC_ID: 'pbXAV8',  // Shopify "Placed Order" metric in Challenger's Klaviyo
 };
 
-// Static workflow catalog
+// Workflow catalog · generated by scripts/sync-workflows.py · do not hand-edit
+// Workflow catalog · generated by scripts/sync-workflows.py · do not hand-edit
+// Workflow catalog · generated by scripts/sync-workflows.py · do not hand-edit
 const WORKFLOWS = [
-  { group: 'Launch & Test', tagline: "when you're shipping something new", items: [
-    { title: 'Launch a new product', explain: 'Turns a product idea into a launch package — positioning, PDP copy, ad concepts, launch email, and social briefs.', time: '~5 min', skills: 5 },
-    { title: 'Launch a new bundle or offer', explain: 'Runs the bundle math, drafts hero + cart upsell + offer landing page, and the first promo email + ad concepts.', time: '~4 min', skills: 4 },
-    { title: 'Launch a sale or promo', explain: 'Builds the campaign — banner copy, email send, SMS, social posts, Klaviyo segment + start/end logic.', time: '~3 min', skills: 3 },
-    { title: 'Test a price point or claim', explain: 'Designs the A/B test — variants, segment, duration, success metric — and stages it for review.', time: '~3 min', skills: 2 },
-    { title: 'Onboard new subscribers', explain: 'Builds the welcome flow for new Recharge subscribers — first jar email, retention nudge, win-back if cancel.', time: '~6 min', skills: 3 },
-    { title: 'Build the next email flow', explain: 'Drafts a complete Klaviyo flow (welcome, browse, post-purchase, winback) using the abandoned cart as the template.', time: '~5 min', skills: 2 },
-  ], open: true },
-  { group: 'Grow', tagline: 'the weekly recurring work', items: [
-    { title: "Create this week's ad creative", explain: 'Pulls real customer language, generates 5–8 static + video ad concepts with hooks and copy in brand voice.', time: '~4 min', skills: 3 },
-    { title: "Create this week's content", explain: 'TikTok scripts, Reddit-ready posts, Instagram captions — all aligned to this week’s themes.', time: '~3 min', skills: 3 },
-    { title: 'Refresh an underperforming PDP', explain: 'Diagnoses the page, rewrites hero + benefits + FAQ in customer voice, generates new hero variants for testing.', time: '~5 min', skills: 4 },
-    { title: 'Reach out to creators or influencers', explain: 'Builds a prospect list across TikTok + Instagram, drafts personalized outreach for each creator.', time: '~4 min', skills: 2 },
-  ], open: true },
-  { group: 'Listen', tagline: 'before you decide', items: [
-    { title: 'What are customers saying?', explain: 'Pulls last 30 days of reviews and survey responses, clusters into themes, surfaces new patterns and ad-ready quotes.', time: '~2 min', skills: 3 },
-    { title: "What's the competitor doing?", explain: 'Scans Based, Hanz De Fuko, Paul Mitchell — new ads, pricing changes, Reddit sentiment. Flags what to borrow or beat.', time: '~3 min', skills: 4 },
-    { title: 'Why did sales drop?', explain: 'Pulls Shopify + GA4 + Klaviyo together, diagnoses where the funnel broke, gives 3 most likely causes with evidence.', time: '~3 min', skills: 3 },
-    { title: "What's working that I can scale?", explain: 'Finds the top-performing creative, email, landing page, and SKU — and recommends where to put more weight.', time: '~3 min', skills: 2 },
-  ], open: false },
-  { group: 'Fix', tagline: 'reactive operational work', items: [
-    { title: 'Reply to a customer issue', explain: 'Drafts a brand-voice reply to a support ticket, ready for the team to review and send.', time: '~1 min', skills: 1 },
-    { title: 'Respond to a negative review', explain: 'Drafts the right response on Amazon or JudgeMe — protects rating, addresses the issue, offers a next step.', time: '~1 min', skills: 1 },
-    { title: 'Pause and rebuild a broken flow', explain: 'Pauses an underperforming email or ad, audits why, builds the replacement, stages for review.', time: '~5 min', skills: 3 },
-    { title: 'Handle inventory restock', explain: 'Calculates reorder timing from velocity, drafts the email to Emanuel, opens the Asana task.', time: '~2 min', skills: 2 },
-  ], open: false },
-  { group: 'Plan', tagline: 'periodic strategic work', items: [
-    { title: "Where's my highest leverage this month?", explain: 'Grades the business across 7 leverage points (Market, Product, Money, Position, Reach, Convert, Expand) and recommends focus.', time: '~6 min', skills: 1 },
-    { title: 'Model my unit economics', explain: 'Builds the contribution margin stack, LTV at 90/180/365 days, and max CPA scenarios.', time: '~4 min', skills: 1 },
-    { title: 'Build the next 90-day plan', explain: 'Synthesizes recent customer feedback, performance, and competitor signals into a prioritized testing and launch roadmap.', time: '~7 min', skills: 4 },
-  ], open: false },
+  { group: 'Launch & Test', tagline: "when you're shipping something new", open: true, items: [
+    { title: 'Launch New Product', explain: 'Turns a product idea into a complete launch package in Challenger voice — positioning, PDP copy, ad concepts, launch email, social briefs, Reddit post, Asana checklist', tier: 'generate', skill: 'launch-new-product' },
+    { title: 'Launch New Bundle Or Offer', explain: 'Builds a complete bundle/offer launch — validates bundle math, drafts hero + cart upsell + offer landing page + promo email + first-week ad concepts', tier: 'stage', skill: 'launch-new-bundle-or-offer' },
+    { title: 'Launch Sale Promo', explain: 'Builds a complete promo campaign from a single ask — banner copy, email send, SMS, social posts, Klaviyo segment + start/end logic', tier: 'stage', skill: 'launch-sale-promo' },
+    { title: 'Test Price Claim', explain: 'Designs an A/B test for a price point or product claim — variants, segment, duration, success metric — stages it for review', tier: 'stage', skill: 'test-price-claim' },
+    { title: 'Onboard New Subscribers', explain: 'Builds the welcome flow for new Recharge subscribers — first jar email, retention nudge before second shipment, win-back if they cancel. Anchored to the Preparation pillar', tier: 'stage', skill: 'onboard-new-subscribers' },
+    { title: 'Build Next Email Flow', explain: 'Drafts a complete Klaviyo flow in Challenger voice — welcome series, browse abandonment, post-purchase, winback, or sunset', tier: 'stage', skill: 'build-next-email-flow' }
+  ] },
+  { group: 'Grow', tagline: "the weekly recurring work", open: true, items: [
+    { title: 'Create this week's Ad Creative', explain: 'Pulls real customer language from VOC + brand voice rules to generate 5–8 ad concepts (static + video) with hooks, copy, and design briefs', tier: 'generate', skill: 'create-this-weeks-ad-creative' },
+    { title: 'Create this week's Content', explain: 'Generates this week\'s organic content batch — TikTok scripts, Reddit-ready posts (founder voice), Instagram captions — aligned to current themes from VOC + dashboard signals', tier: 'generate', skill: 'create-this-weeks-content' },
+    { title: 'Refresh Underperforming PDP', explain: 'Diagnoses why a PDP isn\'t converting, then rebuilds the hero + benefits + FAQ + CTAs in Challenger voice anchored to real VOC quotes', tier: 'stage', skill: 'refresh-underperforming-pdp' },
+    { title: 'Creator Outreach', explain: 'Builds a prospect list of creators / influencers across TikTok + Instagram, drafts personalized outreach for each', tier: 'generate', skill: 'creator-outreach' }
+  ] },
+  { group: 'Listen', tagline: "before you decide", open: false, items: [
+    { title: 'Customer Voice', explain: 'Pulls last 30 days of reviews + survey responses, clusters into themes, surfaces new patterns and ad-ready quotes', tier: 'generate', skill: 'customer-voice' },
+    { title: 'Diagnose Checkout Funnel', explain: 'Investigates a specific funnel-stage problem — cart abandonment, checkout drop-off, device-specific CVR issues — surfaces top causes with evidence', tier: 'generate', skill: 'diagnose-checkout-funnel' },
+    { title: 'Whats the Competitor Doing', explain: 'Scans Based, Hanz De Fuko, Paul Mitchell — pulls new ads, pricing changes, recent launches, Reddit sentiment. Flags what to borrow and what to beat', tier: 'generate', skill: 'whats-the-competitor-doing' },
+    { title: 'Why Sales Dropped', explain: 'Pulls Shopify + GA4 + Klaviyo together, diagnoses where the funnel broke this week, gives 3 most likely causes with evidence', tier: 'generate', skill: 'why-sales-dropped' },
+    { title: 'Whats Working to Scale', explain: 'Finds the top-performing creative, email, landing page, and SKU — recommends where to put more weight', tier: 'generate', skill: 'whats-working-to-scale' }
+  ] },
+  { group: 'Fix', tagline: "reactive operational work", open: false, items: [
+    { title: 'Reply to Customer Issue', explain: 'Drafts a brand-voice reply to a customer support ticket. Specific, useful, doesn\'t grovel. Ivey reviews and sends', tier: 'generate', skill: 'reply-to-customer-issue' },
+    { title: 'Respond to Negative Review', explain: 'Drafts the right response to a negative review on Amazon or JudgeMe. Protects the 84% 5-star moat. Addresses the issue, offers a path forward, doesn\'t grovel', tier: 'stage', skill: 'respond-to-negative-review' },
+    { title: 'Fix Broken Flow', explain: 'Pauses an underperforming email or ad, audits why, builds the replacement, stages for review', tier: 'stage', skill: 'fix-broken-flow' },
+    { title: 'Inventory Restock', explain: 'Calculates reorder timing from real velocity, drafts the email to Emanuel, opens the Asana task', tier: 'execute', skill: 'inventory-restock' }
+  ] },
+  { group: 'Plan', tagline: "periodic strategic work", open: false, items: [
+    { title: 'Highest Leverage', explain: 'Grades the business across 7 leverage points (Market, Product, Money, Position, Reach, Convert, Expand) and recommends focus', tier: 'generate', skill: 'highest-leverage' },
+    { title: 'Model Unit Economics', explain: 'Builds the contribution margin stack, LTV at 90/180/365 days, and max CPA scenarios', tier: 'generate', skill: 'model-unit-economics' }
+  ] }
 ];
 
 function renderWorkflows() {
@@ -666,10 +698,10 @@ function renderWorkflows() {
       </summary>
       <div class="wf-grid">
         ${g.items.map(w => `
-          <div class="wf" data-prompt="${w.title.replace(/"/g, '&quot;')}">
+          <div class="wf" data-skill="${w.skill}">
             <div class="wf-title">${w.title}</div>
             <div class="wf-explain">${w.explain}</div>
-            <div class="wf-foot">${w.time}<span class="wf-foot-sep">·</span>${w.skills} skill${w.skills > 1 ? 's' : ''}</div>
+            <div class="wf-foot"><span class="wf-tier ${w.tier}">${w.tier}</span><span class="wf-foot-sep">·</span>${w.skill}</div>
           </div>
         `).join('')}
       </div>
@@ -678,9 +710,10 @@ function renderWorkflows() {
 
   root.querySelectorAll('.wf').forEach(el => {
     el.addEventListener('click', () => {
-      const prompt = el.getAttribute('data-prompt');
+      const skill = el.getAttribute('data-skill');
       if (window.cowork && window.cowork.sendPrompt) {
-        window.cowork.sendPrompt('Run the "' + prompt + '" workflow for Challenger Care.');
+        // Route via the skill name (more reliable than title parsing)
+        window.cowork.sendPrompt('Run the ' + skill + ' workflow for Challenger Care.');
       }
     });
   });
@@ -894,6 +927,81 @@ async function loadAsana() {
 
   if (card) card.innerHTML = pillsHtml + '<span class="work-note">Live · ' + items.length + ' of ' + all.length + ' tasks shown · ' + incomplete.length + ' incomplete</span>';
   if (meta) meta.innerHTML = '<span class="dot live"></span>Live · Asana';
+}
+
+
+async function loadCompetitorWatch() {
+  const card = document.querySelector('[data-competitor-watch]');
+  const meta = document.querySelector('[data-cw-meta]');
+
+  // Wire the "Run scan" button regardless of Drive state
+  const wireRunBtn = () => {
+    document.querySelectorAll('[data-cw-run]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (window.cowork && window.cowork.sendPrompt) {
+          window.cowork.sendPrompt('Run the whats-the-competitor-doing workflow · scan all 3 competitors and save the JSON output to the Drive dashboard cache folder so the Competitor Watch panel updates.');
+        }
+      });
+    });
+  };
+
+  // Bail if Drive not configured
+  if (!CONFIG.DRIVE_UUID || CONFIG.DRIVE_UUID.startsWith('__') || !CONFIG.DRIVE_DASHBOARD_FOLDER_ID || CONFIG.DRIVE_DASHBOARD_FOLDER_ID.startsWith('__')) {
+    if (card) card.innerHTML = '<div class="cw-empty"><div class="cw-empty-title">Drive not configured</div><div class="cw-empty-body">Set <code>connector.drive_uuid</code> + <code>stack.drive_dashboard_cache_folder_id</code> in CONFIG.md to enable.</div></div>';
+    if (meta) meta.innerHTML = '<span class="dot pending"></span>Drive not configured';
+    return;
+  }
+
+  // Search Drive for the latest scan JSON files in our folder
+  const res = await callTool(TOOL.drive_search, {
+    query: "parentId = '" + CONFIG.DRIVE_DASHBOARD_FOLDER_ID + "' and title contains 'scan' and mimeType = 'application/json'",
+    pageSize: 10,
+  });
+
+  if (!res || !res.files || res.files.length === 0) {
+    // Drive works but no scans yet · keep the empty state
+    if (meta) meta.innerHTML = '<span class="dot pending"></span>Connected · no scans yet';
+    wireRunBtn();
+    return;
+  }
+
+  // Sort by modifiedTime desc and take latest
+  const sorted = res.files.slice().sort((a, b) => (b.modifiedTime || '').localeCompare(a.modifiedTime || ''));
+  const latest = sorted[0];
+
+  // contentSnippet may have partial content · for full content we'd need download_file_content
+  // Try parsing snippet · fall back to a stub
+  let scanData = null;
+  try {
+    if (latest.contentSnippet) {
+      scanData = JSON.parse(latest.contentSnippet);
+    }
+  } catch (e) {
+    // snippet may be truncated · scanData stays null
+  }
+
+  if (!scanData || !scanData.strategic_findings) {
+    // We have a file but couldn't parse · render minimal info
+    if (card) card.innerHTML = '<div class="cw-empty"><div class="cw-empty-title">Scan file found · waiting on full parse</div><div class="cw-empty-body">Latest: ' + (latest.title || 'unknown') + ' · ' + (latest.modifiedTime || '').slice(0, 10) + '</div><button class="cw-run-btn" data-cw-run>Run a fresh scan</button></div>';
+    if (meta) meta.innerHTML = '<span class="dot live"></span>Live · last scan ' + (latest.modifiedTime || '').slice(0, 10);
+    wireRunBtn();
+    return;
+  }
+
+  // Render strategic findings
+  const findings = (scanData.strategic_findings || []).slice(0, 4);
+  const html = findings.map(f => `
+    <div class="cw-finding">
+      <div class="cw-finding-head">
+        <span class="cw-finding-rank">#${f.rank || '·'}</span>
+        <span class="cw-finding-text">${(f.finding || '').replace(/</g, '&lt;')}</span>
+      </div>
+      <div class="cw-finding-response">→ ${(f.challenger_response || '').replace(/</g, '&lt;')}</div>
+    </div>
+  `).join('');
+  if (card) card.innerHTML = html + '<button class="cw-run-btn" data-cw-run style="margin-top:14px;">Run a fresh scan</button>';
+  if (meta) meta.innerHTML = '<span class="dot live"></span>Live · ' + (scanData.competitor || 'scan') + ' · ' + (scanData.scan_date || (latest.modifiedTime || '').slice(0, 10));
+  wireRunBtn();
 }
 
 
@@ -1382,6 +1490,174 @@ function buildQueue(ctx) {
   });
 }
 
+
+// SETTINGS PANEL
+const SETTINGS_STATE = {
+  connectors: {
+    shopify: { name: 'Shopify', uuidVar: 'SHOPIFY_UUID', testFn: null, configKey: 'connector.shopify_uuid', purpose: 'Live revenue, AOV, CVR, funnel, inventory, customer data.' },
+    klaviyo: { name: 'Klaviyo', uuidVar: 'KLAVIYO_UUID', testFn: null, configKey: 'connector.klaviyo_uuid', purpose: 'Email attributed revenue, flow performance, campaign metrics.' },
+    asana:   { name: 'Asana',   uuidVar: 'ASANA_UUID',   testFn: null, configKey: 'connector.asana_uuid', purpose: 'In-flight projects · live task status from the Challenger Care project.' },
+    drive:   { name: 'Google Drive', uuidVar: 'DRIVE_UUID', testFn: null, configKey: 'connector.drive_uuid', purpose: 'Stores competitor scan outputs · enables the Competitor Watch panel.' },
+  },
+};
+
+function dropPrompt(text) {
+  // Drop into the chat input box · user reviews + sends
+  const input = document.getElementById('cmd-input');
+  if (input) {
+    input.value = text;
+    input.focus();
+    // Visual nudge: scroll the input into view and pulse the border
+    input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  // Close settings so user can see the input
+  closeSettings();
+}
+
+function openSettings() {
+  document.querySelector('[data-settings-panel]')?.classList.add('open');
+  document.querySelector('[data-settings-backdrop]')?.classList.add('open');
+  renderConnectorRows();
+  renderChecklist();
+  renderKnowledge();
+}
+function closeSettings() {
+  document.querySelector('[data-settings-panel]')?.classList.remove('open');
+  document.querySelector('[data-settings-backdrop]')?.classList.remove('open');
+}
+
+function connectorStatusFor(key) {
+  const c = SETTINGS_STATE.connectors[key];
+  if (!c) return 'off';
+  const val = CONFIG[c.uuidVar];
+  if (!val || val.startsWith('__')) return 'pending';
+  return 'live';
+}
+
+function renderConnectorRows() {
+  const root = document.querySelector('[data-settings-connectors]');
+  if (!root) return;
+  root.innerHTML = Object.entries(SETTINGS_STATE.connectors).map(([key, c]) => {
+    const status = connectorStatusFor(key);
+    const statusLabel = status === 'live' ? 'Live' : status === 'pending' ? 'Not configured' : 'Off';
+    const askPrompt = status === 'live'
+      ? `Settings → Connectors: ${c.name} shows as Live. Is the dashboard receiving data correctly from this connector? Run a quick diagnostic.`
+      : `Settings → Connectors: ${c.name} is not configured. Walk me through how to authorize this connector in Cowork and add its UUID to CONFIG.md. Current CONFIG value: \"${CONFIG[c.uuidVar] || 'empty'}\".`;
+    return `
+      <div class="settings-row">
+        <div class="settings-row-head">
+          <div class="settings-row-name">${c.name}</div>
+          <span class="settings-row-status ${status}">${statusLabel}</span>
+        </div>
+        <div class="settings-row-desc">${c.purpose}</div>
+        <div class="settings-row-config">CONFIG.md → ${c.configKey}</div>
+        <div class="settings-row-actions">
+          <button class="settings-btn" data-prompt="${askPrompt.replace(/"/g, '&quot;')}">Ask Claude</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Wire the Ask Claude buttons
+  root.querySelectorAll('button[data-prompt]').forEach(btn => {
+    btn.addEventListener('click', () => dropPrompt(btn.getAttribute('data-prompt')));
+  });
+}
+
+function renderChecklist() {
+  const root = document.querySelector('[data-settings-checklist]');
+  if (!root) return;
+
+  const items = [
+    {
+      title: 'Authorize Shopify connector in Cowork',
+      done: connectorStatusFor('shopify') === 'live',
+      help: 'Cowork → Settings → Connectors → Add Shopify → authorize against <code>challengercare.com</code>. Then paste the connector UUID into CONFIG.md → <code>connector.shopify_uuid</code>.',
+      ask: 'Help me authorize the Shopify connector in Cowork and add the UUID to CONFIG.md.',
+    },
+    {
+      title: 'Authorize Klaviyo connector in Cowork',
+      done: connectorStatusFor('klaviyo') === 'live',
+      help: 'Same flow as Shopify · authorize against account ID <code>q93EMp</code>. Paste UUID into <code>connector.klaviyo_uuid</code>.',
+      ask: 'Help me authorize the Klaviyo connector and add the UUID to CONFIG.md.',
+    },
+    {
+      title: 'Authorize Asana connector + set project GID',
+      done: connectorStatusFor('asana') === 'live' && CONFIG.ASANA_PROJECT_GID && !CONFIG.ASANA_PROJECT_GID.startsWith('__'),
+      help: 'Authorize Asana, then create a "Challenger Care" project in your Asana workspace. Open the project, copy the GID from the URL (the long number after <code>/project/</code>). Paste into CONFIG.md → <code>stack.asana_project_gid</code>.',
+      ask: 'Help me set up the Asana project for the In flight section. I need to create a Challenger Care project in Asana and copy its GID into CONFIG.md.',
+    },
+    {
+      title: 'Authorize Drive + create cache folder',
+      done: connectorStatusFor('drive') === 'live' && CONFIG.DRIVE_DASHBOARD_FOLDER_ID && !CONFIG.DRIVE_DASHBOARD_FOLDER_ID.startsWith('__'),
+      help: 'Authorize Google Drive in Cowork. Create a folder in your Drive called <code>Challenger Care Dashboard Cache</code>. Right-click → Get link → copy the ID between <code>/folders/</code> and <code>?</code> in the URL. Paste into CONFIG.md → <code>stack.drive_dashboard_cache_folder_id</code>.',
+      ask: 'Help me set up the Drive cache folder for the Competitor Watch panel. I need to create a folder in my Drive and copy its ID into CONFIG.md.',
+    },
+    {
+      title: 'Run sync-html-config.py after CONFIG.md edits',
+      done: false, // can't auto-detect this · always show as a reminder
+      help: 'After updating CONFIG.md with your UUIDs and IDs, run <code>python3 scripts/sync-html-config.py</code> in your terminal to push values into the dashboard.',
+      ask: 'I updated CONFIG.md but the dashboard still shows old values. How do I sync them?',
+    },
+  ];
+
+  // Update progress meta
+  const doneCount = items.filter(i => i.done).length;
+  const progressEl = document.querySelector('[data-setup-progress]');
+  if (progressEl) progressEl.textContent = `${doneCount} of ${items.length} complete`;
+
+  root.innerHTML = items.map((item, i) => `
+    <div class="settings-row">
+      <div class="settings-row-head">
+        <div class="settings-row-name">
+          <span class="settings-checklist-num ${item.done ? 'done' : 'pending'}">${item.done ? '✓' : (i + 1)}</span>
+          ${item.title}
+        </div>
+      </div>
+      <div class="settings-help">${item.help}</div>
+      <div class="settings-row-actions">
+        <button class="settings-btn primary" data-prompt="${item.ask.replace(/"/g, '&quot;')}">Ask Claude about this step</button>
+      </div>
+    </div>
+  `).join('');
+
+  root.querySelectorAll('button[data-prompt]').forEach(btn => {
+    btn.addEventListener('click', () => dropPrompt(btn.getAttribute('data-prompt')));
+  });
+}
+
+function renderKnowledge() {
+  const root = document.querySelector('[data-settings-knowledge]');
+  if (!root) return;
+  const files = [
+    { name: 'Brand strategy', path: 'assets/brand-strategy.md', desc: 'Voice rules, positioning, taglines, pillars' },
+    { name: 'Unit economics', path: 'assets/unit-economics.md', desc: 'COGS, margin, AOV math, bundle pricing' },
+    { name: 'Claim library', path: 'assets/claim-library.md', desc: 'Approved/banned language, escalation rules' },
+    { name: 'Customer archetypes', path: 'assets/customer-archetypes.md', desc: 'The 5 personas Challenger serves' },
+    { name: 'VOC corpus', path: 'assets/voc/voc-corpus.csv', desc: '480 JudgeMe reviews · ad-ready quotes' },
+    { name: 'Competitor map', path: 'assets/competitor-map.md', desc: 'Based, Hanz De Fuko, Paul Mitchell baseline' },
+    { name: 'Team roles', path: 'assets/team-roles.md', desc: 'Who owns what · permission tiers' },
+    { name: 'Goals + targets', path: 'assets/goals-targets.md', desc: 'AOV, revenue, subscriber, email targets' },
+  ];
+  root.innerHTML = files.map(f => `
+    <div class="settings-row">
+      <div class="settings-row-head">
+        <div class="settings-row-name">${f.name}</div>
+        <span class="settings-row-status live">Loaded ✓</span>
+      </div>
+      <div class="settings-row-desc">${f.desc}</div>
+      <div class="settings-row-config">${f.path}</div>
+    </div>
+  `).join('');
+}
+
+// Wire open/close
+document.querySelector('[data-open-settings]')?.addEventListener('click', openSettings);
+document.querySelector('[data-close-settings]')?.addEventListener('click', closeSettings);
+document.querySelector('[data-settings-backdrop]')?.addEventListener('click', closeSettings);
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSettings(); });
+
+
 async function init() {
   setHeadDate();
   renderWorkflows();
@@ -1392,10 +1668,50 @@ async function init() {
     console.warn('CONFIG.SHOPIFY_UUID is a placeholder. Run: python3 scripts/sync-html-config.py');
     return;
   }
-  await Promise.all([loadShopName(), loadAll(), loadKlaviyo(), loadAsana()]);
+  await Promise.all([loadShopName(), loadAll(), loadKlaviyo(), loadAsana(), loadCompetitorWatch()]);
 }
 
 init();
 </script>
+
+<!-- SETTINGS SLIDE-OVER -->
+<div class="settings-backdrop" data-settings-backdrop></div>
+<div class="settings-panel" data-settings-panel role="dialog" aria-label="Settings">
+  <div class="settings-head">
+    <div class="settings-title">Settings</div>
+    <div class="settings-close" data-close-settings title="Close (Esc)">✕</div>
+  </div>
+  <div class="settings-body">
+
+    <!-- Section 1: Connector Status -->
+    <div class="settings-section">
+      <div class="settings-section-label">
+        <span>Connectors</span>
+        <span class="settings-section-meta">Authorize in Cowork → Settings → Connectors</span>
+      </div>
+      <div data-settings-connectors></div>
+    </div>
+
+    <!-- Section 2: One-Time Setup Checklist -->
+    <div class="settings-section">
+      <div class="settings-section-label">
+        <span>One-time setup</span>
+        <span class="settings-section-meta" data-setup-progress>—</span>
+      </div>
+      <div data-settings-checklist></div>
+    </div>
+
+    <!-- Section 3: Knowledge Base Status -->
+    <div class="settings-section">
+      <div class="settings-section-label">
+        <span>Knowledge base</span>
+        <span class="settings-section-meta">8 files · loaded with plugin install</span>
+      </div>
+      <div data-settings-knowledge></div>
+    </div>
+
+  </div>
+</div>
+
 </body>
 </html>

@@ -39,6 +39,8 @@ PLACEHOLDER_SHOPIFY = "__SHOPIFY_UUID__"
 PLACEHOLDER_KLAVIYO = "__KLAVIYO_UUID__"
 PLACEHOLDER_ASANA = "__ASANA_UUID__"
 PLACEHOLDER_ASANA_PROJECT = "__ASANA_PROJECT_GID__"
+PLACEHOLDER_DRIVE = "__DRIVE_UUID__"
+PLACEHOLDER_DRIVE_FOLDER = "__DRIVE_DASHBOARD_FOLDER_ID__"
 
 
 def extract_yaml_blocks(md_content):
@@ -53,7 +55,7 @@ def extract_yaml_blocks(md_content):
     return merged
 
 
-def build_config_block(goals, thresholds, shopify_uuid, klaviyo_uuid, asana_uuid, asana_project_gid):
+def build_config_block(goals, thresholds, shopify_uuid, klaviyo_uuid, asana_uuid, asana_project_gid, drive_uuid, drive_folder_id):
     return f"""const CONFIG = {{
   goals: {{
     monthly_revenue: {goals.get('monthly_revenue_shopify', 6000)},
@@ -69,6 +71,8 @@ def build_config_block(goals, thresholds, shopify_uuid, klaviyo_uuid, asana_uuid
   KLAVIYO_UUID: '{klaviyo_uuid}',
   ASANA_UUID: '{asana_uuid}',
   ASANA_PROJECT_GID: '{asana_project_gid}',
+  DRIVE_UUID: '{drive_uuid}',
+  DRIVE_DASHBOARD_FOLDER_ID: '{drive_folder_id}',
 }};"""
 
 
@@ -98,6 +102,7 @@ def main():
 
     if args.reset:
         shopify, klaviyo, asana, asana_pgid = PLACEHOLDER_SHOPIFY, PLACEHOLDER_KLAVIYO, PLACEHOLDER_ASANA, PLACEHOLDER_ASANA_PROJECT
+        drive, drive_folder = PLACEHOLDER_DRIVE, PLACEHOLDER_DRIVE_FOLDER
         mode = "RESET (placeholders restored for commit)"
     else:
         stack = config.get("stack", {})
@@ -105,13 +110,17 @@ def main():
         klaviyo = connector.get("klaviyo_uuid", "") or PLACEHOLDER_KLAVIYO
         asana = connector.get("asana_uuid", "") or PLACEHOLDER_ASANA
         asana_pgid = stack.get("asana_project_gid", "") or PLACEHOLDER_ASANA_PROJECT
+        drive = connector.get("drive_uuid", "") or PLACEHOLDER_DRIVE
+        drive_folder = stack.get("drive_dashboard_cache_folder_id", "") or PLACEHOLDER_DRIVE_FOLDER
         mode = "APPLIED (UUIDs from CONFIG.md written to HTML)"
         if shopify == PLACEHOLDER_SHOPIFY:
             print("WARNING: CONFIG.md has empty shopify_uuid · dashboard will show 'CONFIG not synced'")
         if asana == PLACEHOLDER_ASANA:
-            print("NOTE: Asana not configured · In flight section will show 'Asana not configured' (this is fine if Asana isn't authorized)")
+            print("NOTE: Asana not configured · In flight section will show 'Asana not configured'")
+        if drive == PLACEHOLDER_DRIVE:
+            print("NOTE: Drive not configured · Competitor Watch panel will be empty")
 
-    new_block = build_config_block(goals, thresholds, shopify, klaviyo, asana, asana_pgid)
+    new_block = build_config_block(goals, thresholds, shopify, klaviyo, asana, asana_pgid, drive, drive_folder)
     html = DASHBOARD.read_text()
     new_html = replace_in_html(html, new_block)
     DASHBOARD.write_text(new_html)
@@ -121,6 +130,8 @@ def main():
     print(f"   klaviyo_uuid={klaviyo[:8]}{'...' if len(klaviyo) > 8 else ''}")
     print(f"   asana_uuid={asana[:8]}{'...' if len(asana) > 8 else ''}")
     print(f"   asana_project_gid={asana_pgid[:20]}{'...' if len(asana_pgid) > 20 else ''}")
+    print(f"   drive_uuid={drive[:8]}{'...' if len(drive) > 8 else ''}")
+    print(f"   drive_folder_id={drive_folder[:20]}{'...' if len(drive_folder) > 20 else ''}")
 
 
 if __name__ == "__main__":

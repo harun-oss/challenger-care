@@ -20,23 +20,35 @@ Default: scan all three competitors against the baseline in `competitor-map.md`.
 
 ## What this produces
 
-In `/outputs/competitor/[scan-date]/`:
+**Primary output (REQUIRED) — JSON file saved to Google Drive:**
 
-1. **`scan-summary.md`** — Executive summary:
-   - What changed since last scan
-   - The 3 most strategically relevant findings
-   - Recommended Challenger responses (if any)
-2. **`per-brand-update.md`** — Per competitor:
-   - PDP changes (pricing, copy, hero claims)
-   - New SKU launches (if any)
-   - Current ad creative (from Meta Ad Library)
-   - Recent Reddit / community mentions + sentiment
-   - Status: Active / Quiet / Aggressive
-3. **`positioning-implications.md`** — How findings map to Challenger's position:
-   - Gaps competitors are now filling
-   - Gaps still open for Challenger
-   - Things worth borrowing
-   - Things worth beating
+Save the structured scan result as a JSON file to the Drive folder identified by `stack.drive_dashboard_cache_folder_id` in CONFIG.md. The dashboard's Competitor Watch panel reads from this folder.
+
+Filename pattern: `<competitor>-scan-<YYYY-MM-DD>.json` (one file per competitor, dated). Always create a new file — don't try to overwrite.
+
+The JSON MUST have this schema for the dashboard to render it correctly:
+```json
+{
+  "scan_id": "<competitor>-<date>",
+  "scan_date": "YYYY-MM-DD",
+  "competitor": "<brand name>",
+  "status": "<one-line status string e.g. 'Active — aggressive promo cycle'>",
+  "sources": { "homepage": {...}, "meta_ad_library": {...} },
+  "homepage": { ... structured findings ... },
+  "diff_from_baseline": [ { "field", "baseline", "current", "implication" } ],
+  "strategic_findings": [
+    { "rank": 1, "finding": "<one sentence>", "challenger_response": "<one sentence>" }
+  ],
+  "recommended_workflows_to_trigger": [ "<skill-name> — <why>" ],
+  "next_scan_due": "YYYY-MM-DD"
+}
+```
+
+The `strategic_findings` array is what the dashboard panel renders. Aim for 3-5 findings, ranked by strategic importance.
+
+**Secondary outputs (optional, for human reading) — Markdown summaries:**
+
+If the user wants a readable narrative as well, generate `scan-summary.md` with the same content in prose form. This is for human review, not for the dashboard.
 
 ## How Claude runs it
 

@@ -110,7 +110,7 @@ connector:
   klaviyo_uuid: "cf072fd6-c3c4-48ec-af2a-2f4d5457c59d"      # Update on migration
 
   # Optional — enable when authorized
-  drive_uuid: ""
+  drive_uuid: "c4ef2caa-2184-45db-a8b9-048fd7fb7cdc"        # Google Drive MCP UUID (per Cowork connector authorization)
   asana_uuid: "074a94e7-815b-4b26-9a9e-172d35a7ce08"       # Asana MCP UUID (per Cowork connector authorization)
   ga4_uuid: ""
   slack_uuid: ""
@@ -130,6 +130,7 @@ stack:
   drive_client_folder_id: ""        # Add when Drive is connected
   slack_internal_channel_id: ""     # Add if useful
   asana_project_gid: "1189315776295965"  # DUMMY · "Client Onboarding & Tool Setup" · Hayden: replace with real Challenger Care project GID after creating it in his Asana
+  drive_dashboard_cache_folder_id: "1wUAhjeUVd6hncbub_-HbY9lk6BrmA057"  # Drive folder where scan outputs live · Hayden: create folder + paste ID
 ```
 
 ---
