@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Generated outputs (workflow outputs, briefing cache, etc.)
+challenger-care/outputs/
+challenger-care/.cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*~
+
+# Sensitive
+*.env
+.env.local
+secrets.json
+
+# Local-only files
+*.local.md
