@@ -3,7 +3,7 @@ name: creator-outreach
 description: Builds a prospect list of creators / influencers across TikTok + Instagram, drafts personalized outreach for each. MANDATORY TRIGGER: any mention of "Find 10 micro-influencers in men's grooming", "I want to do a gifting campaign for the 3-pack — who should we contact?", "Find creators on TikTok who post barbershop content". Do NOT use this for: Paid Meta influencer ads (that's a different workflow once Meta is reactivated). Customer-as-creator UGC programs (use `ugc-creator-kit` for that). Press outreach to publications (different audience and approach).
 ---
 
-> **Permission tier:** generate · **Time:** 4min · **Tools/context:** skills/lib/influencer-prospector, knowledge/claim-library.md, knowledge/team-roles.md
+> **Permission tier:** generate · **Time:** 4min · **Tools/context:** assets/claim-library.md, assets/team-roles.md
 
 # Reach out to creators or influencers
 

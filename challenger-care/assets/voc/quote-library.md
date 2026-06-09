@@ -12,7 +12,7 @@ This is the ad-ready quote bank. Every quote in here is verbatim, attributable, 
 
 1. **Pick the theme** that matches the message you're crafting
 2. **Borrow the language, not the whole quote** — paraphrase to fit channel + character limits
-3. **Always validate against [Claim Library](../knowledge/claim-library.md)** before publishing — quotes can include claims we can't make in marketing copy
+3. **Always validate against [Claim Library](../claim-library.md)** before publishing — quotes can include claims we can't make in marketing copy
 4. **Attribution rule:** If using verbatim, attribute to "verified buyer" or first-name only
 
 ---
@@ -340,7 +340,7 @@ These exact phrases keep showing up. Use them in copy:
 
 ## Phrases to AVOID using (off-brand)
 
-From customer reviews — these show up but don't fit the brand voice rules ([Claim Library](../knowledge/claim-library.md)):
+From customer reviews — these show up but don't fit the brand voice rules ([Claim Library](../claim-library.md)):
 
 - *"Pampers"* / *"nourishing"* / *"hydrating ritual"* (beauty-coded)
 - *"Crushes it"* / *"alpha"* / *"boss mode"* (bro-coded)

@@ -3,7 +3,7 @@ name: create-this-weeks-ad-creative
 description: Pulls real customer language from VOC + brand voice rules to generate 5–8 ad concepts (static + video) with hooks, copy, and design briefs. Ready for the designer or Implicit agency. MANDATORY TRIGGER: any mention of "Create this week's ad creative", "I need ads for the 3-pack push", "Generate fresh ad concepts focused on sensitive skin", "Build the ad batch for next month's Meta reactivation". Do NOT use this for: Single one-off ads (this workflow is designed for batches). Email creative (use `build-next-email-flow` or `launch-sale-promo`). Specific creative briefs handed to the designer (use the simpler `creative-brief` skill if exists).
 ---
 
-> **Permission tier:** generate · **Time:** 4min · **Tools/context:** knowledge/brand-strategy.md, knowledge/claim-library.md, knowledge/customer-archetypes.md, knowledge/competitor-map.md, voc/quote-library.md
+> **Permission tier:** generate · **Time:** 4min · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/customer-archetypes.md, assets/competitor-map.md, voc/quote-library.md
 
 # Create this week's ad creative
 

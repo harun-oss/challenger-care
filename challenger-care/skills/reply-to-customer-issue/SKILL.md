@@ -3,7 +3,7 @@ name: reply-to-customer-issue
 description: Drafts a brand-voice reply to a customer support ticket. Specific, useful, doesn't grovel. Ivey reviews and sends. MANDATORY TRIGGER: any mention of "Reply to this customer email: [paste]", "Draft a response to this support ticket", "Customer is asking about [issue] — what do I say?". Do NOT use this for: Negative reviews on Amazon / JudgeMe (use `respond-to-negative-review` — public-facing has different stakes). Reddit replies (Hayden does these in founder voice). General brand inbox triage (this is per-message).
 ---
 
-> **Permission tier:** generate · **Time:** 1min · **Tools/context:** knowledge/brand-strategy.md, knowledge/claim-library.md, knowledge/team-roles.md
+> **Permission tier:** generate · **Time:** 1min · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/team-roles.md
 
 # Reply to a customer issue
 

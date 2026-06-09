@@ -3,7 +3,7 @@ name: highest-leverage
 description: Grades the business across 7 leverage points (Market, Product, Money, Position, Reach, Convert, Expand) and recommends focus. MANDATORY TRIGGER: any mention of "Where should I focus this month?", "Run a leverage point assessment", "What's the highest-leverage thing I could be doing?", "Grade the business". Do NOT use this for: Tactical daily decisions (use the dashboard's "On your plate" alerts). Specific workflow recommendations (this surfaces priorities, then point to specific workflows). Forecasting or modeling (use `model-unit-economics`).
 ---
 
-> **Permission tier:** generate · **Time:** 6min · **Tools/context:** skills/lib/leverage-points, mcp:shopify, knowledge/unit-economics.md, knowledge/goals-targets.md, knowledge/competitor-map.md
+> **Permission tier:** generate · **Time:** 6min · **Tools/context:** mcp:shopify, assets/unit-economics.md, assets/goals-targets.md, assets/competitor-map.md
 
 # Where's my highest leverage this month?
 

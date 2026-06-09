@@ -1,9 +1,9 @@
 ---
 name: customer-voice
-description: Pulls last 30 days of reviews + survey responses, clusters into themes, surfaces new patterns and ad-ready quotes. MANDATORY TRIGGER: any mention of "What are customers saying lately?", "Run customer voice — anything new emerging?", "Show me reviews about the 3-pack", "Cluster recent feedback by theme". Do NOT use this for: Strategic positioning decisions (use `highest-leverage`). Single-customer support replies (use `reply-to-customer`). A/B test design (use `test-price-claim`).
+description: Pulls last 30 days of reviews + survey responses, clusters into themes, surfaces new patterns and ad-ready quotes. MANDATORY TRIGGER: any mention of "What are customers saying lately?", "Run customer voice — anything new emerging?", "Show me reviews about the 3-pack", "Cluster recent feedback by theme". Do NOT use this for: Strategic positioning decisions (use `highest-leverage`). Single-customer support replies (use `reply-to-customer-issue`). A/B test design (use `test-price-claim`).
 ---
 
-> **Permission tier:** generate · **Time:** 2min · **Tools/context:** skills/lib/voc-analysis, knowledge/customer-archetypes.md (when available), mcp:google-drive (for review CSV)
+> **Permission tier:** generate · **Time:** 2min · **Tools/context:** assets/customer-archetypes.md, assets/voc/voc-corpus.csv, assets/voc/voc-analysis-report.md
 
 # What are customers saying?
 
@@ -59,5 +59,5 @@ Lands in `Drive/voc-reports/[date].md`. Quotes also append to `../../assets/quot
 ## Don't use this for
 
 - Strategic positioning decisions (use `highest-leverage`)
-- Single-customer support replies (use `reply-to-customer`)
+- Single-customer support replies (use `reply-to-customer-issue`)
 - A/B test design (use `test-price-claim`)

@@ -570,7 +570,16 @@ section { margin-bottom: 48px; }
 </div>
 
 <script>
-// Config — single source of truth. To migrate to another Claude account, only SHOPIFY_UUID needs updating.
+// Config — mirror of CONFIG.md. DO NOT EDIT MANUALLY.
+// Run: python3 scripts/sync-html-config.py
+// to regenerate this block from CONFIG.md after every CONFIG.md edit.
+//
+// On migration to a new account:
+//   1. Update CONFIG.md → connector.shopify_uuid + connector.klaviyo_uuid
+//   2. Run sync-html-config.py
+//   3. Commit + push
+//
+// If SHOPIFY_UUID below is empty, the dashboard will show "CONFIG not synced" — see scripts/sync-html-config.py.
 const CONFIG = {
   goals: {
     monthly_revenue: 6000,
@@ -582,9 +591,14 @@ const CONFIG = {
     checkout_abandonment: 70,
     return_rate: 8,
   },
-  SHOPIFY_UUID: '262ca9fd-3fa1-4803-a458-2822030a8dd0',
-  KLAVIYO_UUID: 'cf072fd6-c3c4-48ec-af2a-2f4d5457c59d',
+  SHOPIFY_UUID: '__SHOPIFY_UUID__',
+  KLAVIYO_UUID: '__KLAVIYO_UUID__',
 };
+
+// Fail loud if CONFIG was never synced from CONFIG.md
+function configIsSynced() {
+  return CONFIG.SHOPIFY_UUID && !CONFIG.SHOPIFY_UUID.startsWith('__');
+}
 
 const TOOL = {
   shop_info: 'mcp__' + CONFIG.SHOPIFY_UUID + '__get-shop-info',
@@ -1202,6 +1216,12 @@ function buildQueue(ctx) {
 async function init() {
   setHeadDate();
   renderWorkflows();
+  if (!configIsSynced()) {
+    setText('[data-shop-name]', 'CONFIG not synced');
+    setText('[data-mtd-context]', 'Run scripts/sync-html-config.py to wire UUIDs from CONFIG.md');
+    console.warn('CONFIG.SHOPIFY_UUID is a placeholder. Run: python3 scripts/sync-html-config.py');
+    return;
+  }
   await Promise.all([loadShopName(), loadAll()]);
 }
 

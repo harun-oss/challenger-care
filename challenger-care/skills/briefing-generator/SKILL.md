@@ -1,9 +1,9 @@
 ---
 name: briefing-generator
-description: Generates the Morning Briefing for the dashboard. Pulls Shopify + Klaviyo + GA4 (when connected), detects anomalies, narrates the state of the business in Challenger voice. Cached daily.
+description: Generates the Morning Briefing for the dashboard. Pulls Shopify + Klaviyo data (GA4 ready to wire when authorized in CONFIG.md), detects anomalies, narrates the state of the business in Challenger voice. Cached daily.
 ---
 
-> **Permission tier:** generate · **Time:** 90s · **Tools/context:** mcp:shopify (analytics-query, list-orders), mcp:klaviyo (get-flow-report, get-campaign-report, query-metric-aggregates), knowledge/brand-strategy.md, knowledge/goals-targets.md, knowledge/unit-economics.md, system/anomaly-detector.md
+> **Permission tier:** generate · **Time:** 90s · **Tools/context:** mcp:shopify (analytics-query, list-orders), mcp:klaviyo (get-flow-report, get-campaign-report, query-metric-aggregates), assets/brand-strategy.md, assets/goals-targets.md, assets/unit-economics.md, skills/anomaly-detector/SKILL.md
 
 # Morning Briefing Generator
 
@@ -53,38 +53,38 @@ Format the output as JSON the dashboard can parse:
 
 ```json
 {
-  "generated_at": "2026-06-08T06:14:00Z",
-  "headline": "Solid week. 3-pack is finally pulling its weight — 41% of orders. But the welcome flow is leaking revenue and Pomade 4oz inventory is getting tight.",
+  "generated_at": "2026-06-08T06:14:00Z"
+  "headline": "Solid week. 3-pack is finally pulling its weight — 41% of orders. But the welcome flow is leaking revenue and Pomade 4oz inventory is getting tight."
   "what_claude_did_last_24h": [
-    {"type": "draft", "title": "3 welcome flow rewrites", "status": "ready for review"},
-    {"type": "draft", "title": "PDP copy variants for 3-pack hero", "status": "drafted in Drive"},
-    {"type": "reply", "title": "2 customer support tickets", "status": "drafts ready"},
+    {"type": "draft", "title": "3 welcome flow rewrites", "status": "ready for review"}
+    {"type": "draft", "title": "PDP copy variants for 3-pack hero", "status": "drafted in Drive"}
+    {"type": "reply", "title": "2 customer support tickets", "status": "drafts ready"}
     {"type": "scan", "title": "Competitor scan", "status": "Based dropped a new SKU"}
-  ],
+  ]
   "key_points": [
     {
-      "type": "win",
-      "headline": "3-pack hit 41% of orders this week",
-      "supporting": "AOV climbed to $34.10 — mostly driven by Tuesday's homepage hero update",
+      "type": "win"
+      "headline": "3-pack hit 41% of orders this week"
+      "supporting": "AOV climbed to $34.10 — mostly driven by Tuesday's homepage hero update"
       "context_source": "shopify.sales + shopify.inventory · 7d window"
-    },
+    }
     {
-      "type": "flag",
-      "headline": "Welcome flow email 2 CTR dropped to 4.1%",
-      "supporting": "Half its benchmark. Copy hasn't changed since 2024. Three rewrites ready.",
+      "type": "flag"
+      "headline": "Welcome flow email 2 CTR dropped to 4.1%"
+      "supporting": "Half its benchmark. Copy hasn't changed since 2024. Three rewrites ready."
       "context_source": "klaviyo.flow-report · 30d"
-    },
+    }
     {
-      "type": "fire",
-      "headline": "Pomade 4oz inventory: 18 days remaining",
-      "supporting": "Reorder lead time is 21 days. Email to Emanuel drafted.",
+      "type": "fire"
+      "headline": "Pomade 4oz inventory: 18 days remaining"
+      "supporting": "Reorder lead time is 21 days. Email to Emanuel drafted."
       "context_source": "shopify.inventory · velocity calc"
     }
-  ],
+  ]
   "side_stats": {
-    "mtd_revenue": {"value": "$4,231", "context": "of $6,000 goal · on pace"},
-    "week_revenue": {"value": "$1,089", "context": "↑ 18% vs. prior week"},
-    "contribution_margin": {"value": "78%", "context": "↑ 2pt"},
+    "mtd_revenue": {"value": "$4,231", "context": "of $6,000 goal · on pace"}
+    "week_revenue": {"value": "$1,089", "context": "↑ 18% vs. prior week"}
+    "contribution_margin": {"value": "78%", "context": "↑ 2pt"}
     "new_customers": {"value": "31", "context": "Repeat rate 23% · LTV $147"}
   }
 }

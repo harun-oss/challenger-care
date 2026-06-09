@@ -95,9 +95,8 @@ When things break, start here. Common failure modes per tool, with the exact thi
 
 ### "Artifact prompts to connect a plugin I don't have"
 - This is the migration discipline violation we built the validator to prevent
-- Check `artifact/command.html` for any `mcp__skills__*` literal · should be ZERO
-- Check `mcp_tools` array in the artifact registration · should only list tools we actively call
-- Generate a fresh share link (old ones are frozen with old requirements)
+- Run `python3 scripts/validate.py` — it scans for `mcp__skills__*` literals and bare UUIDs and will tell you exactly which file is the culprit
+- Generate a fresh share link after fixing (old ones are frozen with old requirements)
 
 ### "Numbers in dashboard don't match what's in CONFIG.md"
 1. Run `python3 scripts/sync-html-config.py` to sync the dashboard CONFIG block from CONFIG.md

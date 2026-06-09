@@ -3,7 +3,7 @@ name: inventory-restock
 description: Calculates reorder timing from real velocity, drafts the email to Emanuel, opens the Asana task. MANDATORY TRIGGER: any mention of "Reorder Pomade 4oz", "Check our inventory — anything need restocking?", "Time to reorder anything?". Do NOT use this for: New product launches (use `launch-new-product`). General inventory health review (run the dashboard's "Top SKUs" section). Strategic SKU decisions like discontinue / bundle / promote (use `highest-leverage`).
 ---
 
-> **Permission tier:** execute · **Time:** 2min · **Tools/context:** mcp:shopify, mcp:asana (when connected), knowledge/team-roles.md, knowledge/unit-economics.md
+> **Permission tier:** execute · **Time:** 2min · **Tools/context:** mcp:shopify, mcp:asana (when connected), assets/team-roles.md, assets/unit-economics.md
 
 # Handle inventory restock
 

@@ -1,6 +1,6 @@
 ---
 name: anomaly-detector
-description: .
+description: System skill · runs on schedule to detect anomalies in live Shopify/Klaviyo data. Produces the 'On your plate' alert feed read by the dashboard. Not invoked by users directly. Invoked by scheduled task every 4 hours.
 ---
 # Anomaly Detector — Logic & Thresholds
 
@@ -198,26 +198,26 @@ Each alert is one object in a JSON array:
 
 ```json
 {
-  "id": "inventory_low_pomade_4oz",
-  "rule": "inventory_low",
-  "severity": "high",
-  "tier": "execute",
-  "title": "Reorder Pomade 4oz to avoid stockout",
-  "description": "18 days remaining · 21-day lead time · ~$3,800 wholesale per past PO",
-  "contract": "→ Sends drafted email to Emanuel · creates Asana task · no funds move until Emanuel confirms PO",
+  "id": "inventory_low_pomade_4oz"
+  "rule": "inventory_low"
+  "severity": "high"
+  "tier": "execute"
+  "title": "Reorder Pomade 4oz to avoid stockout"
+  "description": "18 days remaining · 21-day lead time · ~$3,800 wholesale per past PO"
+  "contract": "→ Sends drafted email to Emanuel · creates Asana task · no funds move until Emanuel confirms PO"
   "actions": [
     {
-      "label": "Send",
-      "primary": true,
+      "label": "Send"
+      "primary": true
       "prompt": "Draft a restock email to Emanuel for Pomade 4oz. Reference current inventory, velocity, and lead time. Recommend reorder quantity based on historical PO."
-    },
+    }
     {
-      "label": "Wait",
-      "primary": false,
+      "label": "Wait"
+      "primary": false
       "prompt": null
     }
-  ],
-  "data_source": "shopify.inventory + shopify.sales",
+  ]
+  "data_source": "shopify.inventory + shopify.sales"
   "generated_at": "2026-06-08T06:14:00Z"
 }
 ```
@@ -240,7 +240,7 @@ When the scheduled task fires:
 ## Calibration notes
 
 - **Inventory rules:** Lead times vary by SKU. Pomade lead time = 21 days per past PO. Update per SKU as data accumulates.
-- **AOV target = $50** per [unit-economics.md](../../../assets/unit-economics.md). When that target shifts, update the multipliers here.
+- **AOV target = $50** per [unit-economics.md](../../assets/unit-economics.md). When that target shifts, update the multipliers here.
 - **Klaviyo benchmarks** by flow type are documented inside the GrowthHit email skills. Pull from there at runtime.
 - **Baselines for traffic, Reddit mentions, etc.** are rolling 30-day averages. Recalculate weekly.
 

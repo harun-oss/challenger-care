@@ -3,7 +3,7 @@ name: orchestrator
 description: Takes free-form input from the command bar. Classifies intent · routes to a pre-built workflow OR builds a custom chain. Loads relevant context. Returns result + transparency on what ran.
 ---
 
-> **Permission tier:** varies (matches the underlying workflow's tier) · **Time:** depends on workflow · **Tools/context:** knowledge/ (all files), skills/workflows/ (all 21 workflows), mcp:* (any tool the routed workflow needs)
+> **Permission tier:** varies (matches the underlying workflow's tier) · **Time:** depends on workflow · **Tools/context:** assets/ (all files), skills/ (all 21 workflows), mcp:* (any tool the routed workflow needs)
 
 # Command Bar Orchestrator
 

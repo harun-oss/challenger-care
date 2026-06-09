@@ -3,7 +3,7 @@ name: why-sales-dropped
 description: Pulls Shopify + GA4 + Klaviyo together, diagnoses where the funnel broke this week, gives 3 most likely causes with evidence. MANDATORY TRIGGER: any mention of "Why is revenue down this week?", "Sales dropped — what happened?", "We're at 60% of last month's pace, why?". Do NOT use this for: Single-day anomalies (statistical noise — wait 3 days). Forward-looking forecasts (this is diagnostic, not predictive). Customer feedback diagnostics (use `customer-voice` for that).
 ---
 
-> **Permission tier:** generate · **Time:** 3min · **Tools/context:** mcp:shopify, mcp:ga4 (optional), mcp:klaviyo (optional), knowledge/unit-economics.md
+> **Permission tier:** generate · **Time:** 3min · **Tools/context:** mcp:shopify, mcp:ga4 (optional), mcp:klaviyo (optional), assets/unit-economics.md
 
 # Why did sales drop?
 

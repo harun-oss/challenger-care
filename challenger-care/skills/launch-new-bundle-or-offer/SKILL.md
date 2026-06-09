@@ -3,7 +3,7 @@ name: launch-new-bundle-or-offer
 description: Builds a complete bundle/offer launch — validates bundle math, drafts hero + cart upsell + offer landing page + promo email + first-week ad concepts. Tuned for the 3-pack as the AOV anchor. MANDATORY TRIGGER: any mention of "Launch the 3-pack as the new default offer", "Build a starter kit", "Make a Father's Day gift bundle", "Test a $50 vs $65 price point for the 3-pack". Do NOT use this for: Discount-led sales (use `launch-sale-promo`). New individual SKUs (use `launch-new-product`). Subscription onboarding (use `onboard-new-subscribers`).
 ---
 
-> **Permission tier:** stage · **Time:** 4min · **Tools/context:** knowledge/brand-strategy.md, knowledge/unit-economics.md, knowledge/claim-library.md, knowledge/customer-archetypes.md, voc/quote-library.md, mcp:shopify
+> **Permission tier:** stage · **Time:** 4min · **Tools/context:** assets/brand-strategy.md, assets/unit-economics.md, assets/claim-library.md, assets/customer-archetypes.md, voc/quote-library.md, mcp:shopify
 
 # Launch a new bundle or offer
 

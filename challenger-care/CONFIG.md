@@ -24,14 +24,14 @@ The targets every workflow and alert evaluates against. Update quarterly or when
 
 ```yaml
 goal:
-  monthly_revenue_blended: 60000     # USD · Amazon + Shopify combined
-  monthly_revenue_shopify: 6000      # USD · Shopify-only target
+  monthly_revenue_blended: 60000     # USD · Amazon + Shopify combined · VERIFY against actuals on first run
+  monthly_revenue_shopify: 6000      # USD · Shopify-only target (10% of blended)
   monthly_email_revenue: 1000        # USD · Klaviyo target
   email_flow_share_pct: 25           # % of email revenue from automated flows
   aov_target: 50                     # USD · unlocks profitable paid acquisition
   shopify_subscribers_target: 50     # 90-day target for Recharge subscribers
-  shopify_subscribers_baseline: 17   # Current as of v0.1.0
-  amazon_ss_subscribers: 1318        # Baseline (no real-time pull)
+  shopify_subscribers_baseline: 17   # VERIFY against Recharge dashboard · last set 2026-06-09
+  amazon_ss_subscribers: 1318        # Manual entry · update from Amazon Seller Central monthly
 ```
 
 ---

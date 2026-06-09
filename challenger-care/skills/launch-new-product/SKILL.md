@@ -3,7 +3,7 @@ name: launch-new-product
 description: Turns a product idea into a complete launch package in Challenger voice — positioning, PDP copy, ad concepts, launch email, social briefs, Reddit post, Asana checklist. MANDATORY TRIGGER: any mention of "Launch [product name]", "Let's launch the new shower bar in 2 weeks", "I want to ship [product] — give me everything". Do NOT use this for: Existing product refreshes (use `refresh-underperforming-pdp` instead). Bundle launches specifically (use `launch-new-bundle-or-offer` — bundle math is different). Sale/promo campaigns (use `launch-sale-promo`).
 ---
 
-> **Permission tier:** generate · **Time:** 5min · **Tools/context:** knowledge/brand-strategy.md, knowledge/unit-economics.md, knowledge/claim-library.md, knowledge/customer-archetypes.md, voc/quote-library.md
+> **Permission tier:** generate · **Time:** 5min · **Tools/context:** assets/brand-strategy.md, assets/unit-economics.md, assets/claim-library.md, assets/customer-archetypes.md, voc/quote-library.md
 
 # Launch a new product
 

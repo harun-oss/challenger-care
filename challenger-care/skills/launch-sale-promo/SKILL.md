@@ -3,9 +3,7 @@ name: launch-sale-promo
 description: Builds a complete promo campaign from a single ask — banner copy, email send, SMS, social posts, Klaviyo segment + start/end logic. MANDATORY TRIGGER: any mention of "Run a 20% off promo on the 3-pack from Friday to Sunday", "BFCM campaign — what should we run?", "Free shipping weekend, let's go". Do NOT use this for: New product launches (use `launch-new-product`). Bundle launches (use `launch-new-bundle`). Ongoing email flows (use `build-next-email-flow`).
 ---
 
-> **Permission tier:** stage · **Time:** 3min · **Tools/context:** knowledge/claim-library.md, knowledge/unit-economics.md, skills/lib/email-copywriting
-
-# Launch a sale or promo
+> **Permission tier:** stage · **Time:** 3min · **Tools/context:** assets/claim-library.md, assets/unit-economics.md, # Launch a sale or promo
 
 ## When to use this workflow
 

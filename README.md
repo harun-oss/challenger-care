@@ -51,7 +51,6 @@ challenger-care/
 ├── artifact/command.html          ← the dashboard
 ├── scripts/                       ← VOC processor, validator
 ├── docs/                          ← how-to, training, troubleshooting
-└── audits/                        ← Klaviyo audit + competitor scans
 ```
 
 ---
