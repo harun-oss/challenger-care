@@ -152,8 +152,10 @@ def main():
                 title = ' '.join(w.capitalize() if w not in {"a", "the", "to", "of", "an", "in", "for", "on"} else w for w in sk_name.replace("-", " ").split())
                 # Fix capitalization for "this weeks" and a few patterns
                 title = title.replace("This Weeks", "this week's").replace("Pdp", "PDP")
+                # Escape single quotes in title for JS single-quoted string literal
+                title_escaped = title.replace("\\", "\\\\").replace("'", "\\'")
                 items_js.append(
-                    f"    {{ title: '{title}', explain: '{desc_escaped}', tier: '{s['tier']}', skill: '{sk_name}' }}"
+                    f"    {{ title: '{title_escaped}', explain: '{desc_escaped}', tier: '{s['tier']}', skill: '{sk_name}' }}"
                 )
         if items_js:
             tagline = BUCKET_TAGLINES.get(bucket_name, "")
