@@ -516,7 +516,7 @@ section { margin-bottom: 48px; }
     <div class="cmd-headline">Type any request. Claude has your full business context and picks the right workflows and tools to handle it.</div>
     <div class="cmd-bar">
       <div class="cmd-icon">✱</div>
-      <input id="cmd-input" placeholder="What do you want Claude to do?" onkeydown="if(event.key==='Enter'){window.cowork && window.cowork.sendPrompt && window.cowork.sendPrompt(this.value); this.value='';}">
+      <input id="cmd-input" placeholder="What do you want Claude to do?" onkeydown="if(event.key==='Enter' && this.value.trim()){ dropPrompt(this.value); this.value=''; }">
       <span class="cmd-bar-kbd">↵</span>
     </div>
     <div class="cmd-examples">
@@ -771,22 +771,56 @@ function setHTML(selector, html) {
   if (el) el.innerHTML = html;
 }
 
-// Global prompt dispatcher · drops text into the chat input box for user review
-// This is the confirmed-working pattern · works whether or not sendPrompt is available
-function dropPrompt(text) {
-  const input = document.getElementById('cmd-input');
-  if (input) {
-    input.value = text;
-    input.focus();
-    input.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    // Visual feedback so user sees something happened
-    input.classList.remove('pulse');
-    // Re-trigger animation by forcing reflow
-    void input.offsetWidth;
-    input.classList.add('pulse');
-  }
-  // Also close settings if open
+// Global prompt dispatcher · tries to actually SEND the prompt to chat.
+// Falls back through 4 paths until one works:
+//  1. Bare global sendPrompt(text)  · per Cowork docs · this is the canonical API
+//  2. window.sendPrompt(text)
+//  3. window.cowork.sendPrompt(text)
+//  4. Copy to clipboard + toast (last resort)
+async function dropPrompt(text) {
   if (typeof closeSettings === 'function') closeSettings();
+
+  // Try the documented path first
+  try {
+    if (typeof sendPrompt === 'function') { sendPrompt(text); return showToast('Sent to Claude ✓'); }
+  } catch (e) { console.warn('[dropPrompt] bare sendPrompt failed:', e); }
+  try {
+    if (typeof window.sendPrompt === 'function') { window.sendPrompt(text); return showToast('Sent to Claude ✓'); }
+  } catch (e) { console.warn('[dropPrompt] window.sendPrompt failed:', e); }
+  try {
+    if (window.cowork && typeof window.cowork.sendPrompt === 'function') {
+      window.cowork.sendPrompt(text);
+      return showToast('Sent to Claude ✓');
+    }
+  } catch (e) { console.warn('[dropPrompt] window.cowork.sendPrompt failed:', e); }
+
+  // Fallback: copy to clipboard + show toast
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast('Prompt copied · paste into chat to run', 4500);
+  } catch (e) {
+    // Last resort: fill the visible input so user can copy manually
+    const input = document.getElementById('cmd-input');
+    if (input) { input.value = text; input.focus(); input.select(); }
+    showToast('Prompt ready in input · copy + paste into chat', 4500);
+  }
+}
+
+// Toast notification (bottom right)
+function showToast(message, duration = 2200) {
+  let toast = document.getElementById('cc-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'cc-toast';
+    toast.style.cssText = 'position:fixed;bottom:24px;right:24px;background:var(--ink);color:white;padding:12px 18px;border-radius:6px;font-size:13px;font-weight:600;z-index:200;box-shadow:0 6px 24px rgba(0,0,0,0.15);opacity:0;transform:translateY(8px);transition:opacity 0.2s,transform 0.2s;max-width:340px;line-height:1.5;';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  requestAnimationFrame(() => { toast.style.opacity = '1'; toast.style.transform = 'translateY(0)'; });
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => {
+    toast.style.opacity = '0'; toast.style.transform = 'translateY(8px)';
+  }, duration);
 }
 
 function setBar(selector, pct) {
