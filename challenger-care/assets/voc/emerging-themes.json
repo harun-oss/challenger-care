@@ -1,0 +1,74 @@
+{
+  "cutoff_date": "2025-06-08",
+  "window": "last 12 months vs prior",
+  "recent_count": 31,
+  "older_count": 449,
+  "emerging": [
+    {
+      "theme": "humidity",
+      "recent_rate": 0.12903225806451613,
+      "older_rate": 0.024498886414253896,
+      "lift_ratio": 5.266862170087976
+    },
+    {
+      "theme": "wash_out",
+      "recent_rate": 0.1935483870967742,
+      "older_rate": 0.0645879732739421,
+      "lift_ratio": 2.996662958843159
+    },
+    {
+      "theme": "fragrance_free",
+      "recent_rate": 0.3870967741935484,
+      "older_rate": 0.16481069042316257,
+      "lift_ratio": 2.3487358326068004
+    },
+    {
+      "theme": "grease_free",
+      "recent_rate": 0.12903225806451613,
+      "older_rate": 0.05790645879732739,
+      "lift_ratio": 2.228287841191067
+    },
+    {
+      "theme": "irritation_free",
+      "recent_rate": 0.06451612903225806,
+      "older_rate": 0.028953229398663696,
+      "lift_ratio": 2.228287841191067
+    },
+    {
+      "theme": "comparison",
+      "recent_rate": 0.0967741935483871,
+      "older_rate": 0.053452115812917596,
+      "lift_ratio": 1.8104838709677418
+    },
+    {
+      "theme": "easy_use",
+      "recent_rate": 0.22580645161290322,
+      "older_rate": 0.12694877505567928,
+      "lift_ratio": 1.7787209960384833
+    },
+    {
+      "theme": "grease_problem",
+      "recent_rate": 0.25806451612903225,
+      "older_rate": 0.14699331848552338,
+      "lift_ratio": 1.7556207233626588
+    },
+    {
+      "theme": "hold",
+      "recent_rate": 0.6774193548387096,
+      "older_rate": 0.39198218262806234,
+      "lift_ratio": 1.7281891495601174
+    },
+    {
+      "theme": "acne_skin",
+      "recent_rate": 0.0967741935483871,
+      "older_rate": 0.0645879732739421,
+      "lift_ratio": 1.4983314794215794
+    },
+    {
+      "theme": "subscribe_repeat",
+      "recent_rate": 0.0967741935483871,
+      "older_rate": 0.07349665924276169,
+      "lift_ratio": 1.316715542521994
+    }
+  ]
+}

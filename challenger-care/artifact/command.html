@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHALLENGER</title>
+<style>
+:root {
+  color-scheme: light;
+  --bg: #F5F1E8;
+  --surface: #FFFFFF;
+  --surface-2: #EBE5D6;
+  --surface-3: #E3DDC8;
+  --ink: #0A0A0A;
+  --ink-2: #2C2A28;
+  --ink-3: #6B645C;
+  --ink-4: #A39B8E;
+  --line: #E3DDC8;
+  --line-2: #CFC8B5;
+  --tan: #D4B896;
+  --tan-soft: #E8DECC;
+  --tan-deep: #B89970;
+  --amber: #946708;
+  --amber-soft: #F0E4C5;
+  --red: #8B3030;
+  --red-soft: #EBD6D2;
+  --green: #2C5F47;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--bg); }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", system-ui, sans-serif;
+  color: var(--ink);
+  font-size: 13.5px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "cv11", "ss01", "ss03";
+}
+.num { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 28px 36px 72px; }
+
+/* NAV */
+.nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 56px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+.nav-left { display: flex; align-items: center; gap: 28px; }
+.brand-block { display: flex; align-items: center; gap: 12px; }
+.brand-mark { width: 28px; height: 28px; border: 2px solid var(--ink); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--ink); font-weight: 700; font-family: "Georgia", "Times New Roman", serif; font-size: 15px; font-style: italic; }
+.brand-wordmark { font-size: 15px; font-weight: 800; letter-spacing: 0.14em; color: var(--ink); }
+.nav-tabs { display: flex; gap: 2px; }
+.nav-tab { font-size: 11px; padding: 6px 12px; color: var(--ink-3); cursor: pointer; border-radius: 4px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+.nav-tab.active { color: var(--ink); background: var(--surface-2); }
+.nav-tab:hover { color: var(--ink); }
+.nav-right { display: flex; align-items: center; gap: 18px; font-size: 11px; color: var(--ink-3); }
+.nav-live { display: flex; align-items: center; gap: 6px; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+.live-dot { width: 6px; height: 6px; background: var(--ink); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.nav-cmd { display: flex; align-items: center; gap: 8px; padding: 6px 12px; border: 1px solid var(--ink); border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: 600; color: var(--ink); letter-spacing: 0.06em; text-transform: uppercase; }
+.nav-cmd:hover { background: var(--ink); color: white; }
+.nav-cmd-kbd { font-size: 9.5px; padding: 2px 5px; background: var(--surface-2); color: var(--ink-3); border-radius: 3px; font-family: -apple-system, "SF Mono", Menlo, monospace; }
+.nav-cmd:hover .nav-cmd-kbd { background: rgba(255,255,255,0.15); color: white; }
+
+/* HEADER */
+.head-row { margin-bottom: 28px; }
+.head-date { font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; font-weight: 700; color: var(--ink-3); margin-bottom: 6px; }
+.head-title { font-size: 36px; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); line-height: 1.05; text-transform: uppercase; }
+.head-sub { font-size: 13px; color: var(--ink-3); margin-top: 8px; }
+
+/* CONTEXT STRIP */
+.context-strip { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 14px 20px; margin-bottom: 48px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.ctx-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink); font-weight: 800; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+.ctx-label::before { content: ""; width: 6px; height: 6px; background: var(--ink); border-radius: 50%; display: inline-block; }
+.ctx-chips { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
+.ctx-chip { font-size: 11px; padding: 4px 11px; background: var(--surface-2); border-radius: 3px; color: var(--ink-2); cursor: pointer; font-weight: 500; }
+.ctx-chip:hover { background: var(--tan-soft); }
+.ctx-chip.pending { color: var(--ink-4); background: transparent; border: 1px dashed var(--line-2); }
+.ctx-edit { font-size: 10.5px; color: var(--ink-3); cursor: pointer; white-space: nowrap; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+.ctx-edit:hover { color: var(--ink); }
+
+/* SECTION LABEL */
+section { margin-bottom: 48px; }
+.sect-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--ink); font-weight: 800; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.sect-meta { font-size: 10.5px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.sect-meta .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--ink); display: inline-block; }
+.sect-meta .dot.cached { background: var(--ink-4); }
+.sect-meta .dot.live { background: var(--green); }
+.sect-meta .dot.pending { background: var(--ink-4); opacity: 0.5; }
+.sect-link { font-size: 10.5px; color: var(--ink-3); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; cursor: pointer; }
+.sect-link:hover { color: var(--ink); }
+
+/* BRIEFING */
+.briefing { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 36px 40px; }
+.briefing-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+.briefing-tag { font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); }
+.briefing-refresh { font-size: 10px; color: var(--ink-4); font-family: -apple-system, "SF Mono", Menlo, monospace; text-transform: uppercase; letter-spacing: 0.08em; }
+.briefing h2 { font-size: 26px; font-weight: 700; line-height: 1.3; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 24px; max-width: 880px; }
+.briefing h2 .hl { background: linear-gradient(180deg, transparent 62%, var(--tan-soft) 62%); padding: 0 4px; }
+.briefing-collapse { background: var(--surface-2); border-radius: 4px; margin-bottom: 24px; }
+.briefing-collapse summary { list-style: none; cursor: pointer; padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); }
+.briefing-collapse summary::-webkit-details-marker { display: none; }
+.collapse-icon { width: 14px; height: 14px; display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--ink-3); transition: transform 0.2s; }
+.briefing-collapse[open] .collapse-icon { transform: rotate(45deg); }
+.briefing-collapse-body { padding: 4px 18px 18px; }
+.briefing-since { display: flex; flex-direction: column; gap: 9px; font-size: 13px; color: var(--ink-2); }
+.since-item { display: flex; align-items: flex-start; gap: 10px; }
+.since-check { color: var(--ink); font-weight: 800; flex-shrink: 0; margin-top: 1px; }
+.since-item strong { color: var(--ink); font-weight: 700; }
+.since-note { font-size: 11px; color: var(--ink-4); font-style: italic; margin-top: 6px; }
+.briefing-points { display: flex; flex-direction: column; gap: 16px; font-size: 14.5px; color: var(--ink-2); line-height: 1.55; }
+.bp { display: flex; gap: 14px; align-items: flex-start; }
+.bp-marker { flex-shrink: 0; width: 24px; height: 24px; border: 1.5px solid var(--ink); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; margin-top: 2px; background: var(--surface); }
+.bp-marker.win { border-color: var(--ink); color: var(--ink); }
+.bp-marker.flag { border-color: var(--amber); background: var(--amber-soft); color: var(--amber); }
+.bp-marker.fire { border-color: var(--red); background: var(--red-soft); color: var(--red); }
+.bp strong { color: var(--ink); font-weight: 700; }
+.bp-context { font-size: 11.5px; color: var(--ink-4); margin-top: 3px; font-style: italic; }
+
+/* KPI */
+.kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--ink); }
+.kpi { padding: 24px 26px; background: var(--surface); border-right: 1px solid var(--line); position: relative; }
+.kpi:last-child { border-right: none; }
+.kpi.pending { background: var(--surface-2); }
+.kpi-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink); font-weight: 800; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
+.kpi-source { font-size: 9px; padding: 2px 6px; border: 1px solid var(--line-2); border-radius: 2px; color: var(--ink-4); font-weight: 700; letter-spacing: 0.08em; }
+.kpi-source.live { color: var(--green); border-color: var(--green); }
+.kpi-val { font-size: 34px; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 8px; line-height: 1; }
+.kpi-val.pending { color: var(--ink-4); }
+.kpi-meta { font-size: 12px; color: var(--ink-3); }
+.delta-up { color: var(--ink); font-weight: 700; }
+.delta-down { color: var(--red); font-weight: 700; }
+.goal-bar { height: 2px; background: var(--surface-2); margin-top: 16px; position: relative; overflow: hidden; }
+.goal-bar-fill { position: absolute; top: 0; left: 0; height: 100%; background: var(--ink); transition: width 0.5s; }
+.goal-label { font-size: 10.5px; color: var(--ink-3); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+.kpi-connect { font-size: 11px; color: var(--ink-3); font-weight: 600; margin-top: 8px; cursor: pointer; }
+.kpi-connect:hover { color: var(--ink); }
+
+/* FUNNEL */
+.funnel-card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 28px 32px; }
+.funnel-stages { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; gap: 14px; align-items: stretch; }
+.fn-stage { display: flex; flex-direction: column; gap: 6px; padding-right: 4px; }
+.fn-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--ink-4); font-weight: 700; }
+.fn-count { font-size: 30px; font-weight: 800; letter-spacing: -0.025em; color: var(--ink); line-height: 1; }
+.fn-pct { font-size: 11px; color: var(--ink-3); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+.fn-bar { height: 3px; background: var(--surface-2); margin-top: 10px; position: relative; }
+.fn-bar-fill { position: absolute; top: 0; left: 0; height: 100%; background: var(--ink); transition: width 0.5s; }
+.fn-arrow { color: var(--ink-4); font-size: 16px; font-weight: 500; display: flex; align-items: flex-start; padding-top: 26px; }
+.funnel-footer { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.fn-footer-stat { font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--ink-3); font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.fn-footer-stat .stat-val { font-size: 17px; font-weight: 800; color: var(--ink); letter-spacing: -0.015em; }
+.fn-footer-stat .stat-val.warn { color: var(--amber); }
+.fn-footer-stat .stat-val.bad { color: var(--red); }
+.fn-footer-stat .stat-val.good { color: var(--green); }
+
+/* SKUs */
+.sku-card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 4px 28px; }
+.sku-row { display: grid; grid-template-columns: 2.4fr 0.7fr 0.9fr 1.1fr 1.2fr; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 13px; align-items: center; gap: 12px; }
+.sku-row.head { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--ink-4); font-weight: 700; padding: 16px 0 10px; }
+.sku-row:last-child { border-bottom: none; }
+.sku-name { font-weight: 700; color: var(--ink); letter-spacing: -0.005em; }
+.sku-name .sku-sub { display: block; font-size: 11px; color: var(--ink-4); font-weight: 400; margin-top: 1px; }
+.sku-num { font-variant-numeric: tabular-nums; color: var(--ink-2); font-weight: 600; }
+.sku-status { display: inline-block; padding: 3px 9px; font-size: 9px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid; white-space: nowrap; }
+.sku-status.healthy { border-color: var(--green); color: var(--green); }
+.sku-status.overstock { border-color: var(--line-2); color: var(--ink-4); }
+.sku-status.dead { border-color: var(--line-2); color: var(--ink-4); background: var(--surface-2); }
+.sku-status.restock { border-color: var(--red); color: var(--red); background: var(--red-soft); }
+.sku-status.order-soon { border-color: var(--amber); color: var(--amber); background: var(--amber-soft); }
+.sku-status.tracking-error { border-color: var(--red); color: var(--red); }
+.sku-status.hero { border-color: var(--ink); color: var(--ink); background: var(--tan-soft); }
+
+/* ON YOUR PLATE */
+.queue { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 4px 28px; }
+.queue-row { display: grid; grid-template-columns: 12px 1fr auto; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--line); align-items: flex-start; }
+.queue-row:last-child { border-bottom: none; }
+.q-sev { width: 8px; height: 8px; border-radius: 50%; margin-top: 7px; }
+.q-sev.high { background: var(--red); }
+.q-sev.med { background: var(--amber); }
+.q-sev.win { background: var(--ink); }
+.q-sev.info { background: var(--ink-4); }
+.q-body { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.q-title-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.q-title { font-size: 15px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; }
+.q-tier { font-size: 9px; padding: 2px 7px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid; }
+.q-tier.generate { border-color: var(--line-2); color: var(--ink-3); }
+.q-tier.stage { border-color: var(--amber); color: var(--amber); }
+.q-tier.execute { border-color: var(--red); color: var(--red); }
+.q-desc { font-size: 13px; color: var(--ink-3); }
+.q-contract { font-size: 11.5px; color: var(--ink-4); font-style: italic; border-left: 2px solid var(--line-2); padding-left: 12px; margin-top: 3px; }
+.q-actions { display: flex; gap: 6px; flex-shrink: 0; padding-top: 4px; }
+.q-btn { font-size: 11px; font-weight: 800; padding: 8px 14px; border: 1px solid var(--line-2); cursor: pointer; font-family: inherit; background: var(--surface); color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.08em; }
+.q-btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+.q-btn:hover { border-color: var(--ink); }
+.queue-footer { padding: 14px 0; border-top: 1px solid var(--line); font-size: 11.5px; color: var(--ink-4); font-style: italic; text-align: center; }
+
+/* COMMAND BAR */
+.cmd-section { background: var(--ink); color: var(--surface); border-radius: 6px; padding: 40px 44px; margin-bottom: 28px; position: relative; }
+.cmd-prelude { font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--tan); font-weight: 800; margin-bottom: 14px; }
+.cmd-headline { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: white; margin-bottom: 22px; line-height: 1.3; max-width: 720px; }
+.cmd-bar { background: var(--surface); border-radius: 6px; display: flex; align-items: center; padding: 0 20px; height: 60px; max-width: 720px; }
+.cmd-icon { font-size: 18px; color: var(--ink-3); margin-right: 14px; font-weight: 300; }
+.cmd-bar input { flex: 1; border: 0; outline: 0; background: none; font-family: inherit; font-size: 15.5px; color: var(--ink); letter-spacing: -0.005em; }
+.cmd-bar input::placeholder { color: var(--ink-4); }
+.cmd-bar-kbd { font-size: 10.5px; padding: 3px 8px; background: var(--surface-2); border-radius: 4px; color: var(--ink-3); font-family: -apple-system, "SF Mono", Menlo, monospace; font-weight: 700; }
+.cmd-examples { margin-top: 18px; display: flex; gap: 8px; flex-wrap: wrap; max-width: 720px; }
+.cmd-ex { font-size: 11px; padding: 5px 11px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 14px; color: rgba(255,255,255,0.75); cursor: pointer; font-weight: 500; }
+.cmd-ex:hover { background: rgba(255,255,255,0.15); color: white; }
+
+/* WORKFLOWS */
+.wf-intro { font-size: 13px; color: var(--ink-3); margin-bottom: 18px; max-width: 720px; line-height: 1.55; }
+.wf-intro strong { color: var(--ink-2); font-weight: 700; }
+.wf-card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 4px 28px; }
+.wf-group { border-bottom: 1px solid var(--line); }
+.wf-card .wf-group:last-of-type { border-bottom: none; }
+.wf-group summary { list-style: none; cursor: pointer; padding: 20px 0; display: flex; align-items: center; gap: 14px; }
+.wf-group summary::-webkit-details-marker { display: none; }
+.wf-group-title { font-size: 12px; font-weight: 800; color: var(--ink); text-transform: uppercase; letter-spacing: 0.16em; min-width: 100px; }
+.wf-group-line { font-size: 12px; color: var(--ink-4); font-weight: 500; flex: 1; }
+.wf-group-count { font-size: 10px; color: var(--ink-3); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.wf-group-icon { width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--ink); margin-left: 12px; transition: transform 0.2s; }
+.wf-group[open] .wf-group-icon { transform: rotate(45deg); }
+.wf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding-bottom: 24px; }
+.wf { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 16px 18px; cursor: pointer; transition: all 0.15s; display: flex; flex-direction: column; gap: 7px; }
+.wf:hover { border-color: var(--ink); transform: translateY(-1px); }
+.wf-title { font-size: 14px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; line-height: 1.3; }
+.wf-explain { font-size: 12px; color: var(--ink-3); line-height: 1.45; }
+.wf-foot { font-size: 9.5px; color: var(--ink-4); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.wf-foot-sep { opacity: 0.5; }
+
+/* COMPETITOR WATCH */
+.cw-card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 28px 32px; }
+.cw-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.cw-brand-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.cw-brand-name { font-size: 12px; font-weight: 800; color: var(--ink); text-transform: uppercase; letter-spacing: 0.14em; }
+.cw-status { font-size: 9px; padding: 2px 7px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid; }
+.cw-status.pending { border-color: var(--line-2); color: var(--ink-4); }
+.cw-event { font-size: 12.5px; color: var(--ink-4); padding: 10px 0; line-height: 1.5; font-style: italic; }
+
+/* CHANNELS */
+.channels-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border: 1px solid var(--ink); border-radius: 6px; overflow: hidden; }
+.ch { background: var(--surface); padding: 16px 18px; border-right: 1px solid var(--line); }
+.ch:last-child { border-right: none; }
+.ch.pending { background: var(--surface-2); }
+.ch-name { font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--ink); font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 7px; }
+.ch-state { width: 5px; height: 5px; border-radius: 50%; background: var(--ink); }
+.ch-state.live { background: var(--green); }
+.ch-state.off { background: var(--ink-4); opacity: 0.5; }
+.ch-val { font-size: 18px; font-weight: 800; color: var(--ink); margin-bottom: 2px; letter-spacing: -0.01em; }
+.ch-val.off { color: var(--ink-4); font-weight: 500; }
+.ch-meta { font-size: 11px; color: var(--ink-3); }
+
+/* IN FLIGHT */
+.work-card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 20px 24px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.work-pill { background: var(--bg); border: 1px solid var(--line); padding: 6px 12px; font-size: 11px; color: var(--ink-2); font-weight: 600; letter-spacing: 0.04em; border-radius: 3px; }
+.work-pill .pill-dot { width: 5px; height: 5px; border-radius: 50%; display: inline-block; margin-right: 8px; vertical-align: middle; }
+.pill-dot.building { background: var(--amber); }
+.pill-dot.planning { background: var(--ink-4); }
+.pill-dot.live { background: var(--ink); }
+.work-note { font-size: 11px; color: var(--ink-4); font-style: italic; margin-left: 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- NAV -->
+  <div class="nav">
+    <div class="nav-left">
+      <div class="brand-block">
+        <div class="brand-mark">C</div>
+        <div class="brand-wordmark">CHALLENGER</div>
+      </div>
+      <div class="nav-tabs">
+        <div class="nav-tab active">Today</div>
+        <div class="nav-tab">Workflows</div>
+        <div class="nav-tab">Channels</div>
+        <div class="nav-tab">Customers</div>
+        <div class="nav-tab">Knowledge</div>
+      </div>
+    </div>
+    <div class="nav-right">
+      <div class="nav-live"><span class="live-dot"></span><span data-shop-name>Live</span></div>
+      <div class="nav-cmd" onclick="window.cowork && window.cowork.sendPrompt && window.cowork.sendPrompt('')">
+        Ask Claude
+        <span class="nav-cmd-kbd">⌘K</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <div class="head-row">
+    <div class="head-date" data-head-date>Loading…</div>
+    <div class="head-title">Your week so far.</div>
+    <div class="head-sub"><span data-mtd-context>Loading 30-day pacing…</span></div>
+  </div>
+
+  <!-- CONTEXT STRIP -->
+  <div class="context-strip">
+    <div class="ctx-label">Context</div>
+    <div class="ctx-chips">
+      <div class="ctx-chip">Brand strategy</div>
+      <div class="ctx-chip">Unit economics</div>
+      <div class="ctx-chip pending">Reviews (pending upload)</div>
+      <div class="ctx-chip">18 SKUs + bundles</div>
+      <div class="ctx-chip">Team roles</div>
+      <div class="ctx-chip">Claim library</div>
+      <div class="ctx-chip">Competitor map</div>
+      <div class="ctx-chip">Connected stack</div>
+      <div class="ctx-chip">Goals + targets</div>
+    </div>
+    <div class="ctx-edit">Edit →</div>
+  </div>
+
+  <!-- BRIEFING -->
+  <section>
+    <div class="briefing">
+      <div class="briefing-head">
+        <div class="briefing-tag">Morning Briefing</div>
+        <div class="briefing-refresh" data-briefing-stamp>Live from Shopify</div>
+      </div>
+
+      <h2 data-briefing-headline>Loading the week's view…</h2>
+
+      <details class="briefing-collapse">
+        <summary>
+          <span>What Claude did in the last 24 hours · sample</span>
+          <span class="collapse-icon">+</span>
+        </summary>
+        <div class="briefing-collapse-body">
+          <div class="briefing-since">
+            <div class="since-item"><span class="since-check">✓</span><div>This will populate live once the briefing skill is installed in your Claude.</div></div>
+            <div class="since-item"><span class="since-check">✓</span><div>It will track every workflow that fires, every alert resolved, and every draft generated.</div></div>
+            <div class="since-note">Sample only. Activates with the briefing skill + Drive connector.</div>
+          </div>
+        </div>
+      </details>
+
+      <div class="briefing-points" data-briefing-points>
+        <div class="bp">
+          <div class="bp-marker win">·</div>
+          <div>Loading insights from Shopify…</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KPIs -->
+  <section>
+    <div class="sect-label">
+      <span>Performance · top-line</span>
+      <span class="sect-meta"><span class="dot live"></span>Live · Shopify</span>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="kpi-label">Revenue · 7d <span class="kpi-source live">Live</span></div>
+        <div class="kpi-val num" data-kpi="revenue-7d">—</div>
+        <div class="kpi-meta" data-kpi="revenue-7d-delta">vs. prior 7d</div>
+        <div class="goal-bar"><div class="goal-bar-fill" data-kpi="mtd-bar" style="width:0%"></div></div>
+        <div class="goal-label" data-kpi="mtd-label">MTD pacing</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">AOV · 7d <span class="kpi-source live">Live</span></div>
+        <div class="kpi-val num" data-kpi="aov-7d">—</div>
+        <div class="kpi-meta" data-kpi="aov-delta">target $50</div>
+        <div class="goal-bar"><div class="goal-bar-fill" data-kpi="aov-bar" style="width:0%"></div></div>
+        <div class="goal-label" data-kpi="aov-label">% to target</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">CVR · 7d <span class="kpi-source live">Live</span></div>
+        <div class="kpi-val num" data-kpi="cvr-7d">—</div>
+        <div class="kpi-meta" data-kpi="cvr-meta">Mobile · Desktop</div>
+        <div class="goal-bar"><div class="goal-bar-fill" data-kpi="cvr-bar" style="width:0%"></div></div>
+        <div class="goal-label" data-kpi="cvr-label">Sessions this week</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Customers · 30d <span class="kpi-source live">Live</span></div>
+        <div class="kpi-val num" data-kpi="customers-total">—</div>
+        <div class="kpi-meta" data-kpi="customers-split">new · returning</div>
+        <div class="goal-bar"><div class="goal-bar-fill" data-kpi="returning-bar" style="width:0%"></div></div>
+        <div class="goal-label" data-kpi="returning-label">% returning</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FUNNEL -->
+  <section>
+    <div class="sect-label">
+      <span>Funnel · 30d</span>
+      <span class="sect-meta"><span class="dot live"></span>Live · Shopify sessions</span>
+    </div>
+    <div class="funnel-card">
+      <div class="funnel-stages">
+        <div class="fn-stage">
+          <div class="fn-label">Sessions</div>
+          <div class="fn-count num" data-fn="sessions">—</div>
+          <div class="fn-pct">100% of traffic</div>
+          <div class="fn-bar"><div class="fn-bar-fill" style="width:100%"></div></div>
+        </div>
+        <div class="fn-arrow">→</div>
+        <div class="fn-stage">
+          <div class="fn-label">Added to cart</div>
+          <div class="fn-count num" data-fn="atc">—</div>
+          <div class="fn-pct" data-fn="atc-pct">— of sessions</div>
+          <div class="fn-bar"><div class="fn-bar-fill" data-fn="atc-bar" style="width:0%"></div></div>
+        </div>
+        <div class="fn-arrow">→</div>
+        <div class="fn-stage">
+          <div class="fn-label">Reached checkout</div>
+          <div class="fn-count num" data-fn="checkout">—</div>
+          <div class="fn-pct" data-fn="checkout-pct">— of sessions</div>
+          <div class="fn-bar"><div class="fn-bar-fill" data-fn="checkout-bar" style="width:0%"></div></div>
+        </div>
+        <div class="fn-arrow">→</div>
+        <div class="fn-stage">
+          <div class="fn-label">Completed</div>
+          <div class="fn-count num" data-fn="completed">—</div>
+          <div class="fn-pct" data-fn="completed-pct">— of sessions</div>
+          <div class="fn-bar"><div class="fn-bar-fill" data-fn="completed-bar" style="width:0%"></div></div>
+        </div>
+      </div>
+      <div class="funnel-footer">
+        <div class="fn-footer-stat">Cart abandonment <span class="stat-val" data-fn="cart-abandon">—</span></div>
+        <div class="fn-footer-stat">Checkout abandonment <span class="stat-val" data-fn="checkout-abandon">—</span></div>
+        <div class="fn-footer-stat">Bundle attach rate <span class="stat-val" data-fn="bundle-attach">—</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOP SKUs -->
+  <section>
+    <div class="sect-label">
+      <span>Top SKUs · 30d</span>
+      <span class="sect-meta"><span class="dot live"></span>Live · Shopify inventory</span>
+    </div>
+    <div class="sku-card">
+      <div class="sku-row head">
+        <div>Product</div>
+        <div>Units</div>
+        <div>Sell-through</div>
+        <div>Days stock</div>
+        <div>Status</div>
+      </div>
+      <div id="sku-rows">
+        <div class="sku-row">
+          <div class="sku-name">Loading inventory…</div>
+          <div class="sku-num">—</div>
+          <div class="sku-num">—</div>
+          <div class="sku-num">—</div>
+          <div>—</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ON YOUR PLATE -->
+  <section>
+    <div class="sect-label">
+      <span>On your plate</span>
+      <span class="sect-meta"><span class="dot live"></span>Live · derived from Shopify</span>
+    </div>
+    <div class="queue" data-queue>
+      <div class="queue-row">
+        <div class="q-sev info"></div>
+        <div class="q-body">
+          <div class="q-title-row"><div class="q-title">Loading real-time alerts from Shopify…</div></div>
+        </div>
+      </div>
+      <div class="queue-footer">More alerts (email flow performance, customer voice patterns) activate when Klaviyo + Drive are connected.</div>
+    </div>
+  </section>
+
+  <!-- COMMAND BAR -->
+  <div class="cmd-section">
+    <div class="cmd-prelude">Ask Claude</div>
+    <div class="cmd-headline">Type any request. Claude has your full business context and picks the right workflows and tools to handle it.</div>
+    <div class="cmd-bar">
+      <div class="cmd-icon">✱</div>
+      <input id="cmd-input" placeholder="What do you want Claude to do?" onkeydown="if(event.key==='Enter'){window.cowork && window.cowork.sendPrompt && window.cowork.sendPrompt(this.value); this.value='';}">
+      <span class="cmd-bar-kbd">↵</span>
+    </div>
+    <div class="cmd-examples">
+      <div class="cmd-ex" onclick="window.cowork && window.cowork.sendPrompt && window.cowork.sendPrompt(this.textContent.replace(/^.|.$/g,''))">"Launch the 3-pack as the new default offer"</div>
+      <div class="cmd-ex" onclick="window.cowork && window.cowork.sendPrompt && window.cowork.sendPrompt(this.textContent.replace(/^.|.$/g,''))">"Why is checkout abandonment so high?"</div>
+      <div class="cmd-ex" onclick="window.cowork && window.cowork.sendPrompt && window.cowork.sendPrompt(this.textContent.replace(/^.|.$/g,''))">"Compare our PDP to Hanz De Fuko"</div>
+      <div class="cmd-ex" onclick="window.cowork && window.cowork.sendPrompt && window.cowork.sendPrompt(this.textContent.replace(/^.|.$/g,''))">"Draft a Reddit post for r/malegrooming"</div>
+    </div>
+  </div>
+
+  <!-- WORKFLOWS -->
+  <section>
+    <div class="sect-label">
+      <span>Workflows · 21 ready</span>
+      <span class="sect-meta"><span class="dot cached"></span>Pick one or type custom above</span>
+    </div>
+    <div class="wf-card" id="workflows-grid"></div>
+  </section>
+
+  <!-- COMPETITOR WATCH -->
+  <section>
+    <div class="sect-label">
+      <span>Competitor Watch</span>
+      <span class="sect-meta"><span class="dot pending"></span>Pending · activates with weekly scan</span>
+    </div>
+    <div class="cw-card">
+      <div class="cw-grid">
+        <div>
+          <div class="cw-brand-head"><div class="cw-brand-name">Based</div><div class="cw-status pending">Not scanning</div></div>
+          <div class="cw-event">Weekly scan kicks off once the competitor-scan task is scheduled in your Claude.</div>
+        </div>
+        <div>
+          <div class="cw-brand-head"><div class="cw-brand-name">Hanz De Fuko</div><div class="cw-status pending">Not scanning</div></div>
+          <div class="cw-event">Pulls Meta Ad Library, PDPs, Reddit mentions each Sunday at 9am.</div>
+        </div>
+        <div>
+          <div class="cw-brand-head"><div class="cw-brand-name">Paul Mitchell</div><div class="cw-status pending">Not scanning</div></div>
+          <div class="cw-event">Surfaces new SKUs, pricing shifts, recent activity.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHANNELS -->
+  <section>
+    <div class="sect-label">
+      <span>Channels</span>
+      <span class="sect-meta"><span class="dot live"></span>Shopify live · others pending</span>
+    </div>
+    <div class="channels-strip">
+      <div class="ch">
+        <div class="ch-name"><span class="ch-state live"></span>Shopify</div>
+        <div class="ch-val num" data-ch="shopify-rev">—</div>
+        <div class="ch-meta" data-ch="shopify-meta">7d</div>
+      </div>
+      <div class="ch pending">
+        <div class="ch-name"><span class="ch-state off"></span>Klaviyo</div>
+        <div class="ch-val off num">—</div>
+        <div class="ch-meta">connect to enable</div>
+      </div>
+      <div class="ch pending">
+        <div class="ch-name"><span class="ch-state off"></span>Reddit</div>
+        <div class="ch-val off num">—</div>
+        <div class="ch-meta">connect to enable</div>
+      </div>
+      <div class="ch pending">
+        <div class="ch-name"><span class="ch-state off"></span>Meta Ads</div>
+        <div class="ch-val off num">—</div>
+        <div class="ch-meta">paused · BM cleanup</div>
+      </div>
+      <div class="ch pending">
+        <div class="ch-name"><span class="ch-state off"></span>TikTok</div>
+        <div class="ch-val off num">—</div>
+        <div class="ch-meta">launching · Implicit</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IN FLIGHT -->
+  <section>
+    <div class="sect-label">
+      <span>In flight</span>
+      <span class="sect-meta"><span class="dot pending"></span>Activates with Asana</span>
+    </div>
+    <div class="work-card">
+      <div class="work-pill"><span class="pill-dot building"></span>3-pack launch</div>
+      <div class="work-pill"><span class="pill-dot building"></span>VOC engine</div>
+      <div class="work-pill"><span class="pill-dot planning"></span>Klaviyo flows</div>
+      <div class="work-pill"><span class="pill-dot planning"></span>PDP refresh</div>
+      <div class="work-pill"><span class="pill-dot planning"></span>Subscriber program</div>
+      <div class="work-pill"><span class="pill-dot live"></span>AI infrastructure</div>
+      <span class="work-note">Live project status activates when Asana is connected.</span>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// Config — single source of truth. To migrate to another Claude account, only SHOPIFY_UUID needs updating.
+const CONFIG = {
+  goals: {
+    monthly_revenue: 6000,
+    aov_target: 50,
+    monthly_email_revenue: 1000,
+  },
+  thresholds: {
+    cart_abandonment: 70,
+    checkout_abandonment: 70,
+    return_rate: 8,
+  },
+  SHOPIFY_UUID: '262ca9fd-3fa1-4803-a458-2822030a8dd0',
+  KLAVIYO_UUID: 'cf072fd6-c3c4-48ec-af2a-2f4d5457c59d',
+};
+
+const TOOL = {
+  shop_info: 'mcp__' + CONFIG.SHOPIFY_UUID + '__get-shop-info',
+  analytics: 'mcp__' + CONFIG.SHOPIFY_UUID + '__run-analytics-query',
+};
+
+// Static workflow catalog
+const WORKFLOWS = [
+  { group: 'Launch & Test', tagline: "when you're shipping something new", items: [
+    { title: 'Launch a new product', explain: 'Turns a product idea into a launch package — positioning, PDP copy, ad concepts, launch email, and social briefs.', time: '~5 min', skills: 5 },
+    { title: 'Launch a new bundle or offer', explain: 'Runs the bundle math, drafts hero + cart upsell + offer landing page, and the first promo email + ad concepts.', time: '~4 min', skills: 4 },
+    { title: 'Launch a sale or promo', explain: 'Builds the campaign — banner copy, email send, SMS, social posts, Klaviyo segment + start/end logic.', time: '~3 min', skills: 3 },
+    { title: 'Test a price point or claim', explain: 'Designs the A/B test — variants, segment, duration, success metric — and stages it for review.', time: '~3 min', skills: 2 },
+    { title: 'Onboard new subscribers', explain: 'Builds the welcome flow for new Recharge subscribers — first jar email, retention nudge, win-back if cancel.', time: '~6 min', skills: 3 },
+    { title: 'Build the next email flow', explain: 'Drafts a complete Klaviyo flow (welcome, browse, post-purchase, winback) using the abandoned cart as the template.', time: '~5 min', skills: 2 },
+  ], open: true },
+  { group: 'Grow', tagline: 'the weekly recurring work', items: [
+    { title: "Create this week's ad creative", explain: 'Pulls real customer language, generates 5–8 static + video ad concepts with hooks and copy in brand voice.', time: '~4 min', skills: 3 },
+    { title: "Create this week's content", explain: 'TikTok scripts, Reddit-ready posts, Instagram captions — all aligned to this week’s themes.', time: '~3 min', skills: 3 },
+    { title: 'Refresh an underperforming PDP', explain: 'Diagnoses the page, rewrites hero + benefits + FAQ in customer voice, generates new hero variants for testing.', time: '~5 min', skills: 4 },
+    { title: 'Reach out to creators or influencers', explain: 'Builds a prospect list across TikTok + Instagram, drafts personalized outreach for each creator.', time: '~4 min', skills: 2 },
+  ], open: true },
+  { group: 'Listen', tagline: 'before you decide', items: [
+    { title: 'What are customers saying?', explain: 'Pulls last 30 days of reviews and survey responses, clusters into themes, surfaces new patterns and ad-ready quotes.', time: '~2 min', skills: 3 },
+    { title: "What's the competitor doing?", explain: 'Scans Based, Hanz De Fuko, Paul Mitchell — new ads, pricing changes, Reddit sentiment. Flags what to borrow or beat.', time: '~3 min', skills: 4 },
+    { title: 'Why did sales drop?', explain: 'Pulls Shopify + GA4 + Klaviyo together, diagnoses where the funnel broke, gives 3 most likely causes with evidence.', time: '~3 min', skills: 3 },
+    { title: "What's working that I can scale?", explain: 'Finds the top-performing creative, email, landing page, and SKU — and recommends where to put more weight.', time: '~3 min', skills: 2 },
+  ], open: false },
+  { group: 'Fix', tagline: 'reactive operational work', items: [
+    { title: 'Reply to a customer issue', explain: 'Drafts a brand-voice reply to a support ticket, ready for the team to review and send.', time: '~1 min', skills: 1 },
+    { title: 'Respond to a negative review', explain: 'Drafts the right response on Amazon or JudgeMe — protects rating, addresses the issue, offers a next step.', time: '~1 min', skills: 1 },
+    { title: 'Pause and rebuild a broken flow', explain: 'Pauses an underperforming email or ad, audits why, builds the replacement, stages for review.', time: '~5 min', skills: 3 },
+    { title: 'Handle inventory restock', explain: 'Calculates reorder timing from velocity, drafts the email to Emanuel, opens the Asana task.', time: '~2 min', skills: 2 },
+  ], open: false },
+  { group: 'Plan', tagline: 'periodic strategic work', items: [
+    { title: "Where's my highest leverage this month?", explain: 'Grades the business across 7 leverage points (Market, Product, Money, Position, Reach, Convert, Expand) and recommends focus.', time: '~6 min', skills: 1 },
+    { title: 'Model my unit economics', explain: 'Builds the contribution margin stack, LTV at 90/180/365 days, and max CPA scenarios.', time: '~4 min', skills: 1 },
+    { title: 'Build the next 90-day plan', explain: 'Synthesizes recent customer feedback, performance, and competitor signals into a prioritized testing and launch roadmap.', time: '~7 min', skills: 4 },
+  ], open: false },
+];
+
+function renderWorkflows() {
+  const root = document.getElementById('workflows-grid');
+  if (!root) return;
+  root.innerHTML = WORKFLOWS.map(g => `
+    <details class="wf-group"${g.open ? ' open' : ''}>
+      <summary>
+        <span class="wf-group-title">${g.group}</span>
+        <span class="wf-group-line">${g.tagline}</span>
+        <span class="wf-group-count">${g.items.length} workflows</span>
+        <span class="wf-group-icon">+</span>
+      </summary>
+      <div class="wf-grid">
+        ${g.items.map(w => `
+          <div class="wf" data-prompt="${w.title.replace(/"/g, '&quot;')}">
+            <div class="wf-title">${w.title}</div>
+            <div class="wf-explain">${w.explain}</div>
+            <div class="wf-foot">${w.time}<span class="wf-foot-sep">·</span>${w.skills} skill${w.skills > 1 ? 's' : ''}</div>
+          </div>
+        `).join('')}
+      </div>
+    </details>
+  `).join('');
+
+  root.querySelectorAll('.wf').forEach(el => {
+    el.addEventListener('click', () => {
+      const prompt = el.getAttribute('data-prompt');
+      if (window.cowork && window.cowork.sendPrompt) {
+        window.cowork.sendPrompt('Run the "' + prompt + '" workflow for Challenger Care.');
+      }
+    });
+  });
+}
+
+async function callTool(name, args) {
+  try {
+    const r = await window.cowork.callMcpTool(name, args || {});
+    if (r.isError) return null;
+    if (r.structuredContent) return r.structuredContent;
+    if (r.content && r.content[0] && r.content[0].text) {
+      try { return JSON.parse(r.content[0].text); } catch (e) { return r.content[0].text; }
+    }
+    return null;
+  } catch (e) {
+    console.error('Tool call failed:', name, e);
+    return null;
+  }
+}
+
+function setText(selector, value) {
+  document.querySelectorAll(selector).forEach(el => { el.textContent = value; });
+}
+function setHTML(selector, html) {
+  const el = document.querySelector(selector);
+  if (el) el.innerHTML = html;
+}
+function setBar(selector, pct) {
+  const el = document.querySelector(selector);
+  if (el) el.style.width = Math.max(0, Math.min(100, pct)) + '%';
+}
+function fmtMoney(n) {
+  if (n == null || isNaN(n)) return '—';
+  return '$' + Math.round(Number(n)).toLocaleString();
+}
+function fmtMoneyDec(n) {
+  if (n == null || isNaN(n)) return '—';
+  return '$' + Number(n).toFixed(2);
+}
+function fmtNum(n) {
+  if (n == null || isNaN(n)) return '—';
+  return Number(n).toLocaleString();
+}
+function fmtPct(decimal, places) {
+  if (decimal == null || isNaN(decimal)) return '—';
+  return (Number(decimal) * 100).toFixed(places != null ? places : 1) + '%';
+}
+
+function setHeadDate() {
+  const now = new Date();
+  const opts = { weekday: 'long', month: 'long', day: 'numeric' };
+  const dateStr = now.toLocaleDateString('en-US', opts);
+  const weekNum = Math.ceil(((now - new Date(now.getFullYear(), 0, 1)) / 86400000 + new Date(now.getFullYear(), 0, 1).getDay() + 1) / 7);
+  setText('[data-head-date]', dateStr + ' · Week ' + weekNum);
+}
+
+async function loadShopName() {
+  const info = await callTool(TOOL.shop_info, {});
+  if (info && info.name) setText('[data-shop-name]', 'Live · ' + info.name);
+}
+
+function classifySku(sold, ending) {
+  const soldN = Number(sold);
+  const endN = Number(ending);
+  if (endN <= 0) return { status: 'tracking-error', label: 'Restock + fix', days: 0 };
+  if (soldN <= 0) return { status: 'dead', label: 'No sales', days: Infinity };
+  const days = Math.round((endN * 30) / soldN);
+  if (days <= 21) return { status: 'restock', label: 'Restock now', days };
+  if (days <= 60) return { status: 'order-soon', label: 'Order soon', days };
+  if (days > 365 && soldN < 5) return { status: 'dead', label: 'Slow mover', days };
+  if (days > 365) return { status: 'overstock', label: 'Overstocked', days };
+  return { status: 'healthy', label: 'Healthy', days };
+}
+
+function formatDays(days) {
+  if (days === 0) return 'OUT';
+  if (days === Infinity) return '—';
+  if (days >= 1825) return '> 5 yr';
+  if (days >= 365) return '> 1 yr';
+  return days + ' days';
+}
+
+function renderSkus(skuRows) {
+  const root = document.getElementById('sku-rows');
+  if (!root || !skuRows || !skuRows.length) {
+    if (root) root.innerHTML = '<div class="sku-row"><div class="sku-name">No SKU data available.</div><div></div><div></div><div></div><div></div></div>';
+    return;
+  }
+  // Filter empty product titles
+  const rows = skuRows.filter(r => r[0] && r[0].trim()).slice(0, 6);
+  root.innerHTML = rows.map(r => {
+    const [title, starting, ending, sold, sellThrough] = r;
+    const cls = classifySku(sold, ending);
+    // Hero override: Combo at 100% sell-through gets a "Hero · Restock" badge
+    const isBundle = title && title.toLowerCase().includes('combo');
+    const isHero = isBundle && Number(sellThrough) >= 0.99;
+    const status = isHero ? { status: 'hero', label: 'Hero · Restock' } : cls;
+    return `
+      <div class="sku-row">
+        <div class="sku-name">${title}</div>
+        <div class="sku-num">${fmtNum(sold)}</div>
+        <div class="sku-num">${fmtPct(sellThrough, 1)}</div>
+        <div class="sku-num">${formatDays(cls.days)}</div>
+        <div><span class="sku-status ${status.status}">${status.label}</span></div>
+      </div>
+    `;
+  }).join('');
+}
+
+async function loadAll() {
+  const [
+    sales7d, salesPrev7d, sales30d, salesDetail30d,
+    cvr7d, cvrByDevice7d,
+    funnel30d, customers30d,
+    topSkus7d, sellThrough30d
+  ] = await Promise.all([
+    callTool(TOOL.analytics, { query: 'FROM sales SHOW orders, total_sales, average_order_value SINCE -7d UNTIL today' }),
+    callTool(TOOL.analytics, { query: 'FROM sales SHOW orders, total_sales, average_order_value SINCE -14d UNTIL -7d' }),
+    callTool(TOOL.analytics, { query: 'FROM sales SHOW orders, total_sales, average_order_value SINCE -30d UNTIL today' }),
+    callTool(TOOL.analytics, { query: 'FROM sales SHOW gross_sales, discounts, returns, net_sales, shipping_charges SINCE -30d UNTIL today' }),
+    callTool(TOOL.analytics, { query: 'FROM sessions SHOW sessions, sessions_that_completed_checkout, conversion_rate SINCE -7d UNTIL today' }),
+    callTool(TOOL.analytics, { query: 'FROM sessions SHOW sessions, conversion_rate GROUP BY session_device_type SINCE -7d UNTIL today' }),
+    callTool(TOOL.analytics, { query: 'FROM sessions SHOW sessions, sessions_with_cart_additions, sessions_that_reached_checkout, sessions_that_completed_checkout SINCE -30d UNTIL today' }),
+    callTool(TOOL.analytics, { query: 'FROM sales SHOW returning_customers, customers, returning_customer_rate SINCE -30d UNTIL today' }),
+    callTool(TOOL.analytics, { query: 'FROM sales SHOW total_sales, orders GROUP BY product_title ORDER BY total_sales DESC LIMIT 5 SINCE -7d UNTIL today' }),
+    callTool(TOOL.analytics, { query: 'FROM inventory SHOW starting_inventory_units, ending_inventory_units, inventory_units_sold, sell_through_rate GROUP BY product_title ORDER BY inventory_units_sold DESC LIMIT 8 SINCE -30d UNTIL today' }),
+  ]);
+
+  // --- KPI: Revenue 7d + delta + MTD ---
+  if (sales7d?.rows?.[0]) {
+    const [orders, rev, aov] = sales7d.rows[0];
+    setText('[data-kpi="revenue-7d"]', fmtMoney(rev));
+    setText('[data-kpi="aov-7d"]', fmtMoneyDec(aov));
+    const aovPct = Math.min(100, Math.round((Number(aov) / CONFIG.goals.aov_target) * 100));
+    setBar('[data-kpi="aov-bar"]', aovPct);
+    setText('[data-kpi="aov-label"]', aovPct + '% to $' + CONFIG.goals.aov_target + ' target');
+
+    if (salesPrev7d?.rows?.[0]) {
+      const prevRev = Number(salesPrev7d.rows[0][1]);
+      if (prevRev > 0) {
+        const delta = Math.round(((Number(rev) - prevRev) / prevRev) * 100);
+        const cls = delta >= 0 ? 'delta-up' : 'delta-down';
+        const arrow = delta >= 0 ? '↑' : '↓';
+        setHTML('[data-kpi="revenue-7d-delta"]', '<span class="' + cls + '">' + arrow + ' ' + Math.abs(delta) + '%</span> vs. prior 7d');
+      }
+    }
+  }
+
+  // --- KPI: 30d MTD pacing + return rate context ---
+  let returnRate = 0;
+  let netSales = 0;
+  if (sales30d?.rows?.[0]) {
+    const mRev = Number(sales30d.rows[0][1]);
+    const pct = Math.min(100, Math.round((mRev / CONFIG.goals.monthly_revenue) * 100));
+    setBar('[data-kpi="mtd-bar"]', pct);
+
+    let mtdLabel = '30d ' + fmtMoney(mRev) + ' of ' + fmtMoney(CONFIG.goals.monthly_revenue) + ' goal · ' + pct + '%';
+    if (salesDetail30d?.rows?.[0]) {
+      const [gross, disc, ret, net] = salesDetail30d.rows[0];
+      netSales = Number(net);
+      const grossN = Number(gross);
+      returnRate = grossN > 0 ? (Math.abs(Number(ret)) / grossN) * 100 : 0;
+      mtdLabel += ' · Net ' + fmtMoney(netSales);
+    }
+    setText('[data-kpi="mtd-label"]', mtdLabel);
+    setText('[data-mtd-context]', '30d revenue ' + fmtMoney(mRev) + ' · ' + pct + '% of $' + CONFIG.goals.monthly_revenue + ' Shopify goal · ' + returnRate.toFixed(1) + '% return rate');
+
+    // Channels Shopify
+    if (sales7d?.rows?.[0]) {
+      const wRev = Number(sales7d.rows[0][1]);
+      const wOrders = sales7d.rows[0][0];
+      setText('[data-ch="shopify-rev"]', fmtMoney(wRev));
+      setText('[data-ch="shopify-meta"]', '7d · ' + wOrders + ' orders');
+    }
+  }
+
+  // --- KPI: CVR + device ---
+  if (cvr7d?.rows?.[0]) {
+    const [sessions, checkouts, cvrRate] = cvr7d.rows[0];
+    const cvrPct = Number(cvrRate) * 100;
+    setText('[data-kpi="cvr-7d"]', cvrPct.toFixed(2) + '%');
+    setText('[data-kpi="cvr-label"]', sessions + ' sessions · ' + checkouts + ' completed');
+    setBar('[data-kpi="cvr-bar"]', (cvrPct / 2) * 100);
+  }
+  let cvrByDeviceRows = [];
+  if (cvrByDevice7d?.rows) {
+    cvrByDeviceRows = cvrByDevice7d.rows;
+    const devs = {};
+    cvrByDevice7d.rows.forEach(r => { devs[r[0]] = { sessions: Number(r[1]), cvr: Number(r[2]) * 100 }; });
+    const mobile = devs.mobile || { sessions: 0, cvr: 0 };
+    const desktop = devs.desktop || { sessions: 0, cvr: 0 };
+    setText('[data-kpi="cvr-meta"]', 'Mobile ' + mobile.cvr.toFixed(2) + '% · Desktop ' + desktop.cvr.toFixed(2) + '%');
+  }
+
+  // --- KPI: Customers ---
+  let returningRate = 0;
+  if (customers30d?.rows?.[0]) {
+    const [returning, total, rate] = customers30d.rows[0];
+    const newCust = Number(total) - Number(returning);
+    returningRate = Number(rate) * 100;
+    setText('[data-kpi="customers-total"]', fmtNum(total));
+    setText('[data-kpi="customers-split"]', newCust + ' new · ' + returning + ' returning');
+    setBar('[data-kpi="returning-bar"]', returningRate);
+    setText('[data-kpi="returning-label"]', returningRate.toFixed(0) + '% returning (' + (returningRate >= 25 ? 'strong' : returningRate >= 15 ? 'fair' : 'weak') + ')');
+  }
+
+  // --- FUNNEL ---
+  let funnelData = null;
+  if (funnel30d?.rows?.[0]) {
+    const [sessions, atc, checkout, completed] = funnel30d.rows[0].map(Number);
+    funnelData = { sessions, atc, checkout, completed };
+    setText('[data-fn="sessions"]', fmtNum(sessions));
+    setText('[data-fn="atc"]', fmtNum(atc));
+    setText('[data-fn="checkout"]', fmtNum(checkout));
+    setText('[data-fn="completed"]', fmtNum(completed));
+
+    const atcPct = sessions > 0 ? (atc / sessions) * 100 : 0;
+    const checkPct = sessions > 0 ? (checkout / sessions) * 100 : 0;
+    const compPct = sessions > 0 ? (completed / sessions) * 100 : 0;
+
+    setText('[data-fn="atc-pct"]', atcPct.toFixed(1) + '% of sessions');
+    setText('[data-fn="checkout-pct"]', checkPct.toFixed(1) + '% of sessions');
+    setText('[data-fn="completed-pct"]', compPct.toFixed(2) + '% of sessions');
+
+    // Bars scaled to session size
+    setBar('[data-fn="atc-bar"]', atcPct);
+    setBar('[data-fn="checkout-bar"]', checkPct);
+    setBar('[data-fn="completed-bar"]', compPct);
+
+    // Cart abandonment = 1 - (completed / atc)
+    const cartAbandon = atc > 0 ? (1 - completed / atc) * 100 : 0;
+    const checkoutAbandon = checkout > 0 ? (1 - completed / checkout) * 100 : 0;
+    const cartCls = cartAbandon > 70 ? 'bad' : cartAbandon > 50 ? 'warn' : 'good';
+    const checkCls = checkoutAbandon > 70 ? 'bad' : checkoutAbandon > 50 ? 'warn' : 'good';
+
+    setHTML('[data-fn="cart-abandon"]', '<span class="stat-val ' + cartCls + '">' + cartAbandon.toFixed(0) + '%</span>');
+    setHTML('[data-fn="checkout-abandon"]', '<span class="stat-val ' + checkCls + '">' + checkoutAbandon.toFixed(0) + '%</span>');
+  }
+
+  // --- Bundle attach (Combo as % of orders) ---
+  let bundleAttachPct = 0;
+  if (sellThrough30d?.rows && sales30d?.rows?.[0]) {
+    const totalOrders30 = Number(sales30d.rows[0][0]);
+    const comboRow = sellThrough30d.rows.find(r => r[0] && r[0].toLowerCase().includes('combo'));
+    if (comboRow && totalOrders30 > 0) {
+      const comboUnits = Number(comboRow[3]);
+      bundleAttachPct = (comboUnits / totalOrders30) * 100;
+      const cls = bundleAttachPct >= 25 ? 'good' : bundleAttachPct >= 15 ? 'warn' : 'bad';
+      setHTML('[data-fn="bundle-attach"]', '<span class="stat-val ' + cls + '">' + bundleAttachPct.toFixed(0) + '%</span>');
+    }
+  }
+
+  // --- SKUs ---
+  if (sellThrough30d?.rows) renderSkus(sellThrough30d.rows);
+
+  // --- BRIEFING + QUEUE ---
+  const ctx = {
+    sales7d: sales7d?.rows?.[0],
+    sales30d: sales30d?.rows?.[0],
+    salesDetail30d: salesDetail30d?.rows?.[0],
+    customers30d: customers30d?.rows?.[0],
+    funnel30d: funnelData,
+    cvrByDevice: cvrByDeviceRows,
+    sellThrough30d: sellThrough30d?.rows || [],
+    topSkus7d: topSkus7d?.rows || [],
+    returnRate,
+    returningRate,
+    bundleAttachPct,
+  };
+  buildBriefing(ctx);
+  buildQueue(ctx);
+}
+
+function buildBriefing(ctx) {
+  if (!ctx.sales30d) {
+    setHTML('[data-briefing-headline]', 'Briefing will appear once Shopify data is available.');
+    return;
+  }
+
+  const mRev = Number(ctx.sales30d[1]);
+  const mAov = Number(ctx.sales30d[2]);
+  const monthPct = Math.round((mRev / CONFIG.goals.monthly_revenue) * 100);
+  const aovGap = CONFIG.goals.aov_target - mAov;
+
+  // Headline that reflects the real story
+  let headline = '';
+  const strongRetention = ctx.returningRate >= 30;
+  if (monthPct < 30 && strongRetention) {
+    headline = '<span class="hl">Strong retention (' + ctx.returningRate.toFixed(0) + '%), thin top-line</span> — $' + Math.round(mRev).toLocaleString() + ' of $' + CONFIG.goals.monthly_revenue.toLocaleString() + ' goal (' + monthPct + '%). The product works. The funnel needs the work.';
+  } else if (monthPct < 30) {
+    headline = '<span class="hl">Slow month so far.</span> $' + Math.round(mRev).toLocaleString() + ' of $' + CONFIG.goals.monthly_revenue.toLocaleString() + ' goal — ' + monthPct + '% there. AOV is the leverage point at ' + fmtMoneyDec(mAov) + '.';
+  } else if (monthPct < 70) {
+    headline = '<span class="hl">Mid-pace month.</span> $' + Math.round(mRev).toLocaleString() + ' of $' + CONFIG.goals.monthly_revenue.toLocaleString() + ' goal — ' + monthPct + '%. AOV at ' + fmtMoneyDec(mAov) + ', $' + aovGap.toFixed(0) + ' below target.';
+  } else {
+    headline = '<span class="hl">On track.</span> $' + Math.round(mRev).toLocaleString() + ' of $' + CONFIG.goals.monthly_revenue.toLocaleString() + ' goal — ' + monthPct + '%.';
+  }
+  setHTML('[data-briefing-headline]', headline);
+
+  const points = [];
+
+  // WIN: returning customer rate
+  if (ctx.returningRate >= 25) {
+    points.push({
+      type: 'win',
+      text: '<strong>Retention is the strongest signal.</strong> ' + ctx.returningRate.toFixed(0) + '% returning customer rate over 30 days — well above the DTC norm. Product-market fit is real.',
+      context: 'Shopify customers · 30d window'
+    });
+  }
+
+  // WIN: bundle (Combo) is the hero
+  if (ctx.bundleAttachPct >= 12) {
+    const comboRow = ctx.sellThrough30d.find(r => r[0] && r[0].toLowerCase().includes('combo'));
+    if (comboRow) {
+      const sellPct = (Number(comboRow[4]) * 100).toFixed(0);
+      points.push({
+        type: 'win',
+        text: '<strong>Combo (3-pack) is your hero SKU in disguise.</strong> ' + sellPct + '% sell-through, ' + ctx.bundleAttachPct.toFixed(0) + '% of orders. Restock + lean into it as the default offer.',
+        context: 'Shopify inventory · sell-through rate per SKU'
+      });
+    }
+  }
+
+  // FIRE: Desktop CVR
+  if (ctx.cvrByDevice && ctx.cvrByDevice.length) {
+    const desktop = ctx.cvrByDevice.find(r => r[0] === 'desktop');
+    const mobile = ctx.cvrByDevice.find(r => r[0] === 'mobile');
+    if (desktop && mobile) {
+      const dCvr = Number(desktop[2]) * 100;
+      const mCvr = Number(mobile[2]) * 100;
+      const dSessions = Number(desktop[1]);
+      if (dSessions > 50 && dCvr < mCvr - 1) {
+        points.push({
+          type: 'fire',
+          text: '<strong>Desktop is broken.</strong> ' + dSessions + ' sessions converted at ' + dCvr.toFixed(2) + '% vs. mobile at ' + mCvr.toFixed(2) + '%. Worth a same-day investigation.',
+          context: 'Shopify sessions + conversion_rate by device · 7d'
+        });
+      }
+    }
+  }
+
+  // FLAG: Checkout abandonment
+  if (ctx.funnel30d) {
+    const { atc, checkout, completed } = ctx.funnel30d;
+    if (checkout > 0) {
+      const checkAbandon = (1 - completed / checkout) * 100;
+      if (checkAbandon > 70) {
+        points.push({
+          type: 'fire',
+          text: '<strong>Checkout abandonment at ' + checkAbandon.toFixed(0) + '%.</strong> ' + checkout + ' reached checkout in 30d, only ' + completed + ' completed. Likely shipping, payment, or trust friction.',
+          context: 'Shopify funnel · sessions_that_reached_checkout vs completed'
+        });
+      }
+    }
+  }
+
+  // FLAG: Return rate
+  if (ctx.returnRate > 8) {
+    points.push({
+      type: 'flag',
+      text: '<strong>Return rate at ' + ctx.returnRate.toFixed(1) + '%.</strong> Above DTC healthy band of 5–8%. Worth tagging refund reasons to find the pattern.',
+      context: 'gross sales vs. returns · 30d'
+    });
+  }
+
+  // INFO: AOV gap
+  if (mAov < CONFIG.goals.aov_target * 0.7) {
+    points.push({
+      type: 'flag',
+      text: '<strong>AOV at ' + fmtMoneyDec(mAov) + '</strong> vs. $' + CONFIG.goals.aov_target + ' target — $' + aovGap.toFixed(0) + ' gap. The 3-pack push is the highest-leverage move.',
+      context: 'unit economics goal: $50 AOV unlocks profitable paid acquisition'
+    });
+  }
+
+  // Closing note
+  points.push({
+    type: 'win',
+    text: '<strong>More insights coming.</strong> Once Klaviyo and Drive are connected, the briefing will add: email revenue, customer voice patterns, and competitor signals.',
+    context: 'currently powered by Shopify only'
+  });
+
+  const html = points.map(p => `
+    <div class="bp">
+      <div class="bp-marker ${p.type}">${p.type === 'win' ? '✓' : p.type === 'fire' ? '!' : p.type === 'flag' ? '!' : '·'}</div>
+      <div>
+        <div>${p.text}</div>
+        <div class="bp-context">${p.context}</div>
+      </div>
+    </div>
+  `).join('');
+  setHTML('[data-briefing-points]', html);
+}
+
+function buildQueue(ctx) {
+  if (!ctx.sales30d) {
+    setHTML('[data-queue]', '<div class="queue-row"><div class="q-sev info"></div><div class="q-body"><div class="q-title">Waiting for Shopify data…</div></div></div>');
+    return;
+  }
+  const items = [];
+  const mAov = Number(ctx.sales30d[2]);
+  const mRev = Number(ctx.sales30d[1]);
+  const monthPct = Math.round((mRev / CONFIG.goals.monthly_revenue) * 100);
+
+  // 1. Desktop CVR alert
+  if (ctx.cvrByDevice && ctx.cvrByDevice.length) {
+    const desktop = ctx.cvrByDevice.find(r => r[0] === 'desktop');
+    const mobile = ctx.cvrByDevice.find(r => r[0] === 'mobile');
+    if (desktop && mobile) {
+      const dCvr = Number(desktop[2]) * 100;
+      const mCvr = Number(mobile[2]) * 100;
+      const dSessions = Number(desktop[1]);
+      if (dSessions > 50 && dCvr < mCvr - 1) {
+        items.push({
+          sev: 'high', tier: 'generate',
+          title: 'Desktop CVR is ' + dCvr.toFixed(2) + '% — mobile is ' + mCvr.toFixed(2) + '%',
+          desc: dSessions + ' desktop sessions in 7d with near-zero conversion. Funnel break on desktop is the likely cause.',
+          contract: '→ Diagnoses the desktop funnel · checks PDP / cart / checkout · proposes top 3 fixes · no live changes',
+          actions: [{ label: 'Investigate', primary: true, prompt: 'Investigate why desktop CVR is ' + dCvr.toFixed(2) + '% vs mobile at ' + mCvr.toFixed(2) + '%. Compare funnel paths, identify likely breaks, propose fixes.' }]
+        });
+      }
+    }
+  }
+
+  // 2. Checkout abandonment
+  if (ctx.funnel30d) {
+    const { checkout, completed } = ctx.funnel30d;
+    if (checkout > 0) {
+      const checkAbandon = (1 - completed / checkout) * 100;
+      if (checkAbandon > 70) {
+        items.push({
+          sev: 'high', tier: 'generate',
+          title: 'Checkout abandonment at ' + checkAbandon.toFixed(0) + '%',
+          desc: checkout + ' reached checkout in 30d · only ' + completed + ' completed. Likely shipping cost shock, payment friction, or trust gap.',
+          contract: '→ Diagnoses checkout step-by-step · proposes shipping / payment / trust fixes · no live changes',
+          actions: [{ label: 'Diagnose', primary: true, prompt: 'Why is checkout abandonment at ' + checkAbandon.toFixed(0) + '%? Investigate shipping cost, payment options, trust signals, and propose the top 3 fixes.' }]
+        });
+      }
+    }
+  }
+
+  // 3. Combo restock / tracking error
+  const comboRow = ctx.sellThrough30d.find(r => r[0] && r[0].toLowerCase().includes('combo'));
+  if (comboRow) {
+    const ending = Number(comboRow[2]);
+    const sold = Number(comboRow[3]);
+    if (ending <= 0 && sold > 0) {
+      items.push({
+        sev: 'high', tier: 'execute',
+        title: 'Combo (3-pack) inventory is at ' + ending + ' — restock + fix tracking',
+        desc: comboRow[0] + ' · sold ' + sold + ' units in 30d · ending inventory shows ' + ending + '. Bestseller flying off the shelves, tracking is also broken.',
+        contract: '→ Drafts email to Emanuel for restock · creates Asana task to audit inventory tracking · no funds move until confirmed',
+        actions: [{ label: 'Restock email', primary: true, prompt: 'Draft a restock email to Emanuel for the Combo (3-pack). Reference real units sold and current inventory state, and recommend a reorder quantity.' }]
+      });
+    }
+  }
+
+  // 4. Return rate
+  if (ctx.returnRate > 8) {
+    items.push({
+      sev: ctx.returnRate > 15 ? 'high' : 'med', tier: 'generate',
+      title: 'Return rate at ' + ctx.returnRate.toFixed(1) + '% — above healthy band',
+      desc: 'DTC healthy band is 5–8%. Worth pulling refund reasons to find the pattern. Could be sizing, expectations, or quality.',
+      contract: '→ Pulls last 30d refunds with reasons · clusters into themes · recommends top 3 fixes',
+      actions: [{ label: 'Investigate returns', primary: true, prompt: 'Pull the last 30 days of refunds from Shopify and cluster the reasons. Identify the top 3 patterns and propose product or PDP fixes.' }]
+    });
+  }
+
+  // 5. AOV alert
+  if (mAov < CONFIG.goals.aov_target * 0.7) {
+    items.push({
+      sev: 'med', tier: 'generate',
+      title: 'AOV well below target — run the 3-pack reshape',
+      desc: 'AOV ' + fmtMoneyDec(mAov) + ' vs. $' + CONFIG.goals.aov_target + ' target. Bundle visibility + cart upsell are the unlocks.',
+      contract: '→ Generates: 3 bundle hero variants · cart upsell copy · A/B test plan · no live changes',
+      actions: [{ label: 'Run workflow', primary: true, prompt: 'Run the "Launch a new bundle or offer" workflow — focus on raising AOV with the 3-pack as the default offer.' }]
+    });
+  }
+
+  // 6. Dead SKUs
+  const deadSkus = ctx.sellThrough30d.filter(r => {
+    if (!r[0] || !r[0].trim()) return false;
+    const sold = Number(r[3]);
+    const ending = Number(r[2]);
+    return sold <= 2 && ending > 500;
+  });
+  if (deadSkus.length >= 2) {
+    items.push({
+      sev: 'info', tier: 'generate',
+      title: deadSkus.length + ' slow-moving SKUs sitting on inventory',
+      desc: deadSkus.slice(0, 3).map(r => r[0]).join(' · ') + (deadSkus.length > 3 ? ' · +' + (deadSkus.length - 3) + ' more' : '') + '. Each selling ≤2 units/month with deep inventory.',
+      contract: '→ Reviews each SKU · recommends bundle / promo / discontinue paths · no live changes',
+      actions: [{ label: 'Review SKUs', primary: false, prompt: 'Review our slow-moving SKUs (selling ≤2 units/month with deep inventory). For each, recommend: bundle into hero, promote, or discontinue.' }]
+    });
+  }
+
+  // 7. Bundle attach win
+  if (ctx.bundleAttachPct >= 12 && ctx.bundleAttachPct < 30) {
+    items.push({
+      sev: 'win', tier: 'generate',
+      title: 'Bundle attach at ' + ctx.bundleAttachPct.toFixed(0) + '% — push to 30%+',
+      desc: '14% of orders include the 3-pack. Strong signal it works. Hero placement + cart upsell + email anchor could double it.',
+      contract: '→ Drafts: PDP hero update · cart upsell module · email anchor copy · all as previews',
+      actions: [{ label: 'Push 3-pack', primary: true, prompt: 'The 3-pack is already at ' + ctx.bundleAttachPct.toFixed(0) + '% bundle attach. Draft a plan to push it to 30%+ — PDP hero, cart upsell, email anchor.' }]
+    });
+  }
+
+  // 8. Monthly pacing
+  if (monthPct < 30) {
+    items.push({
+      sev: 'med', tier: 'generate',
+      title: 'Monthly revenue pacing at ' + monthPct + '%',
+      desc: fmtMoney(mRev) + ' of ' + fmtMoney(CONFIG.goals.monthly_revenue) + ' goal · ' + fmtMoney(CONFIG.goals.monthly_revenue - mRev) + ' to go.',
+      contract: '→ Diagnoses where the funnel is leaking · proposes top 3 interventions · no live changes',
+      actions: [{ label: 'Diagnose', primary: true, prompt: 'Why is monthly revenue at ' + monthPct + '% of goal? Diagnose the funnel and propose the top 3 interventions.' }]
+    });
+  }
+
+  const html = items.map(item => `
+    <div class="queue-row">
+      <div class="q-sev ${item.sev}"></div>
+      <div class="q-body">
+        <div class="q-title-row">
+          <div class="q-title">${item.title}</div>
+          <span class="q-tier ${item.tier}">${item.tier.charAt(0).toUpperCase() + item.tier.slice(1)}</span>
+        </div>
+        <div class="q-desc">${item.desc}</div>
+        <div class="q-contract">${item.contract}</div>
+      </div>
+      <div class="q-actions">
+        ${item.actions.map(a => `<button class="q-btn ${a.primary ? 'primary' : ''}" data-prompt="${a.prompt.replace(/"/g, '&quot;')}">${a.label}</button>`).join('')}
+      </div>
+    </div>
+  `).join('') + `
+    <div class="queue-footer">Real-time alerts powered by live Shopify data. More categories activate as Klaviyo, Drive, and Asana come online.</div>
+  `;
+
+  setHTML('[data-queue]', html);
+
+  document.querySelectorAll('[data-queue] .q-btn[data-prompt]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const p = btn.getAttribute('data-prompt');
+      if (window.cowork && window.cowork.sendPrompt) window.cowork.sendPrompt(p);
+    });
+  });
+}
+
+async function init() {
+  setHeadDate();
+  renderWorkflows();
+  await Promise.all([loadShopName(), loadAll()]);
+}
+
+init();
+</script>
+</body>
+</html>
