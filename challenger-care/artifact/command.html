@@ -359,6 +359,7 @@ section { margin-bottom: 48px; }
       <div class="ctx-chip pending" data-ctx="shopify">Shopify…</div>
       <div class="ctx-chip pending" data-ctx="klaviyo">Klaviyo…</div>
       <div class="ctx-chip pending" data-ctx="asana">Asana…</div>
+      <div class="ctx-chip pending" data-ctx="drive">Drive…</div>
     </div>
   </div>
 
@@ -372,21 +373,7 @@ section { margin-bottom: 48px; }
 
       <h2 data-briefing-headline>Loading the week's view…</h2>
 
-      <details class="briefing-collapse">
-        <summary>
-          <span>What Claude did in the last 24 hours · sample</span>
-          <span class="collapse-icon">+</span>
-        </summary>
-        <div class="briefing-collapse-body">
-          <div class="briefing-since">
-            <div class="since-item"><span class="since-check">✓</span><div>This will populate live once the briefing skill is installed in your Claude.</div></div>
-            <div class="since-item"><span class="since-check">✓</span><div>It will track every workflow that fires, every alert resolved, and every draft generated.</div></div>
-            <div class="since-note">Sample only. Activates with the briefing skill + Drive connector.</div>
-          </div>
-        </div>
-      </details>
-
-      <div class="briefing-points" data-briefing-points>
+<div class="briefing-points" data-briefing-points>
         <div class="bp">
           <div class="bp-marker win">·</div>
           <div>Loading insights from Shopify…</div>
@@ -594,6 +581,46 @@ section { margin-bottom: 48px; }
 
 </div>
 
+
+<!-- SETTINGS SLIDE-OVER -->
+<div class="settings-backdrop" data-settings-backdrop></div>
+<div class="settings-panel" data-settings-panel role="dialog" aria-label="Settings">
+  <div class="settings-head">
+    <div class="settings-title">Settings</div>
+    <div class="settings-close" data-close-settings title="Close (Esc)">✕</div>
+  </div>
+  <div class="settings-body">
+
+    <!-- Section 1: Connector Status -->
+    <div class="settings-section">
+      <div class="settings-section-label">
+        <span>Connectors</span>
+        <span class="settings-section-meta">Authorize in Cowork → Settings → Connectors</span>
+      </div>
+      <div data-settings-connectors></div>
+    </div>
+
+    <!-- Section 2: One-Time Setup Checklist -->
+    <div class="settings-section">
+      <div class="settings-section-label">
+        <span>One-time setup</span>
+        <span class="settings-section-meta" data-setup-progress>—</span>
+      </div>
+      <div data-settings-checklist></div>
+    </div>
+
+    <!-- Section 3: Knowledge Base Status -->
+    <div class="settings-section">
+      <div class="settings-section-label">
+        <span>Knowledge base</span>
+        <span class="settings-section-meta">8 files · loaded with plugin install</span>
+      </div>
+      <div data-settings-knowledge></div>
+    </div>
+
+  </div>
+</div>
+
 <script>
 // Config — mirror of CONFIG.md. DO NOT EDIT MANUALLY.
 // Run: python3 scripts/sync-html-config.py
@@ -641,6 +668,7 @@ const TOOL = {
   asana_get_tasks: 'mcp__' + CONFIG.ASANA_UUID + '__get_tasks',
   // Drive · for reading cached scan outputs
   drive_search: 'mcp__' + CONFIG.DRIVE_UUID + '__search_files',
+  drive_download: 'mcp__' + CONFIG.DRIVE_UUID + '__download_file_content',
 };
 
 // Klaviyo metric IDs · stable across the account · safe to embed
@@ -947,20 +975,31 @@ async function loadCompetitorWatch() {
   };
 
   // Bail if Drive not configured
+  const driveChip = document.querySelector('[data-ctx="drive"]');
   if (!CONFIG.DRIVE_UUID || CONFIG.DRIVE_UUID.startsWith('__') || !CONFIG.DRIVE_DASHBOARD_FOLDER_ID || CONFIG.DRIVE_DASHBOARD_FOLDER_ID.startsWith('__')) {
     if (card) card.innerHTML = '<div class="cw-empty"><div class="cw-empty-title">Drive not configured</div><div class="cw-empty-body">Set <code>connector.drive_uuid</code> + <code>stack.drive_dashboard_cache_folder_id</code> in CONFIG.md to enable.</div></div>';
     if (meta) meta.innerHTML = '<span class="dot pending"></span>Drive not configured';
+    if (driveChip) { driveChip.classList.remove('pending'); driveChip.classList.add('off'); driveChip.textContent = 'Drive (not configured)'; }
     return;
   }
 
   // Search Drive for the latest scan JSON files in our folder
   const res = await callTool(TOOL.drive_search, {
-    query: "parentId = '" + CONFIG.DRIVE_DASHBOARD_FOLDER_ID + "' and title contains 'scan' and mimeType = 'application/json'",
+    query: "parentId = '" + CONFIG.DRIVE_DASHBOARD_FOLDER_ID + "' and mimeType = 'application/json'",
     pageSize: 10,
   });
 
-  if (!res || !res.files || res.files.length === 0) {
-    // Drive works but no scans yet · keep the empty state
+  if (!res) {
+    // Drive call failed entirely
+    if (driveChip) { driveChip.classList.remove('pending'); driveChip.classList.add('off'); driveChip.textContent = 'Drive ✗'; }
+    if (meta) meta.innerHTML = '<span class="dot pending"></span>Drive unreachable';
+    return;
+  }
+  // Drive responded · mark chip live
+  if (driveChip) { driveChip.classList.remove('pending'); driveChip.classList.add('live'); driveChip.textContent = 'Drive ✓'; }
+
+  if (!res.files || res.files.length === 0) {
+    // Drive works but no scans yet · keep the empty state with run button
     if (meta) meta.innerHTML = '<span class="dot pending"></span>Connected · no scans yet';
     wireRunBtn();
     return;
@@ -970,15 +1009,17 @@ async function loadCompetitorWatch() {
   const sorted = res.files.slice().sort((a, b) => (b.modifiedTime || '').localeCompare(a.modifiedTime || ''));
   const latest = sorted[0];
 
-  // contentSnippet may have partial content · for full content we'd need download_file_content
-  // Try parsing snippet · fall back to a stub
+  // Download full file content (snippet truncates for files >~1KB)
   let scanData = null;
   try {
-    if (latest.contentSnippet) {
-      scanData = JSON.parse(latest.contentSnippet);
+    const dl = await callTool(TOOL.drive_download, { fileId: latest.id });
+    if (dl && dl.content) {
+      // content is base64 encoded · decode then parse
+      const raw = atob(dl.content);
+      scanData = JSON.parse(raw);
     }
   } catch (e) {
-    // snippet may be truncated · scanData stays null
+    console.error('[loadCompetitorWatch] full download failed:', e);
   }
 
   if (!scanData || !scanData.strategic_findings) {
@@ -1340,7 +1381,11 @@ function buildBriefing(ctx) {
 
 function buildQueue(ctx) {
   if (!ctx.sales30d) {
-    setHTML('[data-queue]', '<div class="queue-row"><div class="q-sev info"></div><div class="q-body"><div class="q-title">Waiting for Shopify data…</div></div></div>');
+    setHTML('[data-queue]', '<div class="queue-row"><div class="q-sev info"></div><div class="q-body"><div class="q-title">Waiting for Shopify data…</div><div class="q-desc">If this stays loading, the Shopify connector may need to be re-authorized.</div></div><div class="q-actions"><button class="q-btn primary" data-open-settings-from-queue>Open Settings</button></div></div>');
+    // Wire the open-settings button
+    document.querySelectorAll('[data-open-settings-from-queue]').forEach(btn => {
+      btn.addEventListener('click', () => { if (typeof openSettings === 'function') openSettings(); });
+    });
     return;
   }
   const items = [];
@@ -1684,45 +1729,6 @@ async function init() {
 
 init();
 </script>
-
-<!-- SETTINGS SLIDE-OVER -->
-<div class="settings-backdrop" data-settings-backdrop></div>
-<div class="settings-panel" data-settings-panel role="dialog" aria-label="Settings">
-  <div class="settings-head">
-    <div class="settings-title">Settings</div>
-    <div class="settings-close" data-close-settings title="Close (Esc)">✕</div>
-  </div>
-  <div class="settings-body">
-
-    <!-- Section 1: Connector Status -->
-    <div class="settings-section">
-      <div class="settings-section-label">
-        <span>Connectors</span>
-        <span class="settings-section-meta">Authorize in Cowork → Settings → Connectors</span>
-      </div>
-      <div data-settings-connectors></div>
-    </div>
-
-    <!-- Section 2: One-Time Setup Checklist -->
-    <div class="settings-section">
-      <div class="settings-section-label">
-        <span>One-time setup</span>
-        <span class="settings-section-meta" data-setup-progress>—</span>
-      </div>
-      <div data-settings-checklist></div>
-    </div>
-
-    <!-- Section 3: Knowledge Base Status -->
-    <div class="settings-section">
-      <div class="settings-section-label">
-        <span>Knowledge base</span>
-        <span class="settings-section-meta">8 files · loaded with plugin install</span>
-      </div>
-      <div data-settings-knowledge></div>
-    </div>
-
-  </div>
-</div>
 
 </body>
 </html>
