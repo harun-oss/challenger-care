@@ -361,6 +361,33 @@ def check_artifact_uuid_state(root, warnings):
         warn(f"  {YELLOW}!{RESET} Artifact SHOPIFY_UUID is unexpected value: {val[:20]}", warnings)
 
 
+
+def check_mcp_tools_tightness(root, warnings):
+    """NEW: Check that every registered tool in artifact is actually called.
+    Per migration discipline: 'Keep mcp_tools tight — register only what you call.'"""
+    print(f"\n{BOLD}13. Checking artifact mcp_tools tightness...{RESET}")
+    artifact = root / "artifact" / "command.html"
+    if not artifact.exists():
+        return
+    content = artifact.read_text(errors='ignore')
+    # Extract registered tools: pattern `<key>: 'mcp__' + CONFIG.X_UUID + '__<tool>'`
+    reg_re = re.compile(r"^\s+([a-z_]+):\s*'mcp__'\s*\+\s*CONFIG\.[A-Z_]+\s*\+\s*'__[\w-]+'", re.MULTILINE)
+    registered = set(m.group(1) for m in reg_re.finditer(content))
+    # Extract called tools: pattern `callTool(TOOL.<key>`
+    call_re = re.compile(r"callTool\(TOOL\.([a-z_]+)")
+    called = set(m.group(1) for m in call_re.finditer(content))
+    unused = registered - called
+    uncalled_but_used = called - registered
+    if unused:
+        for u in sorted(unused):
+            warn(f"  {YELLOW}!{RESET} Tool '{u}' is registered but never called \u00b7 strip per discipline", warnings)
+    if uncalled_but_used:
+        for u in sorted(uncalled_but_used):
+            warn(f"  {YELLOW}!{RESET} Tool '{u}' is called but not registered \u00b7 add to TOOL object", warnings)
+    if not unused and not uncalled_but_used:
+        print(f"  {GREEN}OK All {len(registered)} registered tools are called{RESET}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Validate the Challenger Care plugin.")
     parser.add_argument("--verbose", action="store_true")
@@ -385,6 +412,7 @@ def main():
     check_markdown_links(root, errors, warnings)
     check_requirements_for_yaml(root, errors, warnings)
     check_artifact_uuid_state(root, warnings)
+    check_mcp_tools_tightness(root, warnings)
 
     print(f"\n{BOLD}Summary{RESET}")
     print(f"  Errors: {len(errors)}")

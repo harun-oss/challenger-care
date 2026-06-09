@@ -111,7 +111,7 @@ connector:
 
   # Optional — enable when authorized
   drive_uuid: ""
-  asana_uuid: ""
+  asana_uuid: "074a94e7-815b-4b26-9a9e-172d35a7ce08"       # Asana MCP UUID (per Cowork connector authorization)
   ga4_uuid: ""
   slack_uuid: ""
 ```
@@ -129,6 +129,7 @@ stack:
   klaviyo_sender_email: "Info@challengercare.com"
   drive_client_folder_id: ""        # Add when Drive is connected
   slack_internal_channel_id: ""     # Add if useful
+  asana_project_gid: "1189315776295965"  # DUMMY · "Client Onboarding & Tool Setup" · Hayden: replace with real Challenger Care project GID after creating it in his Asana
 ```
 
 ---

@@ -72,6 +72,8 @@ body {
 .ctx-chip { font-size: 11px; padding: 4px 11px; background: var(--surface-2); border-radius: 3px; color: var(--ink-2); cursor: pointer; font-weight: 500; }
 .ctx-chip:hover { background: var(--tan-soft); }
 .ctx-chip.pending { color: var(--ink-4); background: transparent; border: 1px dashed var(--line-2); }
+.ctx-chip.live { color: var(--green); border-color: var(--green); }
+.ctx-chip.off { color: var(--ink-4); opacity: 0.55; }
 .ctx-edit { font-size: 10.5px; color: var(--ink-3); cursor: pointer; white-space: nowrap; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
 .ctx-edit:hover { color: var(--ink); }
 
@@ -294,17 +296,20 @@ section { margin-bottom: 48px; }
   <div class="context-strip">
     <div class="ctx-label">Context</div>
     <div class="ctx-chips">
-      <div class="ctx-chip">Brand strategy</div>
-      <div class="ctx-chip">Unit economics</div>
-      <div class="ctx-chip pending">Reviews (pending upload)</div>
-      <div class="ctx-chip">18 SKUs + bundles</div>
-      <div class="ctx-chip">Team roles</div>
-      <div class="ctx-chip">Claim library</div>
-      <div class="ctx-chip">Competitor map</div>
-      <div class="ctx-chip">Connected stack</div>
-      <div class="ctx-chip">Goals + targets</div>
+      <!-- Knowledge files · bundled with plugin · load with install -->
+      <div class="ctx-chip live">Brand strategy ✓</div>
+      <div class="ctx-chip live">Unit economics ✓</div>
+      <div class="ctx-chip live">VOC · 480 reviews ✓</div>
+      <div class="ctx-chip live">SKU catalog ✓</div>
+      <div class="ctx-chip live">Team roles ✓</div>
+      <div class="ctx-chip live">Claim library ✓</div>
+      <div class="ctx-chip live">Competitor map ✓</div>
+      <div class="ctx-chip live">Goals + targets ✓</div>
+      <!-- Connectors · live state set by JS -->
+      <div class="ctx-chip pending" data-ctx="shopify">Shopify…</div>
+      <div class="ctx-chip pending" data-ctx="klaviyo">Klaviyo…</div>
+      <div class="ctx-chip pending" data-ctx="asana">Asana…</div>
     </div>
-    <div class="ctx-edit">Edit →</div>
   </div>
 
   <!-- BRIEFING -->
@@ -527,10 +532,10 @@ section { margin-bottom: 48px; }
         <div class="ch-val num" data-ch="shopify-rev">—</div>
         <div class="ch-meta" data-ch="shopify-meta">7d</div>
       </div>
-      <div class="ch pending">
-        <div class="ch-name"><span class="ch-state off"></span>Klaviyo</div>
-        <div class="ch-val off num">—</div>
-        <div class="ch-meta">connect to enable</div>
+      <div class="ch" data-ch="klaviyo-card">
+        <div class="ch-name"><span class="ch-state" data-ch="klaviyo-state"></span>Klaviyo</div>
+        <div class="ch-val num" data-ch="klaviyo-rev">—</div>
+        <div class="ch-meta" data-ch="klaviyo-meta">Loading…</div>
       </div>
       <div class="ch pending">
         <div class="ch-name"><span class="ch-state off"></span>Reddit</div>
@@ -554,16 +559,10 @@ section { margin-bottom: 48px; }
   <section>
     <div class="sect-label">
       <span>In flight</span>
-      <span class="sect-meta"><span class="dot pending"></span>Activates with Asana</span>
+      <span class="sect-meta" data-inflight-meta><span class="dot pending"></span>Connecting to Asana…</span>
     </div>
-    <div class="work-card">
-      <div class="work-pill"><span class="pill-dot building"></span>3-pack launch</div>
-      <div class="work-pill"><span class="pill-dot building"></span>VOC engine</div>
-      <div class="work-pill"><span class="pill-dot planning"></span>Klaviyo flows</div>
-      <div class="work-pill"><span class="pill-dot planning"></span>PDP refresh</div>
-      <div class="work-pill"><span class="pill-dot planning"></span>Subscriber program</div>
-      <div class="work-pill"><span class="pill-dot live"></span>AI infrastructure</div>
-      <span class="work-note">Live project status activates when Asana is connected.</span>
+    <div class="work-card" data-inflight>
+      <div class="work-pill" data-inflight-loading><span class="pill-dot planning"></span>Loading from Asana…</div>
     </div>
   </section>
 
@@ -593,6 +592,8 @@ const CONFIG = {
   },
   SHOPIFY_UUID: '__SHOPIFY_UUID__',
   KLAVIYO_UUID: '__KLAVIYO_UUID__',
+  ASANA_UUID: '__ASANA_UUID__',
+  ASANA_PROJECT_GID: '__ASANA_PROJECT_GID__',
 };
 
 // Fail loud if CONFIG was never synced from CONFIG.md
@@ -601,8 +602,20 @@ function configIsSynced() {
 }
 
 const TOOL = {
+  // Shopify
   shop_info: 'mcp__' + CONFIG.SHOPIFY_UUID + '__get-shop-info',
   analytics: 'mcp__' + CONFIG.SHOPIFY_UUID + '__run-analytics-query',
+  // Klaviyo · runtime concatenation keeps UUID literals out of HTML source
+  klaviyo_aggregate: 'mcp__' + CONFIG.KLAVIYO_UUID + '__klaviyo_query_metric_aggregates',
+  klaviyo_flow_report: 'mcp__' + CONFIG.KLAVIYO_UUID + '__klaviyo_get_flow_report',
+  klaviyo_campaign_report: 'mcp__' + CONFIG.KLAVIYO_UUID + '__klaviyo_get_campaign_report',
+  // Asana · runtime concatenation keeps UUID literals out of HTML source
+  asana_get_tasks: 'mcp__' + CONFIG.ASANA_UUID + '__get_tasks',
+};
+
+// Klaviyo metric IDs · stable across the account · safe to embed
+const KLAVIYO = {
+  PLACED_ORDER_METRIC_ID: 'pbXAV8',  // Shopify "Placed Order" metric in Challenger's Klaviyo
 };
 
 // Static workflow catalog
@@ -726,8 +739,164 @@ function setHeadDate() {
 
 async function loadShopName() {
   const info = await callTool(TOOL.shop_info, {});
-  if (info && info.name) setText('[data-shop-name]', 'Live · ' + info.name);
+  const chip = document.querySelector('[data-ctx="shopify"]');
+  if (info && info.name) {
+    setText('[data-shop-name]', 'Live · ' + info.name);
+    if (chip) { chip.classList.remove('pending'); chip.classList.add('live'); chip.textContent = 'Shopify ✓'; }
+  } else {
+    if (chip) { chip.classList.remove('pending'); chip.classList.add('off'); chip.textContent = 'Shopify ✗'; }
+  }
 }
+
+function mtdStart() {
+  const now = new Date();
+  return new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1)).toISOString().slice(0, 19);
+}
+function mtdEnd() {
+  const now = new Date();
+  // End of today, UTC
+  return new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 23, 59, 59)).toISOString().slice(0, 19);
+}
+
+async function loadKlaviyo() {
+  // Mark loading state
+  setText('[data-ch="klaviyo-meta"]', 'Querying…');
+
+  // Three calls in parallel · attributed channel total, flow split, campaign split
+  const [totalRes, flowRes, campRes] = await Promise.all([
+    callTool(TOOL.klaviyo_aggregate, {
+      metricId: KLAVIYO.PLACED_ORDER_METRIC_ID,
+      measurements: ['sum_value', 'count'],
+      startDate: mtdStart(),
+      endDate: mtdEnd(),
+      groupBy: ['$attributed_channel'],
+      interval: 'month',
+      timezone: 'US/Pacific',
+      model: 'claude',
+    }),
+    callTool(TOOL.klaviyo_flow_report, {
+      conversionMetricId: KLAVIYO.PLACED_ORDER_METRIC_ID,
+      statistics: ['conversions'],
+      valueStatistics: ['conversion_value'],
+      timeframe: { key: 'this_month' },
+      groupBy: ['flow_id', 'send_channel', 'flow_message_id'],
+      model: 'claude',
+    }),
+    callTool(TOOL.klaviyo_campaign_report, {
+      conversionMetricId: KLAVIYO.PLACED_ORDER_METRIC_ID,
+      statistics: ['conversions'],
+      valueStatistics: ['conversion_value'],
+      timeframe: { key: 'this_month' },
+      groupBy: ['campaign_id', 'send_channel', 'campaign_message_id'],
+      model: 'claude',
+    }),
+  ]);
+
+  // If all three failed, mark as disconnected
+  if (!totalRes && !flowRes && !campRes) {
+    document.querySelector('[data-ch="klaviyo-card"]')?.classList.add('pending');
+    document.querySelector('[data-ch="klaviyo-state"]')?.classList.add('off');
+    setText('[data-ch="klaviyo-rev"]', '—');
+    setText('[data-ch="klaviyo-meta"]', 'not connected');
+    const chip = document.querySelector('[data-ctx="klaviyo"]');
+    if (chip) { chip.classList.remove('pending'); chip.classList.add('off'); chip.textContent = 'Klaviyo ✗'; }
+    return;
+  }
+
+  // Mark live
+  document.querySelector('[data-ch="klaviyo-state"]')?.classList.add('live');
+  const kchip = document.querySelector('[data-ctx="klaviyo"]');
+  if (kchip) { kchip.classList.remove('pending'); kchip.classList.add('live'); kchip.textContent = 'Klaviyo ✓'; }
+
+  // Parse total revenue (across all attributed channels)
+  let totalRev = 0;
+  const dataRows = totalRes?.data?.attributes?.data || [];
+  for (const row of dataRows) {
+    const sums = row?.measurements?.sum_value || [];
+    totalRev += sums.reduce((a, b) => a + (Number(b) || 0), 0);
+  }
+
+  // Parse flow revenue
+  let flowRev = 0;
+  const flowResults = flowRes?.data?.attributes?.results || [];
+  for (const r of flowResults) {
+    flowRev += Number(r?.statistics?.conversion_value || 0);
+  }
+
+  // Parse campaign revenue
+  let campRev = 0;
+  const campResults = campRes?.data?.attributes?.results || [];
+  for (const r of campResults) {
+    campRev += Number(r?.statistics?.conversion_value || 0);
+  }
+
+  setText('[data-ch="klaviyo-rev"]', fmtMoney(totalRev));
+  const flowsLabel = flowRev > 0 ? fmtMoney(flowRev) + ' flows' : '0 flows';
+  const campsLabel = campRev > 0 ? fmtMoney(campRev) + ' campaigns' : '0 campaigns';
+  setText('[data-ch="klaviyo-meta"]', 'MTD · ' + flowsLabel + ' · ' + campsLabel);
+}
+
+
+async function loadAsana() {
+  const card = document.querySelector('[data-inflight]');
+  const meta = document.querySelector('[data-inflight-meta]');
+  const chip = document.querySelector('[data-ctx="asana"]');
+  if (!CONFIG.ASANA_UUID || CONFIG.ASANA_UUID.startsWith('__') || !CONFIG.ASANA_PROJECT_GID || CONFIG.ASANA_PROJECT_GID.startsWith('__')) {
+    if (card) card.innerHTML = '<span class="work-note">Connect Asana + set asana_project_gid in CONFIG.md to enable.</span>';
+    if (meta) meta.innerHTML = '<span class="dot pending"></span>Asana not configured';
+    if (chip) { chip.classList.remove('pending'); chip.classList.add('off'); chip.textContent = 'Asana (not configured)'; }
+    return;
+  }
+
+  const res = await callTool(TOOL.asana_get_tasks, {
+    project: CONFIG.ASANA_PROJECT_GID,
+    limit: 25,
+    opt_fields: 'name,completed,assignee.name,due_on,permalink_url',
+  });
+
+  if (!res || !res.data) {
+    if (card) card.innerHTML = '<span class="work-note">Could not reach Asana. Check connector authorization.</span>';
+    if (meta) meta.innerHTML = '<span class="dot pending"></span>Asana unreachable';
+    if (chip) { chip.classList.remove('pending'); chip.classList.add('off'); chip.textContent = 'Asana ✗'; }
+    return;
+  }
+  // Asana responded · mark chip live
+  if (chip) { chip.classList.remove('pending'); chip.classList.add('live'); chip.textContent = 'Asana ✓'; }
+
+  const all = res.data || [];
+  // Filter to incomplete tasks
+  const incomplete = all.filter(t => !t.completed);
+  // If no incomplete, show most-recent completed
+  const items = (incomplete.length > 0 ? incomplete : all).slice(0, 8);
+
+  if (items.length === 0) {
+    if (card) card.innerHTML = '<span class="work-note">No tasks in this project yet.</span>';
+    if (meta) meta.innerHTML = '<span class="dot live"></span>Live · Asana · 0 tasks';
+    return;
+  }
+
+  const pillsHtml = items.map(t => {
+    // Classify by due_on if present, else default to 'building'
+    let cls = 'building';
+    if (t.completed) cls = 'live';
+    else if (t.due_on) {
+      const due = new Date(t.due_on);
+      const now = new Date();
+      const days = Math.floor((due - now) / 86400000);
+      if (days < 0) cls = 'planning'; // overdue
+      else if (days <= 7) cls = 'building';
+      else cls = 'planning';
+    }
+    const name = (t.name || 'Untitled').replace(/</g, '&lt;');
+    const trimmed = name.length > 40 ? name.slice(0, 37) + '…' : name;
+    return '<div class="work-pill" title="' + name + (t.assignee ? ' · ' + t.assignee.name : '') + '"><span class="pill-dot ' + cls + '"></span>' + trimmed + '</div>';
+  }).join('');
+
+  if (card) card.innerHTML = pillsHtml + '<span class="work-note">Live · ' + items.length + ' of ' + all.length + ' tasks shown · ' + incomplete.length + ' incomplete</span>';
+  if (meta) meta.innerHTML = '<span class="dot live"></span>Live · Asana';
+}
+
+
 
 function classifySku(sold, ending) {
   const soldN = Number(sold);
@@ -1219,10 +1388,11 @@ async function init() {
   if (!configIsSynced()) {
     setText('[data-shop-name]', 'CONFIG not synced');
     setText('[data-mtd-context]', 'Run scripts/sync-html-config.py to wire UUIDs from CONFIG.md');
+    setText('[data-ch="klaviyo-meta"]', 'CONFIG not synced');
     console.warn('CONFIG.SHOPIFY_UUID is a placeholder. Run: python3 scripts/sync-html-config.py');
     return;
   }
-  await Promise.all([loadShopName(), loadAll()]);
+  await Promise.all([loadShopName(), loadAll(), loadKlaviyo(), loadAsana()]);
 }
 
 init();

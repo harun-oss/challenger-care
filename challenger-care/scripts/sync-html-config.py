@@ -37,6 +37,8 @@ DASHBOARD = ROOT / "artifact" / "command.html"
 
 PLACEHOLDER_SHOPIFY = "__SHOPIFY_UUID__"
 PLACEHOLDER_KLAVIYO = "__KLAVIYO_UUID__"
+PLACEHOLDER_ASANA = "__ASANA_UUID__"
+PLACEHOLDER_ASANA_PROJECT = "__ASANA_PROJECT_GID__"
 
 
 def extract_yaml_blocks(md_content):
@@ -51,7 +53,7 @@ def extract_yaml_blocks(md_content):
     return merged
 
 
-def build_config_block(goals, thresholds, shopify_uuid, klaviyo_uuid):
+def build_config_block(goals, thresholds, shopify_uuid, klaviyo_uuid, asana_uuid, asana_project_gid):
     return f"""const CONFIG = {{
   goals: {{
     monthly_revenue: {goals.get('monthly_revenue_shopify', 6000)},
@@ -65,6 +67,8 @@ def build_config_block(goals, thresholds, shopify_uuid, klaviyo_uuid):
   }},
   SHOPIFY_UUID: '{shopify_uuid}',
   KLAVIYO_UUID: '{klaviyo_uuid}',
+  ASANA_UUID: '{asana_uuid}',
+  ASANA_PROJECT_GID: '{asana_project_gid}',
 }};"""
 
 
@@ -93,16 +97,21 @@ def main():
     connector = config.get("connector", {})
 
     if args.reset:
-        shopify, klaviyo = PLACEHOLDER_SHOPIFY, PLACEHOLDER_KLAVIYO
+        shopify, klaviyo, asana, asana_pgid = PLACEHOLDER_SHOPIFY, PLACEHOLDER_KLAVIYO, PLACEHOLDER_ASANA, PLACEHOLDER_ASANA_PROJECT
         mode = "RESET (placeholders restored for commit)"
     else:
+        stack = config.get("stack", {})
         shopify = connector.get("shopify_uuid", "") or PLACEHOLDER_SHOPIFY
         klaviyo = connector.get("klaviyo_uuid", "") or PLACEHOLDER_KLAVIYO
+        asana = connector.get("asana_uuid", "") or PLACEHOLDER_ASANA
+        asana_pgid = stack.get("asana_project_gid", "") or PLACEHOLDER_ASANA_PROJECT
         mode = "APPLIED (UUIDs from CONFIG.md written to HTML)"
         if shopify == PLACEHOLDER_SHOPIFY:
             print("WARNING: CONFIG.md has empty shopify_uuid · dashboard will show 'CONFIG not synced'")
+        if asana == PLACEHOLDER_ASANA:
+            print("NOTE: Asana not configured · In flight section will show 'Asana not configured' (this is fine if Asana isn't authorized)")
 
-    new_block = build_config_block(goals, thresholds, shopify, klaviyo)
+    new_block = build_config_block(goals, thresholds, shopify, klaviyo, asana, asana_pgid)
     html = DASHBOARD.read_text()
     new_html = replace_in_html(html, new_block)
     DASHBOARD.write_text(new_html)
@@ -110,6 +119,8 @@ def main():
     print(f"OK Dashboard CONFIG block · {mode}")
     print(f"   shopify_uuid={shopify[:8]}{'...' if len(shopify) > 8 else ''}")
     print(f"   klaviyo_uuid={klaviyo[:8]}{'...' if len(klaviyo) > 8 else ''}")
+    print(f"   asana_uuid={asana[:8]}{'...' if len(asana) > 8 else ''}")
+    print(f"   asana_project_gid={asana_pgid[:20]}{'...' if len(asana_pgid) > 20 else ''}")
 
 
 if __name__ == "__main__":
