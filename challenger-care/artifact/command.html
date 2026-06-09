@@ -520,10 +520,10 @@ section { margin-bottom: 48px; }
       <span class="cmd-bar-kbd">↵</span>
     </div>
     <div class="cmd-examples">
-      <div class="cmd-ex" onclick="dropPrompt(this.textContent.replace(/^[\u0022\u0027]|[\u0022\u0027]$/g,\u0027\u0027).trim())">"Launch the 3-pack as the new default offer"</div>
-      <div class="cmd-ex" onclick="dropPrompt(this.textContent.replace(/^[\u0022\u0027]|[\u0022\u0027]$/g,\u0027\u0027).trim())">"Why is checkout abandonment so high?"</div>
-      <div class="cmd-ex" onclick="dropPrompt(this.textContent.replace(/^[\u0022\u0027]|[\u0022\u0027]$/g,\u0027\u0027).trim())">"Compare our PDP to Hanz De Fuko"</div>
-      <div class="cmd-ex" onclick="dropPrompt(this.textContent.replace(/^[\u0022\u0027]|[\u0022\u0027]$/g,\u0027\u0027).trim())">"Draft a Reddit post for r/malegrooming"</div>
+      <div class="cmd-ex" onclick="chipClick(this)">"Launch the 3-pack as the new default offer"</div>
+      <div class="cmd-ex" onclick="chipClick(this)">"Why is checkout abandonment so high?"</div>
+      <div class="cmd-ex" onclick="chipClick(this)">"Compare our PDP to Hanz De Fuko"</div>
+      <div class="cmd-ex" onclick="chipClick(this)">"Draft a Reddit post for r/malegrooming"</div>
     </div>
   </div>
 
@@ -769,6 +769,16 @@ function setText(selector, value) {
 function setHTML(selector, html) {
   const el = document.querySelector(selector);
   if (el) el.innerHTML = html;
+}
+
+
+// Helper for cmd-ex chips · strips surrounding quote chars from textContent
+function chipClick(el) {
+  if (!el) return;
+  let text = (el.textContent || '').trim();
+  // Strip leading + trailing quote/curly-quote chars
+  text = text.replace(/^["'“”‘’]+|["'“”‘’]+$/g, '').trim();
+  if (text) dropPrompt(text);
 }
 
 // Global prompt dispatcher · tries to actually SEND the prompt to chat.
