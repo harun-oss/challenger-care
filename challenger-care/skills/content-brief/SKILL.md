@@ -1,6 +1,6 @@
 ---
 name: content-brief
-description: Turns a target keyword into a complete writer brief · SERP analysis, search intent, structure (H1/H2/H3), E-E-A-T requirements, target length, schema, internal linking, meta formulas. MANDATORY TRIGGER: any mention of "content brief", "SEO brief", "brief a writer", "content outline", "structure for this post", "brief for [keyword]". Do NOT use for: Writing the content (use `seo-content-writing`). Keyword discovery (use `keyword-research`).
+description: 'Turns a target keyword into a complete writer brief · SERP analysis, search intent, structure (H1/H2/H3), E-E-A-T requirements, target length, schema, internal linking, meta formulas. MANDATORY TRIGGER: any mention of "content brief", "SEO brief", "brief a writer", "content outline", "structure for this post", "brief for [keyword]". Do NOT use for: Writing the content (use `seo-content-writing`). Keyword discovery (use `keyword-research`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/voc/quote-library.md, assets/team-roles.md, CONFIG.md, assets/claim-library.md

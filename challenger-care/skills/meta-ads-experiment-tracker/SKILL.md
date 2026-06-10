@@ -1,6 +1,6 @@
 ---
 name: meta-ads-experiment-tracker
-description: Logs experiment hypotheses before launch, records results + audience learnings after, synthesises patterns. Reads/writes to assets/experiment-log.md. MANDATORY TRIGGER: any mention of "log an experiment", "experiment log", "record experiment results", "what experiments have we run", "experiment learnings", "Meta experiment history". Do NOT use for: Launching experiments (use `meta-ads-creative-testing`). Writing copy (use `meta-ads-copywriting`).
+description: 'Logs experiment hypotheses before launch, records results + audience learnings after, synthesises patterns. Reads/writes to assets/experiment-log.md. MANDATORY TRIGGER: any mention of "log an experiment", "experiment log", "record experiment results", "what experiments have we run", "experiment learnings", "Meta experiment history". Do NOT use for: Launching experiments (use `meta-ads-creative-testing`). Writing copy (use `meta-ads-copywriting`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/voc/quote-library.md, assets/team-roles.md, assets/experiment-log.md, CONFIG.md

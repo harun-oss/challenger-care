@@ -1,6 +1,6 @@
 ---
 name: keyword-research
-description: SEO keyword discovery + intent classification + competitive gap analysis + clusters + topical authority. MANDATORY TRIGGER: any mention of "SEO keyword research", "what keywords should we rank for", "keyword gap analysis", "competitor keywords", "topical authority", "search intent", "keyword clusters". Do NOT use for: Google Ads keyword research (use `google-ads-keyword-research`). Writing content (use `seo-content-writing`).
+description: 'SEO keyword discovery + intent classification + competitive gap analysis + clusters + topical authority. MANDATORY TRIGGER: any mention of "SEO keyword research", "what keywords should we rank for", "keyword gap analysis", "competitor keywords", "topical authority", "search intent", "keyword clusters". Do NOT use for: Google Ads keyword research (use `google-ads-keyword-research`). Writing content (use `seo-content-writing`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/competitor-map.md, assets/customer-archetypes.md, assets/team-roles.md, CONFIG.md

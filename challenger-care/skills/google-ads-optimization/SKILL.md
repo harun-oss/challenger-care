@@ -1,6 +1,6 @@
 ---
 name: google-ads-optimization
-description: Weekly + monthly Google Ads ongoing optimization · search term pruning, negative keyword management, ad rotation, bid strategy graduation, device/placement bid adjustments, asset group optimization. MANDATORY TRIGGER: any mention of "optimize Google Ads", "Google Ads weekly optimization", "search term review", "Google Ads negative keywords", "RSA optimization", "PMAX optimization", "Google Ads weekly tasks". Do NOT use for: Account audit (use `google-ads-account-audit`). Reporting (use `google-ads-reporting`).
+description: 'Weekly + monthly Google Ads ongoing optimization · search term pruning, negative keyword management, ad rotation, bid strategy graduation, device/placement bid adjustments, asset group optimization. MANDATORY TRIGGER: any mention of "optimize Google Ads", "Google Ads weekly optimization", "search term review", "Google Ads negative keywords", "RSA optimization", "PMAX optimization", "Google Ads weekly tasks". Do NOT use for: Account audit (use `google-ads-account-audit`). Reporting (use `google-ads-reporting`).'
 ---
 
 > **Permission tier:** stage · **Tools/context:** assets/goals-targets.md, assets/team-roles.md, CONFIG.md

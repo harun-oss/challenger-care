@@ -1,6 +1,6 @@
 ---
 name: reddit-founder-post
-description: Drafts a single founder-voice reply to a Reddit thread · for r/malegrooming, r/SkincareAddiction, r/wicked_edge, and adjacent subs. Single-post motion, not a batch. Reads like a person, not a brand. MANDATORY TRIGGER: any mention of "draft a Reddit reply", "respond to this Reddit thread", "founder voice on Reddit", "this thread asks about pomade · what should I say", "Reddit founder post". Do NOT use this for: Weekly batch organic content (use `create-this-weeks-content`). Paid Reddit ads (use `reddit-ads`). Customer support replies (use `reply-to-customer-issue`).
+description: 'Drafts a single founder-voice reply to a Reddit thread · for r/malegrooming, r/SkincareAddiction, r/wicked_edge, and adjacent subs. Single-post motion, not a batch. Reads like a person, not a brand. MANDATORY TRIGGER: any mention of "draft a Reddit reply", "respond to this Reddit thread", "founder voice on Reddit", "this thread asks about pomade · what should I say", "Reddit founder post". Do NOT use this for: Weekly batch organic content (use `create-this-weeks-content`). Paid Reddit ads (use `reddit-ads`). Customer support replies (use `reply-to-customer-issue`).'
 ---
 
 > **Permission tier:** generate · **Time:** 1min · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/voc/quote-library.md, assets/customer-archetypes.md, assets/team-roles.md, CONFIG.md

@@ -1,6 +1,6 @@
 ---
 name: user-testing
-description: Designs, configures, analyses Lyssna.com user tests · Preference Tests (design A/B) and Design Survey Tests (single-design qualitative). Available when Lyssna subscription is active. MANDATORY TRIGGER: any mention of "user testing", "preference test", "Lyssna test", "design validation", "usability test", "run user research", "analyse user test results", "user test insights". Do NOT use for: Live A/B test results (use `ab-test-reporting`). Heatmaps (use `heatmap-scrollmap-analysis`).
+description: 'Designs, configures, analyses Lyssna.com user tests · Preference Tests (design A/B) and Design Survey Tests (single-design qualitative). Available when Lyssna subscription is active. MANDATORY TRIGGER: any mention of "user testing", "preference test", "Lyssna test", "design validation", "usability test", "run user research", "analyse user test results", "user test insights". Do NOT use for: Live A/B test results (use `ab-test-reporting`). Heatmaps (use `heatmap-scrollmap-analysis`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/customer-archetypes.md, assets/team-roles.md, CONFIG.md

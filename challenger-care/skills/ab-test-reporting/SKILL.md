@@ -1,6 +1,6 @@
 ---
 name: ab-test-reporting
-description: Documents A/B test results · per-test setup, statistical interpretation, decision (Ship/Keep Running/Pause/Kill), anomalies, lessons-from-tests synthesis. Markdown output. Pairs with `test-price-claim` and `testing-roadmap`. MANDATORY TRIGGER: any mention of "A/B test report", "test results writeup", "interpret P-values", "VWO Decision Probability", "ship or kill decision", "lessons from tests", "A/B test conclusions". Do NOT use for: Building test roadmap (use `testing-roadmap`). Designing single test (use `test-price-claim`).
+description: 'Documents A/B test results · per-test setup, statistical interpretation, decision (Ship/Keep Running/Pause/Kill), anomalies, lessons-from-tests synthesis. Markdown output. Pairs with `test-price-claim` and `testing-roadmap`. MANDATORY TRIGGER: any mention of "A/B test report", "test results writeup", "interpret P-values", "VWO Decision Probability", "ship or kill decision", "lessons from tests", "A/B test conclusions". Do NOT use for: Building test roadmap (use `testing-roadmap`). Designing single test (use `test-price-claim`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/goals-targets.md, assets/team-roles.md, CONFIG.md, assets/experiment-log.md

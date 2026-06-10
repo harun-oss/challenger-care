@@ -1,6 +1,6 @@
 ---
 name: email-strategy
-description: Defines the full email architecture for Challenger · which flows, what segments, what cadence, attribution setup. The strategic layer between the audit and the build skills. MANDATORY TRIGGER: any mention of "email strategy", "email plan", "what flows should we build", "email roadmap", "email cadence", "plan the email program", "what should we prioritise for email". Do NOT use for: Building specific flows (use `klaviyo-flows`). Diagnosing existing program (use `email-program-audit`). Writing copy (use `email-copywriting`).
+description: 'Defines the full email architecture for Challenger · which flows, what segments, what cadence, attribution setup. The strategic layer between the audit and the build skills. MANDATORY TRIGGER: any mention of "email strategy", "email plan", "what flows should we build", "email roadmap", "email cadence", "plan the email program", "what should we prioritise for email". Do NOT use for: Building specific flows (use `klaviyo-flows`). Diagnosing existing program (use `email-program-audit`). Writing copy (use `email-copywriting`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/customer-archetypes.md, assets/voc/quote-library.md, assets/unit-economics.md, assets/goals-targets.md, assets/team-roles.md, CONFIG.md, mcp:klaviyo

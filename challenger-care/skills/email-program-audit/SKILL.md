@@ -1,6 +1,6 @@
 ---
 name: email-program-audit
-description: Audit the Klaviyo email program end-to-end. Maps existing flows + campaigns, benchmarks list health and deliverability, identifies revenue gaps, produces a prioritised build plan. Run once during program revival; outputs become assets. MANDATORY TRIGGER: any mention of "audit our email program", "diagnose Klaviyo", "what email do we have running", "email program review", "what flows are live", "Klaviyo health check". Do NOT use for: building a specific flow (use `klaviyo-flows` or `build-next-email-flow`). Writing copy (use `email-copywriting`). Email strategy decisions (use `email-strategy`).
+description: 'Audit the Klaviyo email program end-to-end. Maps existing flows + campaigns, benchmarks list health and deliverability, identifies revenue gaps, produces a prioritised build plan. Run once during program revival; outputs become assets. MANDATORY TRIGGER: any mention of "audit our email program", "diagnose Klaviyo", "what email do we have running", "email program review", "what flows are live", "Klaviyo health check". Do NOT use for: building a specific flow (use `klaviyo-flows` or `build-next-email-flow`). Writing copy (use `email-copywriting`). Email strategy decisions (use `email-strategy`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/goals-targets.md, assets/team-roles.md, CONFIG.md, mcp:klaviyo

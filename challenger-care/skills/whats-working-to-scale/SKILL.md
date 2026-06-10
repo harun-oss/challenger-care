@@ -1,6 +1,6 @@
 ---
 name: whats-working-to-scale
-description: Finds the top-performing creative, email, landing page, and SKU — recommends where to put more weight. MANDATORY TRIGGER: any mention of "What's working that I should double down on?", "Where should I put more attention this quarter?", "Find the wins from last 30 days". Do NOT use this for: Diagnosing what's broken (use `why-sales-dropped`). Setting up new tests (use `test-price-claim`). Strategic positioning decisions (use `highest-leverage`).
+description: 'Finds the top-performing creative, email, landing page, and SKU — recommends where to put more weight. MANDATORY TRIGGER: any mention of "What''s working that I should double down on?", "Where should I put more attention this quarter?", "Find the wins from last 30 days". Do NOT use this for: Diagnosing what''s broken (use `why-sales-dropped`). Setting up new tests (use `test-price-claim`). Strategic positioning decisions (use `highest-leverage`).'
 ---
 
 > **Permission tier:** generate · **Time:** 3min · **Tools/context:** mcp:shopify, mcp:klaviyo (optional), assets/unit-economics.md

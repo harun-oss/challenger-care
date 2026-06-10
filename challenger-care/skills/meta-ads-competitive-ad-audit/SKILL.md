@@ -1,6 +1,6 @@
 ---
 name: meta-ads-competitive-ad-audit
-description: Researches 8-12 competitor ads from Meta Ad Library + TikTok Ads Library, analyses creative formats/hooks/copy/CTAs. Paired with whats-the-competitor-doing. MANDATORY TRIGGER: any mention of "competitive ad audit", "Meta Ads Library research", "analyse competitor ads", "competitor creative audit", "TikTok Ads Library", "what are competitors running on Meta". Do NOT use for: Recurring weekly competitor scans (use `whats-the-competitor-doing`). Bain Elements competitor analysis (use `competitive-analysis`). Value prop research (we have brand-strategy.md).
+description: 'Researches 8-12 competitor ads from Meta Ad Library + TikTok Ads Library, analyses creative formats/hooks/copy/CTAs. Paired with whats-the-competitor-doing. MANDATORY TRIGGER: any mention of "competitive ad audit", "Meta Ads Library research", "analyse competitor ads", "competitor creative audit", "TikTok Ads Library", "what are competitors running on Meta". Do NOT use for: Recurring weekly competitor scans (use `whats-the-competitor-doing`). Bain Elements competitor analysis (use `competitive-analysis`). Value prop research (we have brand-strategy.md).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/competitor-map.md, assets/customer-archetypes.md, assets/voc/quote-library.md, assets/team-roles.md, CONFIG.md

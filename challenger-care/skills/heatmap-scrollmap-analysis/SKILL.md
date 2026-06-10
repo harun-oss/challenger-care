@@ -1,6 +1,6 @@
 ---
 name: heatmap-scrollmap-analysis
-description: Analyses tap/click heatmaps and scroll maps from Hotjar, Microsoft Clarity, Lucky Orange. Dynamic element classification, Baymard-backed test ideas, prioritised findings. Available when behavioral analytics tool is installed. MANDATORY TRIGGER: any mention of "heatmap analysis", "scroll map analysis", "tap map", "click map", "heatmap audit", "Hotjar analysis", "Clarity analysis", "behavioral analytics". Do NOT use for: VoC analysis (use `customer-voice`/`voc-analysis`). Session recordings (use `session-recording-analysis`).
+description: 'Analyses tap/click heatmaps and scroll maps from Hotjar, Microsoft Clarity, Lucky Orange. Dynamic element classification, Baymard-backed test ideas, prioritised findings. Available when behavioral analytics tool is installed. MANDATORY TRIGGER: any mention of "heatmap analysis", "scroll map analysis", "tap map", "click map", "heatmap audit", "Hotjar analysis", "Clarity analysis", "behavioral analytics". Do NOT use for: VoC analysis (use `customer-voice`/`voc-analysis`). Session recordings (use `session-recording-analysis`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/team-roles.md, CONFIG.md

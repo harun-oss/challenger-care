@@ -1,6 +1,6 @@
 ---
 name: model-unit-economics
-description: Builds the contribution margin stack, LTV at 90/180/365 days, and max CPA scenarios. MANDATORY TRIGGER: any mention of "What's our max CPA if Meta gets reactivated?", "Model the 3-pack at $65 — is it profitable?", "If subscription attach hits 25%, what changes?", "Run unit economics on the wholesale opportunity". Do NOT use this for: Real-time CPA tracking (that's the ads weekly report when Meta + Google connect). Brand strategy decisions (use `highest-leverage`). Single-promo pricing decisions (use `launch-sale-promo` — references this workflow internally).
+description: 'Builds the contribution margin stack, LTV at 90/180/365 days, and max CPA scenarios. MANDATORY TRIGGER: any mention of "What''s our max CPA if Meta gets reactivated?", "Model the 3-pack at $65 — is it profitable?", "If subscription attach hits 25%, what changes?", "Run unit economics on the wholesale opportunity". Do NOT use this for: Real-time CPA tracking (that''s the ads weekly report when Meta + Google connect). Brand strategy decisions (use `highest-leverage`). Single-promo pricing decisions (use `launch-sale-promo` — references this workflow internally).'
 ---
 
 > **Permission tier:** generate · **Time:** 4min · **Tools/context:** mcp:shopify, assets/unit-economics.md

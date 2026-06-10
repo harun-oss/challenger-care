@@ -1,6 +1,6 @@
 ---
 name: unit-economics-ecom
-description: Builds the full acquisition economics model · CM1/CM2/CM3 stack, LTV at 90/180/365 days, max CPA scenarios. Pairs with `model-unit-economics` (the Challenger-tuned production version). This is the consulting-grade deep dive. MANDATORY TRIGGER: any mention of "consulting-grade unit economics", "full CM stack", "deep unit economics", "max allowable CPA", "MACPA", "break-even ROAS", "contribution margin stack", "consulting-grade LTV model". Do NOT use for: Quick Challenger-tuned unit economics (use `model-unit-economics`). B2B / lead gen (different math). Ad performance reporting.
+description: 'Builds the full acquisition economics model · CM1/CM2/CM3 stack, LTV at 90/180/365 days, max CPA scenarios. Pairs with `model-unit-economics` (the Challenger-tuned production version). This is the consulting-grade deep dive. MANDATORY TRIGGER: any mention of "consulting-grade unit economics", "full CM stack", "deep unit economics", "max allowable CPA", "MACPA", "break-even ROAS", "contribution margin stack", "consulting-grade LTV model". Do NOT use for: Quick Challenger-tuned unit economics (use `model-unit-economics`). B2B / lead gen (different math). Ad performance reporting.'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/unit-economics.md, assets/goals-targets.md, assets/team-roles.md, CONFIG.md

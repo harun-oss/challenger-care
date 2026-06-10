@@ -1,6 +1,6 @@
 {
   "name": "challenger-care",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Challenger Care AI operating system v0.2.0. 70 user-facing + 3 system skills \u00b7 15 Library entry cards (Jobs-To-Be-Done) \u00b7 6 named chains \u00b7 hub-and-spoke routing. Brand voice + voice rules loaded at runtime from assets/. Role-keyed CONFIG.md substitution for team changes. 20 validator checks enforce migration discipline.",
   "author": {
     "name": "GrowthHit"

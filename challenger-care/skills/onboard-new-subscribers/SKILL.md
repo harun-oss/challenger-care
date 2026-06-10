@@ -1,6 +1,6 @@
 ---
 name: onboard-new-subscribers
-description: Builds the welcome flow for new Recharge subscribers — first jar email, retention nudge before second shipment, win-back if they cancel. Anchored to the Preparation pillar. MANDATORY TRIGGER: any mention of "Build the subscriber welcome flow", "Set up onboarding for new Recharge subscribers", "Create a winback for subscription cancellations". Do NOT use this for: General email Welcome Series for non-subscribers (use `build-next-email-flow` and select welcome). One-time promotional sends (use `launch-sale-promo`). Reactivating lapsed customers (different flow — use `build-next-email-flow` and select winback).
+description: 'Builds the welcome flow for new Recharge subscribers — first jar email, retention nudge before second shipment, win-back if they cancel. Anchored to the Preparation pillar. MANDATORY TRIGGER: any mention of "Build the subscriber welcome flow", "Set up onboarding for new Recharge subscribers", "Create a winback for subscription cancellations". Do NOT use this for: General email Welcome Series for non-subscribers (use `build-next-email-flow` and select welcome). One-time promotional sends (use `launch-sale-promo`). Reactivating lapsed customers (different flow — use `build-next-email-flow` and select winback).'
 ---
 
 > **Permission tier:** stage · **Time:** 6min · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/unit-economics.md, assets/customer-archetypes.md, voc/quote-library.md, mcp:klaviyo, CONFIG.md

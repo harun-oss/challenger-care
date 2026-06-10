@@ -1,6 +1,6 @@
 ---
 name: briefing-generator
-description: Generates the Morning Briefing for the dashboard. Pulls Shopify + Klaviyo data (GA4 ready to wire when authorized in CONFIG.md), detects anomalies, narrates the state of the business in Challenger voice. Cached daily.
+description: 'Generates the Morning Briefing for the dashboard. Pulls Shopify + Klaviyo data (GA4 ready to wire when authorized in CONFIG.md), detects anomalies, narrates the state of the business in Challenger voice. Cached daily.'
 ---
 
 > **Permission tier:** generate · **Time:** 90s · **Tools/context:** mcp:shopify (analytics-query, list-orders), mcp:klaviyo (get-flow-report, get-campaign-report, query-metric-aggregates), assets/brand-strategy.md, assets/goals-targets.md, assets/unit-economics.md, skills/anomaly-detector/SKILL.md

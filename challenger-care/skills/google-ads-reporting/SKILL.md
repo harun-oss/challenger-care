@@ -1,6 +1,6 @@
 ---
 name: google-ads-reporting
-description: Weekly + monthly Google Ads performance reporting · markdown output (not PPTX). Spend, key metrics, bid strategy progression notes, narrative framing. MANDATORY TRIGGER: any mention of "Google Ads weekly update", "Google Ads monthly report", "Google Ads performance update", "weekly Google update", "monthly Google report", "Google Ads results". Do NOT use for: Account audit (use `google-ads-account-audit`). Optimization tasks (use `google-ads-optimization`).
+description: 'Weekly + monthly Google Ads performance reporting · markdown output (not PPTX). Spend, key metrics, bid strategy progression notes, narrative framing. MANDATORY TRIGGER: any mention of "Google Ads weekly update", "Google Ads monthly report", "Google Ads performance update", "weekly Google update", "monthly Google report", "Google Ads results". Do NOT use for: Account audit (use `google-ads-account-audit`). Optimization tasks (use `google-ads-optimization`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/goals-targets.md, assets/team-roles.md, CONFIG.md

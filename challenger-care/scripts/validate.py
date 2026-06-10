@@ -28,6 +28,7 @@ import os
 import sys
 import re
 import json
+import yaml
 import argparse
 from pathlib import Path
 
@@ -167,6 +168,14 @@ def check_skill_frontmatter(root, errors, warnings):
             issues += 1
             continue
         fm = content[4:end]
+        # NEW · real YAML parse (catches unquoted colons that Cowork's parser rejects)
+        try:
+            yaml.safe_load(fm)
+        except yaml.YAMLError as e:
+            err_line = str(e).split(chr(10))[0][:120]
+            fail(f"  {RED}X{RESET} {skill_md.relative_to(root)} YAML parse: {err_line}", errors)
+            issues += 1
+            continue
         if "name:" not in fm:
             fail(f"  {RED}X{RESET} {skill_md.relative_to(root)} missing 'name:'", errors)
             issues += 1

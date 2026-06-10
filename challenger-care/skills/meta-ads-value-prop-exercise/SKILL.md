@@ -1,6 +1,6 @@
 ---
 name: meta-ads-value-prop-exercise
-description: Initial Meta brand-and-audience research exercise · defines core value props, unique differentiators, customer pain points, emotional drivers. For Challenger this aligns the Meta team with brand-strategy.md before campaigns start. MANDATORY TRIGGER: any mention of "Meta value prop exercise", "value proposition research for Meta", "brand deep dive for Meta", "Meta messaging research", "Meta value prop deck". Do NOT use for: Competitive ad audit (use `meta-ads-competitive-ad-audit`). Writing ad copy (use `meta-ads-copywriting`).
+description: 'Initial Meta brand-and-audience research exercise · defines core value props, unique differentiators, customer pain points, emotional drivers. For Challenger this aligns the Meta team with brand-strategy.md before campaigns start. MANDATORY TRIGGER: any mention of "Meta value prop exercise", "value proposition research for Meta", "brand deep dive for Meta", "Meta messaging research", "Meta value prop deck". Do NOT use for: Competitive ad audit (use `meta-ads-competitive-ad-audit`). Writing ad copy (use `meta-ads-copywriting`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/customer-archetypes.md, assets/voc/quote-library.md, assets/competitor-map.md, assets/team-roles.md, CONFIG.md

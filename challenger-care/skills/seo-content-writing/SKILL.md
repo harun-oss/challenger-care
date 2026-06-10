@@ -1,6 +1,6 @@
 ---
 name: seo-content-writing
-description: Writes SEO-optimised articles, guides, comparison pages, PDP SEO copy. Intent-matched structure, E-E-A-T signals, optimised meta tags, schema-ready. MANDATORY TRIGGER: any mention of "write SEO content", "write this article", "write this blog post", "write this guide", "write SEO landing page", "organic content for [keyword]". Do NOT use for: Ad or email copy. Creating content briefs (use `content-brief`).
+description: 'Writes SEO-optimised articles, guides, comparison pages, PDP SEO copy. Intent-matched structure, E-E-A-T signals, optimised meta tags, schema-ready. MANDATORY TRIGGER: any mention of "write SEO content", "write this article", "write this blog post", "write this guide", "write SEO landing page", "organic content for [keyword]". Do NOT use for: Ad or email copy. Creating content briefs (use `content-brief`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/customer-archetypes.md, assets/voc/quote-library.md, assets/team-roles.md, CONFIG.md

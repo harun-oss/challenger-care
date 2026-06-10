@@ -1,6 +1,6 @@
 ---
 name: subscription-migration-amazon-to-shopify
-description: Models the economics of migrating Amazon Subscribe & Save customers to Shopify subscriptions, drafts the migration offer for owner approval, then executes the comms once approved. MANDATORY TRIGGER: any mention of "migrate Amazon subscribers to Shopify", "move S&S to Recharge", "win subscribers off Amazon", "subscription migration play". Do NOT use this for: New subscriber acquisition (use `onboard-new-subscribers`). General subscription program review (use `whats-working-to-scale`). One-off campaign sends (use `launch-sale-promo`).
+description: 'Models the economics of migrating Amazon Subscribe & Save customers to Shopify subscriptions, drafts the migration offer for owner approval, then executes the comms once approved. MANDATORY TRIGGER: any mention of "migrate Amazon subscribers to Shopify", "move S&S to Recharge", "win subscribers off Amazon", "subscription migration play". Do NOT use this for: New subscriber acquisition (use `onboard-new-subscribers`). General subscription program review (use `whats-working-to-scale`). One-off campaign sends (use `launch-sale-promo`).'
 ---
 
 > **Permission tier:** stage (stage 1 model) → execute (stage 2 comms · execute_tier_approver only) · **Time:** 5min model + 8min comms · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/unit-economics.md, assets/goals-targets.md, assets/team-roles.md, assets/voc/quote-library.md, CONFIG.md, mcp:klaviyo, mcp:shopify

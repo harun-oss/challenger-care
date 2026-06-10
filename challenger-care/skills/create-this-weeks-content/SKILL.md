@@ -1,6 +1,6 @@
 ---
 name: create-this-weeks-content
-description: Generates this week's organic content batch — TikTok scripts, Reddit-ready posts (founder voice), Instagram captions — aligned to current themes from VOC + dashboard signals. MANDATORY TRIGGER: any mention of "Create this week's content", "Generate the content batch for next week", "I need a Reddit post for r/malegrooming about [topic]", "TikTok scripts for the humidity push". Do NOT use this for: Paid ad creative (use `create-this-weeks-ad-creative`). Email content (use `build-next-email-flow` or `launch-sale-promo`). One-off founder posts where context is highly specific (just write directly with Hayden).
+description: 'Generates this week''s organic content batch — TikTok scripts, Reddit-ready posts (founder voice), Instagram captions — aligned to current themes from VOC + dashboard signals. MANDATORY TRIGGER: any mention of "Create this week''s content", "Generate the content batch for next week", "I need a Reddit post for r/malegrooming about [topic]", "TikTok scripts for the humidity push". Do NOT use this for: Paid ad creative (use `create-this-weeks-ad-creative`). Email content (use `build-next-email-flow` or `launch-sale-promo`). One-off founder posts where context is highly specific (just write directly with Hayden).'
 ---
 
 > **Permission tier:** generate · **Time:** 3min · **Tools/context:** assets/brand-strategy.md, assets/customer-archetypes.md, voc/quote-library.md, voc/voc-analysis-report.md, CONFIG.md, assets/claim-library.md

@@ -1,6 +1,6 @@
 ---
 name: build-next-email-flow
-description: Drafts a complete Klaviyo flow in Challenger voice — welcome series, browse abandonment, post-purchase, winback, or sunset. Uses the live abandoned cart flow as the template baseline. MANDATORY TRIGGER: any mention of "Build the welcome flow", "Set up browse abandonment in Klaviyo", "Build a winback series for lapsed customers", "Rebuild the [flow name] in brand voice". Do NOT use this for: Subscription welcome (use `onboard-new-subscribers`). One-time campaign sends (use `launch-sale-promo`). Fixing an existing underperforming flow (use `fix-broken-flow` — different process).
+description: 'Drafts a complete Klaviyo flow in Challenger voice — welcome series, browse abandonment, post-purchase, winback, or sunset. Uses the live abandoned cart flow as the template baseline. MANDATORY TRIGGER: any mention of "Build the welcome flow", "Set up browse abandonment in Klaviyo", "Build a winback series for lapsed customers", "Rebuild the [flow name] in brand voice". Do NOT use this for: Subscription welcome (use `onboard-new-subscribers`). One-time campaign sends (use `launch-sale-promo`). Fixing an existing underperforming flow (use `fix-broken-flow` — different process).'
 ---
 
 > **Permission tier:** stage · **Time:** 5min · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/customer-archetypes.md, voc/quote-library.md, mcp:klaviyo, CONFIG.md

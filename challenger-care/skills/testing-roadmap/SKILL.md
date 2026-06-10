@@ -1,6 +1,6 @@
 ---
 name: testing-roadmap
-description: Builds and maintains a prioritized test backlog using ICE scoring (Impact x Confidence x Ease). Applies 40/40/20 portfolio rule (Quick Wins / Core Tests / Big Swings). Pairs with `test-price-claim` (single-test designer). MANDATORY TRIGGER: any mention of "ICE score", "test prioritization", "testing roadmap", "test backlog", "sprint planning for CRO", "which tests to run next", "rank test hypotheses". Do NOT use for: Reporting A/B test results (use `ab-test-reporting`). Designing a single test (use `test-price-claim`). User testing (use `user-testing`).
+description: 'Builds and maintains a prioritized test backlog using ICE scoring (Impact x Confidence x Ease). Applies 40/40/20 portfolio rule (Quick Wins / Core Tests / Big Swings). Pairs with `test-price-claim` (single-test designer). MANDATORY TRIGGER: any mention of "ICE score", "test prioritization", "testing roadmap", "test backlog", "sprint planning for CRO", "which tests to run next", "rank test hypotheses". Do NOT use for: Reporting A/B test results (use `ab-test-reporting`). Designing a single test (use `test-price-claim`). User testing (use `user-testing`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/voc/quote-library.md, assets/goals-targets.md, assets/team-roles.md, CONFIG.md

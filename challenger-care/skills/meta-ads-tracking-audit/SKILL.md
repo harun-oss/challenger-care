@@ -1,6 +1,6 @@
 ---
 name: meta-ads-tracking-audit
-description: Maps the conversion funnel, audits Meta Pixel health, documents standard + custom events, assesses Conversions API (CAPI) setup for iOS 14+ compliance. Critical for Meta BM recovery. MANDATORY TRIGGER: any mention of "Meta tracking audit", "Meta Pixel audit", "pixel health check", "Meta conversion events", "CAPI setup", "Meta Pixel events", "iOS 14 tracking". Do NOT use for: Account onboarding (one-time). Campaign builds (use `meta-ads-campaign-build`).
+description: 'Maps the conversion funnel, audits Meta Pixel health, documents standard + custom events, assesses Conversions API (CAPI) setup for iOS 14+ compliance. Critical for Meta BM recovery. MANDATORY TRIGGER: any mention of "Meta tracking audit", "Meta Pixel audit", "pixel health check", "Meta conversion events", "CAPI setup", "Meta Pixel events", "iOS 14 tracking". Do NOT use for: Account onboarding (one-time). Campaign builds (use `meta-ads-campaign-build`).'
 ---
 
 > **Permission tier:** stage · **Tools/context:** assets/brand-strategy.md, assets/team-roles.md, CONFIG.md

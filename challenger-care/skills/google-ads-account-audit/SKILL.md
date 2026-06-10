@@ -1,6 +1,6 @@
 ---
 name: google-ads-account-audit
-description: Full diagnostic of a Google Ads account · conversion tracking, campaign performance, competitive landscape, strategic gaps. For account takeovers or stale-account reactivation. MANDATORY TRIGGER: any mention of "audit Google Ads account", "Google Ads health check", "diagnose Google Ads", "Google Ads account review", "review Google Ads", "take over Google account". Do NOT use for: Building new campaigns (use `google-ads-campaign-build`). Pre-launch QA (use `google-ads-prelaunch-qa`).
+description: 'Full diagnostic of a Google Ads account · conversion tracking, campaign performance, competitive landscape, strategic gaps. For account takeovers or stale-account reactivation. MANDATORY TRIGGER: any mention of "audit Google Ads account", "Google Ads health check", "diagnose Google Ads", "Google Ads account review", "review Google Ads", "take over Google account". Do NOT use for: Building new campaigns (use `google-ads-campaign-build`). Pre-launch QA (use `google-ads-prelaunch-qa`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/goals-targets.md, assets/unit-economics.md, assets/team-roles.md, CONFIG.md

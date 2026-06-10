@@ -1,6 +1,6 @@
 ---
 name: meta-ads-copywriting
-description: Generates platform-ready Meta ad copy · primary texts (400-500 chars, Hook/Body/CTA), headlines (30-40 chars, 12 framework options), video scripts (3s hook + 30s body + 3s CTA). Researches Challenger context first. MANDATORY TRIGGER: any mention of "write Meta ad copy", "write primary text", "write ad headlines", "Meta ad script", "video brief", "Facebook ad copy", "Instagram ad copy", "generate ad creative copy". Do NOT use for: Building campaign structure (use `meta-ads-campaign-build`). Analysing creative performance (use `meta-ads-reporting`).
+description: 'Generates platform-ready Meta ad copy · primary texts (400-500 chars, Hook/Body/CTA), headlines (30-40 chars, 12 framework options), video scripts (3s hook + 30s body + 3s CTA). Researches Challenger context first. MANDATORY TRIGGER: any mention of "write Meta ad copy", "write primary text", "write ad headlines", "Meta ad script", "video brief", "Facebook ad copy", "Instagram ad copy", "generate ad creative copy". Do NOT use for: Building campaign structure (use `meta-ads-campaign-build`). Analysing creative performance (use `meta-ads-reporting`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/customer-archetypes.md, assets/voc/quote-library.md, assets/team-roles.md, CONFIG.md

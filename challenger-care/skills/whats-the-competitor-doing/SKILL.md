@@ -1,6 +1,6 @@
 ---
 name: whats-the-competitor-doing
-description: Scans Based, Hanz De Fuko, Paul Mitchell — pulls new ads, pricing changes, recent launches, Reddit sentiment. Flags what to borrow and what to beat. MANDATORY TRIGGER: any mention of "What's the competitor doing?", "Run a competitor scan", "Has Based launched anything new?", "Check Hanz De Fuko's current PDPs". Do NOT use this for: Internal product audits (use `refresh-underperforming-pdp` or `heuristic-analysis`). Customer-voice analysis (use `customer-voice` / VOC workflow). Direct ad copy (use `create-this-weeks-ad-creative` — competitor scan is an input to it).
+description: 'Scans Based, Hanz De Fuko, Paul Mitchell — pulls new ads, pricing changes, recent launches, Reddit sentiment. Flags what to borrow and what to beat. MANDATORY TRIGGER: any mention of "What''s the competitor doing?", "Run a competitor scan", "Has Based launched anything new?", "Check Hanz De Fuko''s current PDPs". Do NOT use this for: Internal product audits (use `refresh-underperforming-pdp` or `heuristic-analysis`). Customer-voice analysis (use `customer-voice` / VOC workflow). Direct ad copy (use `create-this-weeks-ad-creative` — competitor scan is an input to it).'
 ---
 
 > **Permission tier:** generate · **Time:** 3min · **Tools/context:** assets/competitor-map.md, assets/brand-strategy.md, browser tool (Claude in Chrome) when available, web fetch for public sources (Meta Ad Library, brand sites)

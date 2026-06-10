@@ -1,6 +1,6 @@
 ---
 name: tiktok-shop-launch-prep
-description: Preps the catalog, content angles, and success metrics for TikTok Shop launch with the Implicit agency. This skill briefs Implicit and gives the team a hand-off doc · it does NOT run TikTok Shop (that is explicitly out of scope per the engagement SOW · Implicit owns execution). MANDATORY TRIGGER: any mention of "prep TikTok Shop", "TikTok Shop launch", "brief Implicit", "TikTok Shop catalog", "TikTok content angles". Do NOT use this for: Running TikTok Shop campaigns (Implicit owns that). TikTok organic content from Implicit (use `create-this-weeks-content`). Paid TikTok ads (different skill set · not in scope).
+description: 'Preps the catalog, content angles, and success metrics for TikTok Shop launch with the Implicit agency. This skill briefs Implicit and gives the team a hand-off doc · it does NOT run TikTok Shop (that is explicitly out of scope per the engagement SOW · Implicit owns execution). MANDATORY TRIGGER: any mention of "prep TikTok Shop", "TikTok Shop launch", "brief Implicit", "TikTok Shop catalog", "TikTok content angles". Do NOT use this for: Running TikTok Shop campaigns (Implicit owns that). TikTok organic content from Implicit (use `create-this-weeks-content`). Paid TikTok ads (different skill set · not in scope).'
 ---
 
 > **Permission tier:** generate · **Time:** 5min · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/voc/quote-library.md, assets/customer-archetypes.md, assets/unit-economics.md, assets/team-roles.md, CONFIG.md

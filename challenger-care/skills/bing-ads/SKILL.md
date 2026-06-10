@@ -1,6 +1,6 @@
 ---
 name: bing-ads
-description: Microsoft Advertising setup, reporting, optimisation · Search, Shopping, PMAX-equivalent · Google Ads import + Bing-specific bid adjustments + LinkedIn profile targeting. Import from Google after Google launches. MANDATORY TRIGGER: any mention of "Bing Ads", "Microsoft Advertising", "Bing campaign", "Bing search ads", "Bing Shopping", "set up Bing", "import to Bing", "Bing optimisation". Do NOT use for: Google Ads campaigns. Meta Ads. Reporting only.
+description: 'Microsoft Advertising setup, reporting, optimisation · Search, Shopping, PMAX-equivalent · Google Ads import + Bing-specific bid adjustments + LinkedIn profile targeting. Import from Google after Google launches. MANDATORY TRIGGER: any mention of "Bing Ads", "Microsoft Advertising", "Bing campaign", "Bing search ads", "Bing Shopping", "set up Bing", "import to Bing", "Bing optimisation". Do NOT use for: Google Ads campaigns. Meta Ads. Reporting only.'
 ---
 
 > **Permission tier:** execute · **Tools/context:** assets/goals-targets.md, assets/team-roles.md, CONFIG.md

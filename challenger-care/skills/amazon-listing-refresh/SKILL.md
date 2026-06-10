@@ -1,6 +1,6 @@
 ---
 name: amazon-listing-refresh
-description: Refreshes Amazon listing copy, A+ content, image stack, and pricing strategy based on review data + brand strategy + competitor moves. Covers the cash engine that gets ~92% of revenue with zero current skill coverage. MANDATORY TRIGGER: any mention of "refresh Amazon listing", "update Amazon copy", "redo A+ content", "Amazon SEO", "Amazon listing audit", "fix the Pomade Amazon listing". Do NOT use this for: Shopify PDP work (use `refresh-underperforming-pdp`). Responding to Amazon reviews (use `respond-to-negative-review`). Inventory restocking (use `inventory-restock`).
+description: 'Refreshes Amazon listing copy, A+ content, image stack, and pricing strategy based on review data + brand strategy + competitor moves. Covers the cash engine that gets ~92% of revenue with zero current skill coverage. MANDATORY TRIGGER: any mention of "refresh Amazon listing", "update Amazon copy", "redo A+ content", "Amazon SEO", "Amazon listing audit", "fix the Pomade Amazon listing". Do NOT use this for: Shopify PDP work (use `refresh-underperforming-pdp`). Responding to Amazon reviews (use `respond-to-negative-review`). Inventory restocking (use `inventory-restock`).'
 ---
 
 > **Permission tier:** stage · **Time:** 6min · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/voc/quote-library.md, assets/competitor-map.md, assets/customer-archetypes.md, assets/team-roles.md, CONFIG.md

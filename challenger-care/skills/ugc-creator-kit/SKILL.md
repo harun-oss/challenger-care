@@ -1,6 +1,6 @@
 ---
 name: ugc-creator-kit
-description: Complete creator brief document for external UGC video creators · campaign specs, product overview, key messages, dos and donts, filming specs, content rights, deliverables. Pairs with `creator-outreach`. MANDATORY TRIGGER: any mention of "creator brief", "UGC brief", "brief for a creator", "video creator instructions", "brief a UGC creator", "what to send the creator", "filming instructions", "creator kit doc". Do NOT use for: Internal designer briefs (use `meta-ads-creative-brief` if needed). Finding creators (use `creator-outreach`).
+description: 'Complete creator brief document for external UGC video creators · campaign specs, product overview, key messages, dos and donts, filming specs, content rights, deliverables. Pairs with `creator-outreach`. MANDATORY TRIGGER: any mention of "creator brief", "UGC brief", "brief for a creator", "video creator instructions", "brief a UGC creator", "what to send the creator", "filming instructions", "creator kit doc". Do NOT use for: Internal designer briefs (use `meta-ads-creative-brief` if needed). Finding creators (use `creator-outreach`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/customer-archetypes.md, assets/voc/quote-library.md, assets/team-roles.md, CONFIG.md

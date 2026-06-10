@@ -1,6 +1,6 @@
 ---
 name: meta-ads-creative-testing
-description: Weekly creative testing cadence · 1 DCT experiment per month, 7-day pause rules, move non-performers to ASC+/ADV+, maintain legacy library. MANDATORY TRIGGER: any mention of "launch a Meta experiment", "run a Meta DCT", "weekly creative testing", "Meta DCT", "launch new ads on Meta", "weekly Meta creative cadence", "Flexible Ads experiment". Do NOT use for: Initial campaign setup (use `meta-ads-campaign-build`). Scaling decisions. The kickoff methodology deck (not in our port).
+description: 'Weekly creative testing cadence · 1 DCT experiment per month, 7-day pause rules, move non-performers to ASC+/ADV+, maintain legacy library. MANDATORY TRIGGER: any mention of "launch a Meta experiment", "run a Meta DCT", "weekly creative testing", "Meta DCT", "launch new ads on Meta", "weekly Meta creative cadence", "Flexible Ads experiment". Do NOT use for: Initial campaign setup (use `meta-ads-campaign-build`). Scaling decisions. The kickoff methodology deck (not in our port).'
 ---
 
 > **Permission tier:** execute · **Tools/context:** assets/brand-strategy.md, assets/customer-archetypes.md, assets/voc/quote-library.md, assets/team-roles.md, CONFIG.md
