@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """
-Sync the WORKFLOWS array in artifact/command.html from skills/*/SKILL.md frontmatter.
+Sync the WORKFLOWS array in artifact/command.html from docs/port-manifest.md.
 
-Reads each user-facing SKILL.md, extracts:
-  - name (frontmatter)
-  - description (frontmatter, first sentence used for tile label)
-  - tier (parsed from preamble line, defaults to 'generate')
+v3 architecture: 15 Library entry cards (Jobs-To-Be-Done), each binding 1+ spoke skills.
+Spokes are hidden from the Library; reachable only via orchestrator or named chains.
 
-Groups workflows by intent buckets (Launch & Test, Grow, Listen, Fix, Plan) — buckets
-are derived from skill name patterns. Regenerates the WORKFLOWS JS array in the dashboard.
+Reads:
+    docs/port-manifest.md · canonical source of truth for skill inventory
+        Specifically the "The 15 entry cards" table
+
+Writes:
+    artifact/command.html · regenerates the WORKFLOWS JS array
 
 Run from plugin root:
     python3 scripts/sync-workflows.py
@@ -19,175 +21,94 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SKILLS_DIR = ROOT / "skills"
+MANIFEST = ROOT / "docs" / "port-manifest.md"
 DASHBOARD = ROOT / "artifact" / "command.html"
 
-# System skills · not user-facing workflows · excluded from tiles
-SYSTEM_SKILLS = {"briefing-generator", "orchestrator", "anomaly-detector"}
-
-# Map skill name → bucket. Order within bucket is the order skills will appear.
-BUCKETS = {
-    "Launch & Test": [
-        "launch-new-product",
-        "launch-new-bundle-or-offer",
-        "launch-sale-promo",
-        "test-price-claim",
-        "onboard-new-subscribers",
-        "build-next-email-flow",
-    ],
-    "Grow": [
-        "create-this-weeks-ad-creative",
-        "create-this-weeks-content",
-        "refresh-underperforming-pdp",
-        "creator-outreach",
-    ],
-    "Listen": [
-        "customer-voice",
-        "diagnose-checkout-funnel",
-        "whats-the-competitor-doing",
-        "why-sales-dropped",
-        "whats-working-to-scale",
-    ],
-    "Fix": [
-        "reply-to-customer-issue",
-        "respond-to-negative-review",
-        "fix-broken-flow",
-        "inventory-restock",
-    ],
-    "Plan": [
-        "highest-leverage",
-        "model-unit-economics",
-    ],
+# Visual taglines for each entry card · keep these brand-voiced + short
+CARD_TAGLINES = {
+    "Launch something new": "product, bundle, sale, subscription",
+    "Fix something broken": "flow, funnel, page, copy",
+    "Why did X drop?": "diagnose the leak",
+    "Where to focus this month?": "priority + leverage",
+    "Make this week's creative": "ads + concepts",
+    "Make this week's content": "TikTok, Reddit, IG organic",
+    "Run the email machine": "build, send, audit, copy",
+    "Handle this customer": "reply or review response",
+    "Check the competition": "scan, deep dive, ad library",
+    "Prep a paid campaign": "Meta, Google, Bing, Reddit ads",
+    "Amazon ops": "listing, restock, S&S",
+    "Weekly review": "what shipped, what won, next week",
+    "Listen to customers": "reviews + surveys",
+    "CRO deep dive": "heatmap, session, GA4, polls",
+    "SEO + content": "audit, keywords, briefs, writing",
 }
 
-BUCKET_TAGLINES = {
-    "Launch & Test": "when you're shipping something new",
-    "Grow": "the weekly recurring work",
-    "Listen": "before you decide",
-    "Fix": "reactive operational work",
-    "Plan": "periodic strategic work",
-}
 
-# Default which buckets start open
-BUCKET_OPEN = {"Launch & Test": True, "Grow": True, "Listen": False, "Fix": False, "Plan": False}
+def parse_entry_cards(manifest_text):
+    """Extract the 15 entry cards table from port-manifest.md."""
+    # Find "## The 15 entry cards" section
+    m = re.search(r"^## The 15 entry cards.*?\n\n(.+?)(?=\n##|\Z)", manifest_text, re.DOTALL | re.MULTILINE)
+    if not m:
+        sys.exit("ERROR: Could not find '## The 15 entry cards' section in port-manifest.md")
+    
+    section = m.group(1)
+    cards = []
+    # Match table rows like: | 1 | Card title | spoke1 · spoke2 · spoke3 |
+    for row_match in re.finditer(r"^\|\s*(\d+)\s*\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|", section, re.MULTILINE):
+        num = int(row_match.group(1))
+        title = row_match.group(2).strip()
+        spokes_raw = row_match.group(3).strip()
+        # Split spokes by ' · '
+        spokes = [s.strip() for s in spokes_raw.split('·') if s.strip()]
+        cards.append({
+            "num": num,
+            "title": title,
+            "tagline": CARD_TAGLINES.get(title, ""),
+            "spokes": spokes,
+        })
+    
+    if not cards:
+        sys.exit("ERROR: No card rows parsed")
+    print(f"Parsed {len(cards)} entry cards from manifest")
+    return cards
 
 
-def parse_skill(skill_md: Path) -> dict | None:
-    """Pull name, short description, tier from a SKILL.md file."""
-    try:
-        content = skill_md.read_text(errors='ignore')
-    except Exception:
-        return None
-    if not content.startswith("---\n"):
-        return None
-    end = content.find("\n---\n", 4)
-    if end == -1:
-        return None
-    fm = content[4:end]
-    body = content[end + 5:]
-
-    name = None
-    description = None
-    for line in fm.splitlines():
-        if line.startswith("name:"):
-            name = line.split(":", 1)[1].strip()
-        elif line.startswith("description:"):
-            description = line.split(":", 1)[1].strip()
-
-    if not name or not description:
-        return None
-
-    # Tier: parse "Permission tier:** generate" from preamble line
-    tier = "generate"
-    tier_m = re.search(r"\*\*Permission tier:\*\*\s*(\w+)", body)
-    if tier_m:
-        tier = tier_m.group(1).lower()
-
-    # Tile description: take the first sentence of the SKILL description
-    # (before any MANDATORY TRIGGER · keep punchy)
-    tile_desc = description
-    # Strip MANDATORY TRIGGER + everything after
-    tile_desc = re.split(r"(?i)mandatory trigger", tile_desc)[0].strip()
-    # Strip trailing period
-    tile_desc = tile_desc.rstrip(".").rstrip()
-    # If too long, truncate at first period after 60 chars
-    if len(tile_desc) > 180:
-        cut = tile_desc.find(".", 100)
-        if cut > 0:
-            tile_desc = tile_desc[:cut]
-
-    return {"name": name, "description": tile_desc, "tier": tier}
+def build_workflows_js(cards):
+    """Build the JS WORKFLOWS array · one entry per card."""
+    items = []
+    for card in cards:
+        title_escaped = card["title"].replace("'", "\\'")
+        tagline_escaped = card["tagline"].replace("'", "\\'")
+        spokes_str = ', '.join(f"'{s}'" for s in card["spokes"])
+        items.append(
+            f"  {{ num: {card['num']}, title: '{title_escaped}', tagline: '{tagline_escaped}', spokes: [{spokes_str}] }}"
+        )
+    return "const WORKFLOWS = [\n" + ",\n".join(items) + "\n];"
 
 
 def main():
-    if not SKILLS_DIR.exists():
-        sys.exit("skills/ directory not found")
+    if not MANIFEST.exists():
+        sys.exit(f"port-manifest.md not found at {MANIFEST}")
     if not DASHBOARD.exists():
-        sys.exit("artifact/command.html not found")
-
-    # Read all skills
-    skills_by_name = {}
-    for skill_md in SKILLS_DIR.glob("*/SKILL.md"):
-        skill_name = skill_md.parent.name
-        if skill_name in SYSTEM_SKILLS:
-            continue
-        data = parse_skill(skill_md)
-        if data:
-            skills_by_name[skill_name] = data
-
-    print(f"Found {len(skills_by_name)} user-facing skills")
-
-    # Build the JS WORKFLOWS array, grouped by bucket
-    groups_js = []
-    seen = set()
-    for bucket_name, skill_order in BUCKETS.items():
-        items_js = []
-        for sk_name in skill_order:
-            if sk_name in skills_by_name:
-                s = skills_by_name[sk_name]
-                seen.add(sk_name)
-                # Escape backticks/single-quotes in description
-                desc_escaped = s["description"].replace("'", "\\'").replace("\n", " ")
-                # Title-case from kebab (with manual overrides for short connectors)
-                title = ' '.join(w.capitalize() if w not in {"a", "the", "to", "of", "an", "in", "for", "on"} else w for w in sk_name.replace("-", " ").split())
-                # Fix capitalization for "this weeks" and a few patterns
-                title = title.replace("This Weeks", "this week's").replace("Pdp", "PDP")
-                # Escape single quotes in title for JS single-quoted string literal
-                title_escaped = title.replace("\\", "\\\\").replace("'", "\\'")
-                items_js.append(
-                    f"    {{ title: '{title_escaped}', explain: '{desc_escaped}', tier: '{s['tier']}', skill: '{sk_name}' }}"
-                )
-        if items_js:
-            tagline = BUCKET_TAGLINES.get(bucket_name, "")
-            is_open = "true" if BUCKET_OPEN.get(bucket_name, False) else "false"
-            groups_js.append(
-                f"  {{ group: '{bucket_name}', tagline: \"{tagline}\", open: {is_open}, items: [\n"
-                + ",\n".join(items_js)
-                + "\n  ] }"
-            )
-
-    # Warn about any skills that aren't in a bucket
-    unbucketed = set(skills_by_name.keys()) - seen
-    if unbucketed:
-        print(f"WARNING: skills not in any bucket: {sorted(unbucketed)}")
-        print("Add them to BUCKETS dict at top of this script.")
-
-    workflows_js = "const WORKFLOWS = [\n" + ",\n".join(groups_js) + "\n];"
-
-    # Replace existing WORKFLOWS array in HTML
+        sys.exit(f"artifact/command.html not found at {DASHBOARD}")
+    
+    manifest_text = MANIFEST.read_text()
+    cards = parse_entry_cards(manifest_text)
+    workflows_js = build_workflows_js(cards)
+    
     html = DASHBOARD.read_text()
-    pattern = re.compile(r"// Static workflow catalog\nconst WORKFLOWS = \[.*?\n\];", re.DOTALL)
+    pattern = re.compile(r"// Workflow catalog.*?\nconst WORKFLOWS = \[.*?\n\];", re.DOTALL)
     if not pattern.search(html):
-        # Try without comment
         pattern = re.compile(r"const WORKFLOWS = \[.*?\n\];", re.DOTALL)
         if not pattern.search(html):
             sys.exit("ERROR: Could not find WORKFLOWS array in dashboard HTML")
-
-    new_block = "// Workflow catalog · generated by scripts/sync-workflows.py · do not hand-edit\n" + workflows_js
+    
+    new_block = "// Workflow catalog · 15 entry cards · generated by scripts/sync-workflows.py from docs/port-manifest.md · do not hand-edit\n" + workflows_js
     new_html = pattern.sub(new_block, html, count=1)
     DASHBOARD.write_text(new_html)
-
-    print(f"OK Dashboard WORKFLOWS array regenerated · {sum(len(BUCKETS[b]) for b in BUCKETS)} tiles across {len(groups_js)} groups")
+    
+    total_spokes = sum(len(c["spokes"]) for c in cards)
+    print(f"OK Dashboard WORKFLOWS array regenerated · {len(cards)} entry cards · {total_spokes} spoke bindings")
 
 
 if __name__ == "__main__":

@@ -210,25 +210,34 @@ async function main() {
   // 6. WORKFLOW TILES rendered + clickable
   // ============================================================
   section('6. Workflow tiles');
-  const tiles = document.querySelectorAll('.wf');
-  if (tiles.length === 21) pass(`21 workflow tiles rendered (expected 21)`);
-  else fail(`${tiles.length} workflow tiles rendered, expected 21`);
+  // v3 architecture: 15 Library entry cards, each binds 1+ spoke skills
+  const entries = document.querySelectorAll('.wf-entry');
+  if (entries.length === 15) pass(`15 Library entry cards rendered (expected 15)`);
+  else fail(`${entries.length} entry cards rendered, expected 15`);
 
-  // Click a sample of 3 tiles
-  const sampleTiles = [tiles[0], tiles[5], tiles[20]].filter(t => t);
+  // Open all entries so spoke chips are interactable for click test
+  entries.forEach(e => e.setAttribute('open', ''));
+  await new Promise(r => setTimeout(r, 50));
+
+  const spokes = document.querySelectorAll('.wf-spoke');
+  if (spokes.length > 0) pass(`${spokes.length} spoke chips rendered across cards`);
+  else fail('No spoke chips rendered');
+
+  // Click a sample of 3 spokes
+  const sampleSpokes = [spokes[0], spokes[Math.floor(spokes.length/2)], spokes[spokes.length-1]].filter(s => s);
   sendPromptCalls.length = 0;
-  for (const tile of sampleTiles) {
+  for (const spoke of sampleSpokes) {
     const beforeCount = sendPromptCalls.length;
     try {
-      tile.click();
+      spoke.click();
       await new Promise(r => setTimeout(r, 50));
       if (sendPromptCalls.length > beforeCount) {
-        pass(`Tile "${tile.querySelector('.wf-title')?.textContent}" → ${sendPromptCalls.slice(-1)[0].via}`);
+        pass(`Spoke "${spoke.textContent}" → ${sendPromptCalls.slice(-1)[0].via}`);
       } else {
-        fail(`Tile "${tile.querySelector('.wf-title')?.textContent}" → NO sendPrompt/dropPrompt fired`);
+        fail(`Spoke "${spoke.textContent}" → NO sendPrompt/dropPrompt fired`);
       }
     } catch (e) {
-      fail(`Tile click threw: ${e.message}`);
+      fail(`Spoke click threw: ${e.message}`);
     }
   }
 
