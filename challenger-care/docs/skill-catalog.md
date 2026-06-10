@@ -1,204 +1,234 @@
-# Skill Catalog · Complete Reference
+# Skill Catalog · v3.1 (Hub + Spoke)
 
-Every skill in the Challenger Care plugin · what it does, what it needs, what it produces, who can run it, how long it takes.
+Complete reference for every skill in the Challenger Care plugin.
 
-Use this as a lookup when you're not sure which workflow fits the job at hand.
+**Architecture:** 15 Library entry cards (Jobs-To-Be-Done) bind to ~55 spoke skills. Spokes are invoked via their entry card OR directly via a chain. The orchestrator picks the right route based on user input.
 
----
-
-## Orchestration skills (3)
-
-These are the background skills that run automatically or behind the command bar.
-
-### orchestrator
-**Purpose:** Routes free-form command bar input to the right workflow OR builds a custom skill chain.
-**When it runs:** Every time you type something into the command bar.
-**Tier:** Varies (matches the underlying workflow it routes to)
-**Time:** Depends on the routed workflow
-**Inputs:** Free-form text from the command bar
-**Outputs:** Whatever the routed workflow produces, plus a transparency summary of what ran.
-
-### briefing-generator
-**Purpose:** Produces the daily Morning Briefing on the dashboard.
-**When it runs:** Daily at 6:00 AM PT (scheduled).
-**Tier:** Generate
-**Time:** ~90 seconds
-**Inputs:** Live Shopify, Klaviyo, GA4 data; anomaly-detector output
-**Outputs:** `outputs/briefing-feed.json` consumed by the dashboard
-
-### anomaly-detector
-**Purpose:** Surfaces alerts in the "On your plate" queue.
-**When it runs:** Every 4 hours (scheduled).
-**Tier:** Generate
-**Time:** ~30 seconds
-**Inputs:** Live MCP data + thresholds from `CONFIG.md`
-**Outputs:** `outputs/anomaly-feed.json` consumed by the dashboard
+**Canonical source:** `docs/port-manifest.md` is the single source of truth. This catalog is the human-readable reference. If they disagree, the manifest wins.
 
 ---
 
-## Launch & Test (6 workflows)
+## How to find what you need
 
-For shipping new things into the world.
+**You know what you want to do:** scan the 15 entry cards below. Pick the one that matches the job. Click any spoke under it to fire that skill.
 
-### launch-new-product · ~5 min · Generate
-**Use when:** A new SKU is about to launch and you need every asset built in Challenger voice.
-**Produces:** Positioning · PDP (Shopify + Amazon) · 3 ad concepts · launch email · Reddit post · TikTok scripts · Asana launch checklist
-**Don't use for:** Existing product refreshes (use `refresh-underperforming-pdp`)
+**You don't know the right skill:** just type the request into the command bar in plain English. The orchestrator routes to the right entry card and its primary spoke.
 
-### launch-new-bundle-or-offer · ~4 min · Stage
-**Use when:** Launching a bundle, value pack, gift set — especially the 3-pack as default offer (the AOV unlock).
-**Produces:** Bundle math validation · PDP hero · cart upsell module · offer landing page · promo email · 3 ad concepts · first-week organic content
-**Don't use for:** Discount-led promos (use `launch-sale-promo`)
-
-### launch-sale-promo · ~3 min · Stage
-**Use when:** Running a percentage-off campaign, BFCM, flash sale, or limited-time offer.
-**Produces:** Site banner · email + SMS · 2 social posts · Klaviyo segment definition · start/end logic
-**Don't use for:** Permanent new SKUs or bundles
-
-### test-price-claim · ~3 min · Stage
-**Use when:** You want to A/B test a price point or a hero claim.
-**Produces:** Test plan · variant copy · tracking plan · decision tree
-**Don't use for:** Email subject line tests (handled inside Klaviyo)
-
-### onboard-new-subscribers · ~6 min · Stage
-**Use when:** Building (or rebuilding) the welcome flow for new Recharge subscribers.
-**Produces:** 4-email welcome flow architecture · all email HTMLs · subject line variants · Klaviyo setup notes
-**Don't use for:** General Welcome Series for non-subscribers (use `build-next-email-flow`)
-
-### build-next-email-flow · ~5 min · Stage
-**Use when:** Building a new Klaviyo flow (welcome · browse abandonment · post-purchase · winback · sunset).
-**Produces:** Flow architecture · all email HTMLs · subject line variants · Klaviyo setup notes · metrics targets
-**Don't use for:** Subscriber-specific welcome (use `onboard-new-subscribers`) or campaigns (use `launch-sale-promo`)
+**You want depth on a specific topic:** scan the spoke list under each card. Each spoke has its own SKILL.md you can open in GitHub for the full instructions.
 
 ---
 
-## Grow (4 workflows)
+## The 15 entry cards
 
-The weekly recurring work.
+### 1 · Launch something new
 
-### create-this-weeks-ad-creative · ~4 min · Generate
-**Use when:** Producing the weekly batch of ad concepts for Meta / TikTok / Reddit.
-**Produces:** 5–8 ad concepts (hook + body + CTA + visual brief) · designer handoff · TikTok scripts · Reddit cuts in founder voice
-**Don't use for:** One-off ads (this is for batches)
+When you're shipping a product, bundle, sale, or subscription.
 
-### create-this-weeks-content · ~3 min · Generate
-**Use when:** Producing weekly organic content for TikTok (Implicit) · Reddit (founder voice) · Instagram.
-**Produces:** TikTok scripts · Reddit posts · Instagram captions · content calendar
-**Don't use for:** Paid ad creative (use `create-this-weeks-ad-creative`)
+| Spoke | What it does | Tier |
+|---|---|---|
+| launch-new-product | Full new-SKU launch package · positioning, PDP, ads, email, social, Reddit, Asana checklist | generate |
+| launch-new-bundle-or-offer | Bundle math + hero copy + cart upsell + offer page + promo email + first-week ads | stage |
+| launch-sale-promo | Banner, email, SMS, social, Klaviyo segment + start/end logic | stage |
+| onboard-new-subscribers | Welcome flow for new Recharge subs · first jar email, retention nudge, winback if cancel | stage |
+| subscription-migration-amazon-to-shopify | The Amazon S&S → Shopify migration play (stage 1 model · stage 2 execute) | stage→execute |
+| tiktok-shop-launch-prep | Catalog + content angles + success metrics · briefs Implicit, doesn't run TikTok Shop | generate |
 
-### refresh-underperforming-pdp · ~5 min · Stage
-**Use when:** A product page is converting badly or hasn't been updated.
-**Produces:** Current-state audit · full PDP rewrite · 3 hero variants · FAQ block · A/B test plan
-**Don't use for:** New product launches (use `launch-new-product`)
+### 2 · Fix something broken
 
-### creator-outreach · ~4 min · Generate
-**Use when:** Building an influencer/creator prospect list and outreach.
-**Produces:** 10–25 prospect list with handles, fit notes · personalized outreach drafts · deal structure · tracking plan
-**Don't use for:** Paid Meta influencer ads (different workflow)
+When a flow, funnel, page, or copy is underperforming.
+
+| Spoke | What it does | Tier |
+|---|---|---|
+| fix-broken-flow | Pauses underperformer · audits why · builds replacement | stage |
+| diagnose-checkout-funnel | Investigates a specific funnel-stage problem · top causes with evidence | generate |
+| refresh-underperforming-pdp | Diagnoses then rebuilds hero/benefits/FAQ/CTAs in Challenger voice | stage |
+| copy-messaging-audit | Joanna Wiebe Seven Sweeps on website copy | generate |
+| heuristic-analysis | Conversion + UX friction audit · scored on Clarity/Trust/CTA/Persuasion/UX | generate |
+
+### 3 · Why did X drop?
+
+When revenue, traffic, conversion, or another metric is below expectation.
+
+| Spoke | What it does | Tier |
+|---|---|---|
+| why-sales-dropped | Pulls Shopify + GA4 + Klaviyo · diagnoses funnel break · 3 likely causes with evidence | generate |
+| diagnose-checkout-funnel | Funnel-stage investigation · cart, checkout, device-specific issues | generate |
+
+### 4 · Where to focus this month?
+
+When you need strategic prioritization · what's the highest leverage right now.
+
+| Spoke | What it does | Tier |
+|---|---|---|
+| highest-leverage | Grades 7 leverage points (Market/Product/Money/Position/Reach/Convert/Expand) · monthly | generate |
+| leverage-point-assessment | Quarterly consulting-grade LPA · same framework, deeper output | generate |
+| whats-working-to-scale | Top creative, email, page, SKU · where to put more weight | generate |
+| model-unit-economics | CM stack, LTV, max CPA scenarios · Challenger-tuned | generate |
+| unit-economics-ecom | Consulting-grade CM1/CM2/CM3 + LTV at 90/180/365 + 3 CPA scenarios | generate |
+
+### 5 · Make this week's creative
+
+When you need ads or ad concepts.
+
+| Spoke | What it does | Tier |
+|---|---|---|
+| create-this-weeks-ad-creative | 5-8 ad concepts from VOC + brand voice rules | generate |
+| reddit-ad-builder | Mines Reddit + reviews + Ad Library to produce ad concepts | generate |
+| meta-ads-copywriting | Meta primary text (12 frameworks) + headlines (12 options) + video scripts | generate |
+| ugc-creator-kit | Brief doc for external UGC creators · specs, key messages, dos/donts | generate |
+| creator-outreach | Find creators · TikTok + Instagram prospects + personalized outreach drafts | generate |
+
+### 6 · Make this week's content
+
+When you need TikTok scripts, Reddit posts, IG captions.
+
+| Spoke | What it does | Tier |
+|---|---|---|
+| create-this-weeks-content | Weekly batch · TikTok scripts + Reddit posts + IG captions | generate |
+| reddit-founder-post | Single founder-voice Reddit reply (high-frequency motion) | generate |
+
+### 7 · Run the email machine
+
+When you're building, sending, auditing, or writing email.
+
+| Spoke | What it does | Tier |
+|---|---|---|
+| build-next-email-flow | Challenger-tuned Klaviyo flow (welcome, cart, browse, post-purchase, winback) | stage |
+| klaviyo-flows | Consulting-grade flow build · deeper than build-next-email-flow | stage |
+| klaviyo-campaigns | One-time sends · newsletter, BFCM, promo · A/B testing, segmentation | stage |
+| email-copywriting | Any email writing in brand voice · subject lines, preview, body, CTAs | generate |
+| email-program-audit | Diagnose current Klaviyo state · gaps · build plan | generate |
+| email-strategy | Annual roadmap · flows + segments + cadence + attribution | generate |
+
+### 8 · Handle this customer
+
+When a support ticket or negative review comes in.
+
+| Spoke | What it does | Tier |
+|---|---|---|
+| reply-to-customer-issue | Brand-voice support reply · specific, useful, doesn't grovel | generate |
+| respond-to-negative-review | Public response on Amazon/JudgeMe that protects rating | stage |
+
+### 9 · Check the competition
+
+When you need a competitor scan or positioning analysis.
+
+| Spoke | What it does | Tier |
+|---|---|---|
+| whats-the-competitor-doing | Recurring scan · Based / Hanz De Fuko / Paul Mitchell · pricing, ads, sentiment | generate |
+| competitive-analysis | Quarterly deep · Bain Elements of Value + UX audit | generate |
+| meta-ads-competitive-ad-audit | Meta Ad Library + TikTok Ads Library · creative format/hook/copy analysis | generate |
+
+### 10 · Prep a paid campaign
+
+When standing up, tuning, or reporting on paid ad accounts.
+
+**Meta (9):** meta-ads-campaign-build · meta-ads-tracking-audit · meta-ads-audience-research · meta-ads-creative-testing · meta-ads-experiment-tracker · meta-ads-reporting · meta-ads-value-prop-exercise
+
+**Google (6):** google-ads-account-audit · google-ads-campaign-build · google-ads-keyword-research · google-ads-optimization · google-ads-prelaunch-qa · google-ads-reporting
+
+**Other (4):** bing-ads · reddit-ads · test-price-claim · testing-roadmap · ab-test-reporting
+
+(Hidden by default · invoked via the orchestrator or named chains.)
+
+### 11 · Amazon ops
+
+When the cash engine needs attention.
+
+| Spoke | What it does | Tier |
+|---|---|---|
+| amazon-listing-refresh | Quarterly listing refresh · copy + A+ content + image stack + pricing | stage |
+| inventory-restock | Reorder timing from velocity · email to inventory_owner · Asana task | execute |
+
+### 12 · Weekly review
+
+The Friday synthesis.
+
+| Spoke | What it does | Tier |
+|---|---|---|
+| weekly-business-review | Reads briefing cache + experiment log + Klaviyo + Shopify · 5-section retrospective + next-week plan | generate |
+
+### 13 · Listen to customers
+
+When you want themes from reviews or surveys.
+
+| Spoke | What it does | Tier |
+|---|---|---|
+| customer-voice | Review mining · 30-day reviews from JudgeMe + Amazon · themes + ad-ready quotes | generate |
+| voc-analysis | Open-ended survey response analysis (exit poll, NPS open-ends, post-purchase) | generate |
+
+### 14 · CRO deep dive
+
+When the dashboard isn't enough · diagnostic tools.
+
+| Spoke | What it does | Tier |
+|---|---|---|
+| heatmap-scrollmap-analysis | Hotjar / Clarity / Lucky Orange heatmap analysis (when tool installed) | generate |
+| session-recording-analysis | Structured session replay analysis · Successful/Unsuccessful/Takeaways | generate |
+| user-testing | Lyssna preference + design survey tests (when subscription active) | generate |
+| exit-intent-poll | Single-question exit poll response analysis | generate |
+| quantitative-analysis | GA4-based site analysis · funnel + entry points + top pages | generate |
+
+### 15 · SEO + content
+
+When organic search becomes a priority.
+
+| Spoke | What it does | Tier |
+|---|---|---|
+| seo-audit | Full technical + on-page + content SEO audit | generate |
+| keyword-research | SEO keyword discovery · intent classification · topical authority | generate |
+| content-brief | Keyword → writer brief (SERP, structure, E-E-A-T, schema) | generate |
+| seo-content-writing | Articles, guides, comparison pages, SEO PDP copy | generate |
+| ecommerce-seo | Shopify-specific SEO execution · canonical, faceted nav, product schema | stage |
 
 ---
 
-## Listen (5 workflows)
+## The 6 named chains
 
-Before you decide.
+The orchestrator runs these in sequence when the request matches:
 
-### customer-voice · ~2 min · Generate
-**Use when:** You want a current read on what customers are saying.
-**Produces:** Top 5 themes · emerging patterns · ad-ready quotes by theme · sentiment trend · recommended actions
-**Don't use for:** Strategic positioning (use `highest-leverage`) or single-customer reply (use `reply-to-customer-issue`)
-
-### whats-the-competitor-doing · ~3 min · Generate
-**Use when:** Weekly competitor scan or ad-hoc deep dive before a launch.
-**Produces:** Scan summary · per-brand update · positioning implications · recommended responses
-**Don't use for:** Internal product audits (use `refresh-underperforming-pdp` or `heuristic-analysis`)
-
-### why-sales-dropped · ~3 min · Generate
-**Use when:** Revenue is lower than expected and you want a diagnostic fast.
-**Produces:** Diagnostic summary · funnel comparison · channel breakdown · top 3 likely causes with evidence · recommended next actions
-**Don't use for:** Single-day noise — wait 3 days
-
-### whats-working-to-scale · ~3 min · Generate
-**Use when:** You want to identify which channels / SKUs / campaigns to double down on.
-**Produces:** Top performers per dimension · diagnosis · scale recommendations · risks
-**Don't use for:** Diagnosing what's broken (use `why-sales-dropped`)
-
-### diagnose-checkout-funnel · ~3 min · Generate
-**Use when:** A specific funnel stage is broken (cart abandonment, checkout drop, device CVR gap).
-**Produces:** Stage-by-stage funnel map · device + source segmentation · correlation analysis · top 3 root causes · fix recommendations · reversal test plan
-**Don't use for:** Generic "sales dropped" (use `why-sales-dropped`) or email funnel (use `fix-broken-flow`)
+| Chain | When | Sequence |
+|---|---|---|
+| **3-pack launch** | Push the 3-pack as default offer | launch-new-bundle-or-offer → meta-ads-copywriting → email-copywriting → klaviyo-campaigns |
+| **Meta reactivation** | Turn Meta back on after BM recovery | meta-ads-tracking-audit → meta-ads-audience-research → meta-ads-campaign-build → meta-ads-creative-testing → meta-ads-reporting |
+| **Subscription migration** | Move Amazon S&S subs to Shopify | subscription-migration-amazon-to-shopify → email-copywriting → klaviyo-campaigns → onboard-new-subscribers |
+| **Email program restart** | Get Klaviyo running | email-program-audit → email-strategy → klaviyo-flows × N |
+| **Quarterly review** | Big-picture strategic review | leverage-point-assessment → testing-roadmap → competitive-analysis |
+| **PDP refresh** | Fix an underperforming product page | copy-messaging-audit → heuristic-analysis → refresh-underperforming-pdp → test-price-claim → ab-test-reporting |
 
 ---
 
-## Fix (4 workflows)
+## System skills (background · not user-invoked)
 
-Reactive operational work.
-
-### reply-to-customer-issue · ~1 min · Generate
-**Use when:** A customer email or DM needs a brand-voice response.
-**Produces:** Drafted reply (subject + greeting + answer + next step + sign-off)
-**Don't use for:** Public negative reviews (use `respond-to-negative-review`) or Reddit (Hayden in founder voice)
-
-### respond-to-negative-review · ~1 min · Stage
-**Use when:** A 3-star-or-below review just landed on Amazon or JudgeMe.
-**Produces:** Drafted response staged for Hayden's review · escalation flag for sensitive cases
-**Don't use for:** Positive reviews · customer support DMs · Reddit
-
-### fix-broken-flow · ~5 min · Stage
-**Use when:** A Klaviyo flow is underperforming benchmarks.
-**Produces:** Audit summary · diagnosis · pause action · 3 rewrite variants · A/B test plan · decision rule
-**Don't use for:** New flows (use `build-next-email-flow`) or one-time sends (use `launch-sale-promo`)
-
-### inventory-restock · ~2 min · Execute
-**Use when:** A SKU is approaching stockout or has crossed the restock threshold.
-**Produces:** Restock analysis · email to Emanuel · Asana task · cost estimate
-**Don't use for:** New launches · general inventory review (run the dashboard) · strategic SKU decisions (use `highest-leverage`)
+| Skill | What it does | When it runs |
+|---|---|---|
+| orchestrator | Routes free-form input to the right entry card / spoke / chain | Every chat message |
+| anomaly-detector | Produces "On your plate" alerts for the dashboard | Every 4 hours (scheduled) |
+| briefing-generator | Daily Morning Briefing on the dashboard | Daily 6am PT (scheduled) |
 
 ---
 
-## Plan (2 workflows)
+## Permission tiers
 
-Periodic strategic work.
+Every skill has one of three tiers:
 
-### highest-leverage · ~6 min · Generate
-**Use when:** Start of month/quarter, or feeling overwhelmed by competing priorities.
-**Produces:** Leverage point assessment (7 dimensions A–F) with evidence · top 2 focuses recommendation · what to defer
-**Don't use for:** Tactical daily decisions (use the dashboard's alerts)
+| Tier | What it means | Who can run |
+|---|---|---|
+| **generate** | Drafts only · no live changes · no money out · fully reversible | Anyone |
+| **stage** | Pre-loads into a tool (Klaviyo, Shopify, Asana) but doesn't publish | marketing_coordinator + above |
+| **execute** | Live customer-facing change OR money out | execute_tier_approver only (per CONFIG.md) |
 
-### model-unit-economics · ~4 min · Generate
-**Use when:** Before a pricing decision, paid acquisition reactivation, bundle launch, or subscription change.
-**Produces:** Contribution margin stack · LTV projections (90/180/365 day) · max CPA scenarios · decision read · sensitivities
-**Don't use for:** Brand strategy decisions (use `highest-leverage`)
+The orchestrator stops on Execute-tier work and confirms approval before any live action.
 
 ---
 
-## Quick decision tree
+## How this catalog stays current
 
-**Have a customer or rating to respond to?** → `reply-to-customer-issue` (private) or `respond-to-negative-review` (public)
+`docs/port-manifest.md` is the canonical source. When a skill is added, removed, or changes status:
 
-**Inventory or operational alert?** → `inventory-restock` · `fix-broken-flow`
+1. Edit `docs/port-manifest.md` first
+2. Run `python3 scripts/sync-workflows.py` (regenerates dashboard Library)
+3. This catalog gets regenerated (or manually updated) to match
+4. Validator (check #21) confirms `skills/` matches the manifest
 
-**Launching something new?** → `launch-new-product` (single) · `launch-new-bundle-or-offer` (bundle) · `launch-sale-promo` (sale) · `build-next-email-flow` (new flow)
-
-**Generating creative or content?** → `create-this-weeks-ad-creative` · `create-this-weeks-content` · `creator-outreach`
-
-**Diagnosing a problem?** → `why-sales-dropped` (broad) · `diagnose-checkout-funnel` (specific) · `fix-broken-flow` (email)
-
-**Listening before deciding?** → `customer-voice` · `whats-the-competitor-doing` · `whats-working-to-scale`
-
-**Strategic / planning?** → `highest-leverage` · `model-unit-economics`
-
-**Refreshing existing content?** → `refresh-underperforming-pdp` · `fix-broken-flow`
-
-**Testing an idea?** → `test-price-claim`
-
----
-
-## How skills find each other
-
-Every skill's frontmatter has a `description` field that includes:
-- **MANDATORY TRIGGER:** the phrases that should fire this skill
-- **Do NOT use for:** the scenarios that should route elsewhere
-
-The orchestrator reads these on every command bar input and picks the right skill (or chain of skills) automatically.
-
-If you find the orchestrator routing wrong frequently to a skill, edit that skill's `description` — sharpen the triggers, or add a clearer "Do NOT use for" line.
+Quarterly: 90-day cut/keep review. Skills used <2×/month by non-GrowthHit roles get archived.
