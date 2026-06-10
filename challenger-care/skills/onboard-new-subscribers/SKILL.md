@@ -54,9 +54,9 @@ Subscriber emails skew warmer than ad copy — these customers have already opte
 
 ## Permission tier
 
-**Stage** — All 4 emails get drafted in Klaviyo as a flow but stay paused until Hayden's explicit approval. Klaviyo setup notes are Generate-tier reference.
+**Stage** — All 4 emails get drafted in Klaviyo as a flow but stay paused until the {{roles.founder}}'s explicit approval. Klaviyo setup notes are Generate-tier reference.
 
-**Why Stage:** A subscriber welcome flow is live customer-facing the moment it's unpaused. Reversible (can be paused again) but worth Hayden's approval before going live.
+**Why Stage:** A subscriber welcome flow is live customer-facing the moment it's unpaused. Reversible (can be paused again) but worth the {{roles.execute_tier_approver}}'s approval before going live.
 
 ## Example prompts that trigger this
 

@@ -24,7 +24,7 @@ You're running a discount, BFCM-style campaign, flash sale, or limited-time offe
 4. **2 social posts** — Instagram + Reddit-appropriate (founder voice for Reddit)
 5. **Klaviyo segment definition** — who gets the email
 6. **Start/end logic** — turn-on date, turn-off date, exclusion list
-7. **Discount code** suggestion (Hayden creates in Shopify)
+7. **Discount code** suggestion (the {{roles.founder}} creates in Shopify)
 
 All drafts land in `Drive/promos/[campaign-name]/`.
 
@@ -41,7 +41,7 @@ All drafts land in `Drive/promos/[campaign-name]/`.
 
 ## Permission tier
 
-**Stage** — All drafts go into Klaviyo / Shopify but don't publish. Hayden approves before send.
+**Stage** — All drafts go into Klaviyo / Shopify but don't publish. the {{roles.execute_tier_approver}} approves before send.
 
 ## Example prompts that trigger this
 

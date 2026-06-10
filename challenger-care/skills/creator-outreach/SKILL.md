@@ -42,7 +42,7 @@ Lands in `Drive/outreach/[campaign-name]/`.
 
 ## Permission tier
 
-**Generate** — all drafts, no sends. Hayden or Ivey reviews and sends manually (or via outreach tool).
+**Generate** — all drafts, no sends. the {{roles.founder}} or the {{roles.email_reviewer}} reviews and sends manually (or via outreach tool).
 
 ## Example prompts that trigger this
 

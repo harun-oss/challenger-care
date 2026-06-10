@@ -59,7 +59,7 @@ Run every customer-facing draft through the brand book quick checklist:
 
 ## Permission tier
 
-**Generate** — all drafts, no live changes. Hayden + Ivey review before anything ships.
+**Generate** — all drafts, no live changes. the {{roles.founder}} + the {{roles.marketing_coordinator}} review before anything ships.
 
 ## Example prompts that trigger this
 

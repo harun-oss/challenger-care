@@ -28,7 +28,7 @@ A single drafted Reddit reply, output to `/outputs/reddit/[date]-[thread-slug].m
 ## How Claude runs it
 
 1. Read the thread context · what's the actual question · what's the sentiment · what's the OP asking for
-2. Load `brand-strategy.md` · the founder voice rules section (which is *different* from brand voice · more personal, opinion-led, willing to recommend competitors when honest)
+2. Load `brand-strategy.md` · the {{roles.founder}} voice rules section (which is *different* from brand voice · more personal, opinion-led, willing to recommend competitors when honest)
 3. Load `customer-archetypes.md` · most Reddit replies hit the Reddit Discoverer archetype (community-driven, founder-voice receptive)
 4. Load `claim-library.md` · the same banned-claim rules apply (no "cures", no medical claims) but Reddit allows more direct competitor mentions than ad copy
 5. Load `voc/quote-library.md` · if a real customer has already said something relevant, riff on it rather than inventing
@@ -69,7 +69,7 @@ Things that flag as inauthentic and tank the post:
 
 ## Permission tier
 
-**Generate** · drafts only · the `roles.reddit_voice_owner` (per CONFIG.md · currently the founder) personally posts.
+**Generate** · drafts only · the `roles.reddit_voice_owner` (per CONFIG.md · currently the {{roles.founder}}) personally posts.
 
 This skill never auto-posts. Reddit's API + founder voice both require the human in the loop.
 
@@ -78,7 +78,7 @@ This skill never auto-posts. Reddit's API + founder voice both require the human
 - "Draft a Reddit reply for [thread URL]"
 - "Someone in r/malegrooming asked about hair pomades · what should I post?"
 - "This Reddit thread is about acne · founder voice reply please"
-- "What would Hayden post in this thread?" (where Hayden = `roles.reddit_voice_owner`)
+- "What would the {{roles.founder}} post in this thread?" (where the {{roles.founder}} = `roles.reddit_voice_owner`)
 
 ## Don't use this for
 
@@ -92,5 +92,5 @@ This skill never auto-posts. Reddit's API + founder voice both require the human
 - High-frequency · this skill runs 2-5×/week, much higher than most skills
 - The `$5 jar drop` mechanic is documented in `brand-strategy.md` · surface it when natural
 - Reading the OP's full post + the top 3 comments is mandatory before drafting · context matters
-- If the thread is contentious or has a hostile sentiment, the right answer is often "don't engage" · flag this to the founder rather than drafting
+- If the thread is contentious or has a hostile sentiment, the right answer is often "don't engage" · flag this to the {{roles.founder}} rather than drafting
 

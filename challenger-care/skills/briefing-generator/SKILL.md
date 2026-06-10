@@ -77,7 +77,7 @@ Format the output as JSON the dashboard can parse:
     {
       "type": "fire"
       "headline": "Pomade 4oz inventory: 18 days remaining"
-      "supporting": "Reorder lead time is 21 days. Email to Emanuel drafted."
+      "supporting": "Reorder lead time is 21 days. Email to the {{roles.inventory_owner}} drafted."
       "context_source": "shopify.inventory · velocity calc"
     }
   ]
@@ -95,7 +95,7 @@ Format the output as JSON the dashboard can parse:
 Before writing, review `brand-strategy.md` voice rules. The briefing speaks like a sharp chief of staff:
 - Direct
 - Confident, not cocky
-- Peer-to-peer (Hayden's a founder, not someone who needs educating)
+- Peer-to-peer (the {{roles.founder}}'s a founder, not someone who needs educating)
 - Specific over poetic
 
 **Good headline example:**
@@ -129,5 +129,5 @@ The dashboard fetches this file on load. Updates show as soon as the file refres
 
 - When the dashboard's briefing section adds/removes fields
 - When the anomaly detector adds new rule categories
-- When Hayden gives feedback on briefing tone or focus
+- When the {{roles.founder}} gives feedback on briefing tone or focus
 - When new connectors come online (GA4, more granular data)

@@ -24,7 +24,7 @@ A SKU is approaching stockout or has crossed the restock threshold. Auto-trigger
    - Days of stock remaining
    - Recommended reorder quantity (based on lead time + target stock level)
    - Estimated cost (based on past PO data if available)
-2. **Email to Emanuel** — drafted, ready to send, in brand voice
+2. **Email to the {{roles.inventory_owner}}** — drafted, ready to send, in brand voice
 3. **Asana task** — created for tracking the PO through to delivery
 4. **Cost estimate** — wholesale cost ballpark for cash flow planning
 
@@ -34,14 +34,14 @@ A SKU is approaching stockout or has crossed the restock threshold. Auto-trigger
 2. Calculate 30d velocity from Shopify sales
 3. Apply lead time (Pomade = 21 days per past data — confirm for other SKUs)
 4. Recommend reorder qty = (target stock days × velocity per day) + safety buffer
-5. Reference `../../assets/team-roles.md` — Emanuel is the manufacturing handoff
-6. Draft email to Emanuel with all the data
+5. Reference `../../assets/team-roles.md` — the {{roles.inventory_owner}} is the manufacturing handoff
+6. Draft email to the {{roles.inventory_owner}} with all the data
 7. Open Asana task in the "Inventory" project (when Asana connected)
-8. Surface the email for Hayden's approval before sending
+8. Surface the email for the {{roles.execute_tier_approver}}'s approval before sending
 
 ## Permission tier
 
-**Execute** — sends a real email to Emanuel + creates a real Asana task. Funds don't move until Emanuel responds with PO confirmation. Reversible: the email can be retracted within send-delay window; the Asana task can be deleted.
+**Execute** — sends a real email to the {{roles.inventory_owner}} + creates a real Asana task. Funds don't move until the {{roles.inventory_owner}} responds with PO confirmation. Reversible: the email can be retracted within send-delay window; the Asana task can be deleted.
 
 ## Example prompts that trigger this
 
@@ -51,7 +51,7 @@ A SKU is approaching stockout or has crossed the restock threshold. Auto-trigger
 
 ## Special handling
 
-- **Combo (3-pack)** — currently shows negative inventory due to a tracking error. This workflow flags the tracking issue separately from the restock decision and asks Hayden to confirm both actions.
+- **Combo (3-pack)** — currently shows negative inventory due to a tracking error. This workflow flags the tracking issue separately from the restock decision and asks the {{roles.founder}} to confirm both actions.
 - **Dead SKUs** (e.g., Body Wash, Tea Tree Shampoo with high stock + low velocity) — workflow does NOT recommend restock. Instead refers to `highest-leverage` for product mix decisions.
 
 ## Don't use this for

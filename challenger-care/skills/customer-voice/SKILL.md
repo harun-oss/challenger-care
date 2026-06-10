@@ -54,7 +54,7 @@ Lands in `Drive/voc-reports/[date].md`. Quotes also append to `../../assets/quot
 
 ## Note on data dependency
 
-**This workflow's output quality depends on the underlying review corpus.** Currently it reads from JudgeMe-only data (724 reviews). Once Hayden delivers the 500 Amazon reviews CSV, the corpus jumps to 1,224 and the analysis gets much more reliable. Until then, results are partial — the workflow runs, just at lower confidence.
+**This workflow's output quality depends on the underlying review corpus.** Currently it reads from JudgeMe-only data (724 reviews). Once the {{roles.founder}} delivers the 500 Amazon reviews CSV, the corpus jumps to 1,224 and the analysis gets much more reliable. Until then, results are partial — the workflow runs, just at lower confidence.
 
 ## Don't use this for
 

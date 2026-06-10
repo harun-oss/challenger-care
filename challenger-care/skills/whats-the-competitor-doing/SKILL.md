@@ -60,7 +60,7 @@ If the user wants a readable narrative as well, generate `scan-summary.md` with 
    - Search Reddit for last-30-day mentions (r/malegrooming, r/wicked_edge, r/SkincareAddiction)
    - Compare against baseline in `competitor-map.md`
 4. Diff each finding from baseline · flag changes
-5. Cross-reference with Hayden's stated read in `competitor-map.md`:
+5. Cross-reference with the {{roles.founder}}'s stated read in `competitor-map.md`:
    - Based — Gen Z TikTok hype · weak long-term
    - Hanz De Fuko — premium pomade · not innovating · Challenger Clean is better
    - Paul Mitchell — mass-prestige · coasting since 1987

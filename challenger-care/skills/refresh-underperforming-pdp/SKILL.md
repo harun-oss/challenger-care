@@ -63,7 +63,7 @@ All in `/outputs/pdps/[product-handle]/`:
 
 ## Permission tier
 
-**Stage** — Rewrite gets staged in Shopify (or Pagefly) but stays unpublished. Hero variants ready for A/B test setup. Hayden approves before going live.
+**Stage** — Rewrite gets staged in Shopify (or Pagefly) but stays unpublished. Hero variants ready for A/B test setup. the {{roles.execute_tier_approver}} approves before going live.
 
 ## Example prompts that trigger this
 
@@ -84,4 +84,4 @@ Per VOC + dashboard data, these SKUs are barely moving (2 units/month). When thi
 - Could they be re-positioned as part of "the complete routine"?
 - Is the SKU worth keeping vs. discontinuing?
 
-A new PDP doesn't fix a SKU-mix problem. Flag this to Hayden if the PDP rewrite isn't the right intervention.
+A new PDP doesn't fix a SKU-mix problem. Flag this to the {{roles.founder}} if the PDP rewrite isn't the right intervention.

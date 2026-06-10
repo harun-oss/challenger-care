@@ -49,7 +49,7 @@ All in `/outputs/ads/[week-of-date]/`:
    - At least 1 anchored to a specific VOC quote (the "wet dog" anecdote, "pomade acne," etc. are gold)
    - Mix dare frames + result-restriction frames + time-payoff frames per brand book headline formulas
 7. Designer brief: anchor to the visual references in the brand book (Jack Henry style — minimal, premium, performance-led)
-8. Reddit cuts: NOT brand voice — Hayden-as-founder voice
+8. Reddit cuts: NOT brand voice — the {{roles.founder}}-as-founder voice
 
 ## Voice check on every concept
 
@@ -61,7 +61,7 @@ All in `/outputs/ads/[week-of-date]/`:
 
 ## Permission tier
 
-**Generate** — all concepts are drafts. Hayden + Ivey + designer review before anything ships to Meta / Implicit.
+**Generate** — all concepts are drafts. the {{roles.founder}} + the {{roles.marketing_coordinator}} + designer review before anything ships to Meta / Implicit.
 
 ## Example prompts that trigger this
 

@@ -41,7 +41,7 @@ Every alert ships with an action button tagged:
 ### 1. Inventory restock — `inventory_low`
 - **Trigger:** Any SKU with `days_stock_remaining < 25 AND lead_time_days > days_stock_remaining`
 - **Severity:** high (if < 14 days), med (14–25 days)
-- **Tier:** execute (drafts email to Emanuel + Asana task)
+- **Tier:** execute (drafts email to the {{roles.inventory_owner}} + Asana task)
 - **Title pattern:** "Reorder [SKU] to avoid stockout"
 - **Description:** Include current units, velocity, lead time, recommended order qty
 - **Calculation:** `days_stock = (ending_inventory * 30) / units_sold_30d`
@@ -204,12 +204,12 @@ Each alert is one object in a JSON array:
   "tier": "execute"
   "title": "Reorder Pomade 4oz to avoid stockout"
   "description": "18 days remaining · 21-day lead time · ~$3,800 wholesale per past PO"
-  "contract": "→ Sends drafted email to Emanuel · creates Asana task · no funds move until Emanuel confirms PO"
+  "contract": "→ Sends drafted email to the {{roles.inventory_owner}} · creates Asana task · no funds move until the {{roles.inventory_owner}} confirms PO"
   "actions": [
     {
       "label": "Send"
       "primary": true
-      "prompt": "Draft a restock email to Emanuel for Pomade 4oz. Reference current inventory, velocity, and lead time. Recommend reorder quantity based on historical PO."
+      "prompt": "Draft a restock email to the {{roles.inventory_owner}} for Pomade 4oz. Reference current inventory, velocity, and lead time. Recommend reorder quantity based on historical PO."
     }
     {
       "label": "Wait"
@@ -271,4 +271,4 @@ To prevent alert fatigue:
 - Add new rules as new data sources come online
 - Adjust thresholds when calibration shows noise (too many false positives) or misses
 - Document new alert categories that emerge from team feedback
-- Quarterly review with Hayden to confirm the rules still match priorities
+- Quarterly review with the {{roles.founder}} to confirm the rules still match priorities

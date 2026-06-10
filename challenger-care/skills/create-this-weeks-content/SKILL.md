@@ -30,7 +30,7 @@ All in `/outputs/content/[week-of-date]/`:
    - Suggested visual direction for the creator
 2. **`reddit-posts.md`** — 2–3 founder-voice posts for r/malegrooming + related subs:
    - Title
-   - Body (Hayden voice · first-person · opinion-led · NOT brand voice)
+   - Body (the {{roles.founder}} voice · first-person · opinion-led · NOT brand voice)
    - Suggested timing + sub
 3. **`instagram-captions.md`** — 4–5 captions:
    - Short caption (Stories, single-image posts)
@@ -57,10 +57,10 @@ All in `/outputs/content/[week-of-date]/`:
 - The challenge frame is most powerful here (per brand book)
 
 ### Reddit (founder voice, NOT brand voice)
-- First-person Hayden voice
+- First-person the {{roles.founder}} voice
 - Opinion-led: *"I think..."*, *"In my experience..."*
 - Helpful before promotional
-- Specific product comparisons OK (Hayden's brand is the brand book context, but on Reddit he can be more direct about competitors)
+- Specific product comparisons OK (the {{roles.founder}}'s brand is the brand book context, but on Reddit he can be more direct about competitors)
 - Never copy-paste marketing language
 - $5 jar drops are a proven pattern — surface this when natural
 
@@ -71,7 +71,7 @@ All in `/outputs/content/[week-of-date]/`:
 
 ## Permission tier
 
-**Generate** — all drafts. Hayden runs the Reddit posts personally (founder voice requires founder posting). Ivey can publish IG. Implicit handles TikTok.
+**Generate** — all drafts. the {{roles.reddit_voice_owner}} handles Reddit posts personally (founder voice requires founder posting). the {{roles.marketing_coordinator}} can publish IG. Implicit handles TikTok.
 
 ## Example prompts that trigger this
 
@@ -84,11 +84,11 @@ All in `/outputs/content/[week-of-date]/`:
 
 - Paid ad creative (use `create-this-weeks-ad-creative`)
 - Email content (use `build-next-email-flow` or `launch-sale-promo`)
-- One-off founder posts where context is highly specific (just write directly with Hayden)
+- One-off founder posts where context is highly specific (just write directly with the {{roles.founder}})
 
 ## Notes
 
 - **Reddit voice is the trickiest.** It must NOT sound like marketing. If a Reddit post could be cut-and-pasted into an IG caption, rewrite it.
-- **Hayden's $5 jar drop pattern** is a proven Reddit play — surface it as an option when natural
+- **the {{roles.reddit_voice_owner}}'s \$5 jar drop pattern** is a proven Reddit play — surface it as an option when natural
 - **The Pomade Acne hook** plays beautifully on Reddit — high-intent, real conversation territory
 - **Implicit handles TikTok execution**, but the scripts feed their content engine

@@ -45,7 +45,7 @@ Lands in `Drive/tests/[test-name]/`.
 
 ## Permission tier
 
-**Stage** — Builds the test plan. Hayden reviews. The actual A/B implementation happens in Shopify / Pagefly / Klaviyo by Ivey or Hayden.
+**Stage** — Builds the test plan. the {{roles.execute_tier_approver}} reviews. The actual A/B implementation happens in Shopify / Pagefly / Klaviyo by the {{roles.marketing_coordinator}} or the {{roles.founder}}.
 
 ## Example prompts that trigger this
 

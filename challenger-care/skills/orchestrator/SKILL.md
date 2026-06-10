@@ -85,7 +85,7 @@ Example:
 ### "Draft a Reddit post for r/malegrooming"
 1. Load `brand-strategy.md` (founder voice rules)
 2. Load `../../assets/voc/quote-library.md` (real customer language for the relevant theme)
-3. Reference Hayden's tone (NOT brand voice — founder voice)
+3. Reference the {{roles.founder}}'s tone (NOT brand voice — founder voice)
 4. Output Reddit-native post, NOT a marketing-y post
 
 ### "What's our return rate trend?"

@@ -16,7 +16,7 @@ Start of month, start of quarter, or when feeling overwhelmed by competing prior
 Nothing required — Claude pulls current state from Shopify + knowledge files.
 
 Optional inputs:
-- Specific constraint to factor in (cash flow tight · Hayden capacity tight · Q3 push)
+- Specific constraint to factor in (cash flow tight · the {{roles.founder}} capacity tight · Q3 push)
 - Time horizon (this month · this quarter · next 90 days)
 
 ## What this produces

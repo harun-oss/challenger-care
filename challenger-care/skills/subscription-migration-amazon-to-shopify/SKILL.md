@@ -11,7 +11,7 @@ description: Models the economics of migrating Amazon Subscribe & Save customers
 
 The single biggest known LTV unlock in the business. The brand has 1,318 Amazon Subscribe & Save subscribers paying the platform's terms, with limited customer data and no direct relationship. Moving even 10% to Shopify subscriptions (currently 17 subs · 90-day target 50) doubles the subscription base and gives the brand a direct CRM line.
 
-This is also the highest-risk move in the playbook · Amazon S&S subscribers cancel within Amazon's UI, and pushing migration too aggressively can trigger Amazon's rank-suppression for "customer manipulation." Two-stage by design: stage 1 produces a model + offer for review, stage 2 executes only after the execute_tier_approver signs off.
+This is also the highest-risk move in the playbook · Amazon S&S subscribers cancel within Amazon's UI, and pushing migration too aggressively can trigger Amazon's rank-suppression for "customer manipulation." Two-stage by design: stage 1 produces a model + offer for review, stage 2 executes only after the {{roles.execute_tier_approver}} signs off.
 
 ## What you need
 
@@ -38,7 +38,7 @@ In `/outputs/subscription-migration/[date]-stage1/`:
 3. **`klaviyo-segment-spec.md`** — The audience definition for the comms send:
    - Who's eligible (active S&S subs · activity threshold · purchase history)
    - Who's excluded (recent purchasers · recently cancelled · damaged-product complaints)
-4. **`approval-checklist.md`** — Decisions the execute_tier_approver makes before stage 2:
+4. **`approval-checklist.md`** — Decisions the {{roles.execute_tier_approver}} makes before stage 2:
    - Approve / modify / kill incentive structure
    - Approve / modify segment scope
    - Set launch window

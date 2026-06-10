@@ -149,6 +149,25 @@ team:
 
 ---
 
+## Roles (substitution layer)
+
+Every skill references roles via `roles.*` keys, never raw names. Edit one value here, every skill that mentions that role updates automatically. Adding a fractional CMO is one edit.
+
+```yaml
+roles:
+  founder: "Hayden Wheatley"
+  marketing_coordinator: "Ivey"
+  manufacturing_lead: "Emanuel Itzhakian"
+  email_reviewer: "Ivey"
+  inventory_owner: "Emanuel Itzhakian"
+  execute_tier_approver: "Hayden Wheatley"
+  customer_support_owner: "Ivey"
+  reddit_voice_owner: "Hayden Wheatley"
+  fractional_cmo: ""
+```
+
+---
+
 ## Brand reference values
 
 Single source of truth for brand identifiers.

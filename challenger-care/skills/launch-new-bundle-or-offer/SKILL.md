@@ -59,7 +59,7 @@ Same as `launch-new-product` — run every draft through the brand book quick ch
 
 ## Permission tier
 
-**Stage** — PDP draft + email get staged in Shopify + Klaviyo respectively. Bundle math + ad concepts are Generate-tier. The Stage actions need Hayden's explicit go before going live.
+**Stage** — PDP draft + email get staged in Shopify + Klaviyo respectively. Bundle math + ad concepts are Generate-tier. The Stage actions need the {{roles.founder}}'s explicit go before going live.
 
 ## Example prompts that trigger this
 

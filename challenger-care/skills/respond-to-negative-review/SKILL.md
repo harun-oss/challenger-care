@@ -37,15 +37,15 @@ A staged response (saved to `/outputs/reviews/[date]-[platform]-[product].md`) i
    - **Shipping / fulfillment** ("Took forever to arrive" · "Wrong size")
    - **Pricing** ("Overpriced" · "Bottle smaller than expected")
    - **Allergic reaction / sensitivity** ⚠️ **escalate immediately**
-   - **Trolling / fake review** → flag to Hayden, don't engage publicly
+   - **Trolling / fake review** → flag to the {{roles.execute_tier_approver}}, don't engage publicly
 3. Load `brand-strategy.md` — voice rules. Public responses skew slightly warmer but stay direct.
 4. Load `claim-library.md` — confirm no banned language slips into the response · don't make medical claims even when addressing a sensitivity report
 5. Draft the response per the type:
-   - **Quality / defect:** Acknowledge specifically. Offer replacement or refund. Provide a direct contact (Ivey or support email).
+   - **Quality / defect:** Acknowledge specifically. Offer replacement or refund. Provide a direct contact (the {{roles.marketing_coordinator}} or support email).
    - **Expectation mismatch:** Don't argue. Acknowledge the gap. Educate gently. Sometimes offer to swap to a different SKU that better fits their need.
    - **Shipping:** Apologize once for the experience. Offer to make it right.
    - **Pricing:** Don't apologize for the price. Reframe the value (110-day jar math, ingredient quality). Thank them for trying.
-   - **Allergic reaction:** Escalate. Do NOT publish a response without Hayden's review.
+   - **Allergic reaction:** Escalate. Do NOT publish a response without the {{roles.founder}}'s review.
 
 ## Voice rules for public review responses
 
@@ -59,16 +59,16 @@ A staged response (saved to `/outputs/reviews/[date]-[platform]-[product].md`) i
 ## On-brand vs off-brand
 
 **On-brand response to "Pomade didn't hold":**
-> *"Sorry to hear it didn't hold for you, Tom. Our Matte gives medium-firm hold and works best applied to damp hair · if you'd like a hold step up, our Strong variant might fit better. Email me at info@challengercare.com and I'll swap it out. — Ivey"*
+> *"Sorry to hear it didn't hold for you, Tom. Our Matte gives medium-firm hold and works best applied to damp hair · if you'd like a hold step up, our Strong variant might fit better. Email me at info@challengercare.com and I'll swap it out. — the {{roles.marketing_coordinator}}"*
 
 **Off-brand (rewrite):**
 > *"Dear valued customer, we sincerely apologize that your Challenger experience did not meet your expectations. Your feedback is invaluable and we will share it with our team. We hope you'll give us another opportunity to support your daily self-care routine."*
 
 ## Permission tier
 
-**Stage** — Response is drafted but stays unpublished until Hayden reviews. Public-facing reviews are too high-stakes for auto-posting.
+**Stage** — Response is drafted but stays unpublished until the {{roles.execute_tier_approver}} reviews. Public-facing reviews are too high-stakes for auto-posting.
 
-**Exceptions requiring Hayden's direct write:**
+**Exceptions requiring the {{roles.execute_tier_approver}}'s direct write:**
 - Allergic reaction or safety mention
 - Legal threat language
 - Reviewer is an influencer / has a public following
@@ -85,7 +85,7 @@ A staged response (saved to `/outputs/reviews/[date]-[platform]-[product].md`) i
 
 - Positive reviews (different flow — usually a brief thank-you, not a response)
 - Customer support emails / DMs (use `reply-to-customer-issue` — private channel, different stakes)
-- Reddit threads (Hayden in founder voice)
+- Reddit threads (the {{roles.reddit_voice_owner}} in founder voice)
 
 ## Protecting the rating equity
 

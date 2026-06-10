@@ -21,7 +21,7 @@ A Klaviyo flow (welcome email 2, abandoned cart sequence, post-purchase nudge) i
 
 1. **Audit summary** — what the current flow is doing, where it's failing
 2. **Diagnosis** — most likely 1–2 reasons for the drop (copy, CTA, send time, segment, deliverability)
-3. **Pause action** — staged in Klaviyo, awaits Hayden's approval before going live
+3. **Pause action** — staged in Klaviyo, awaits the {{roles.execute_tier_approver}}'s approval before going live
 4. **3 rewrite variants** — each with subject line, preview, body, CTA in brand voice
 5. **A/B test plan** — how to run the 3 variants against the underperformer
 6. **Decision rule** — when to ship the winner
@@ -41,7 +41,7 @@ Lands in `Drive/flow-fixes/[flow-name]/`.
 
 ## Permission tier
 
-**Stage** — pause is staged but not live until Hayden approves. Rewrites are drafts. The A/B implementation requires explicit "ship" from Hayden.
+**Stage** — pause is staged but not live until the {{roles.execute_tier_approver}} approves. Rewrites are drafts. The A/B implementation requires explicit "ship" from the {{roles.founder}}.
 
 ## Example prompts that trigger this
 

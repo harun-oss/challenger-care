@@ -9,7 +9,7 @@ description: Drafts a complete Klaviyo flow in Challenger voice — welcome seri
 
 ## When to use this workflow
 
-You're building a new Klaviyo flow that doesn't exist yet (or rebuilding one of the 34 dormant drafts in Hayden's account). Most-needed: Welcome Series · Browse Abandonment · Post-Purchase · Winback · Sunset Unengaged.
+You're building a new Klaviyo flow that doesn't exist yet (or rebuilding one of the 34 dormant drafts in the {{roles.founder}}'s account). Most-needed: Welcome Series · Browse Abandonment · Post-Purchase · Winback · Sunset Unengaged.
 
 ## What you need
 
@@ -25,7 +25,7 @@ All in `/outputs/flows/[flow-name]/`:
 2. **`email-XX-[step-name].html`** — Klaviyo-ready HTML for each step (typically 3–5 emails)
 3. **`subject-lines.md`** — 3 variants per email for A/B testing
 4. **`klaviyo-setup-notes.md`** — Trigger config · suppression · smart send time · tracking
-5. **`metrics-targets.md`** — Expected open rate, CTR, conversion rate based on Klaviyo benchmarks + Hayden's past flow performance
+5. **`metrics-targets.md`** — Expected open rate, CTR, conversion rate based on Klaviyo benchmarks + the {{roles.founder}}'s past flow performance
 
 ## How Claude runs it
 
@@ -55,7 +55,7 @@ Apply the brand book quick checklist to every email:
 
 ## Permission tier
 
-**Stage** — Flows get drafted in Klaviyo but stay paused until Hayden approves. Email content is reversible (can edit/pause), but going live touches real customers.
+**Stage** — Flows get drafted in Klaviyo but stay paused until the {{roles.execute_tier_approver}} approves. Email content is reversible (can edit/pause), but going live touches real customers.
 
 ## Example prompts that trigger this
 
@@ -70,7 +70,7 @@ Apply the brand book quick checklist to every email:
 - One-time campaign sends (use `launch-sale-promo`)
 - Fixing an existing underperforming flow (use `fix-broken-flow` — different process)
 
-## Reference flow benchmarks (industry + Hayden's data)
+## Reference flow benchmarks (industry + the {{roles.founder}}'s data)
 
 | Flow | Open rate target | CTR target | Revenue per recipient |
 |---|---|---|---|
@@ -79,4 +79,4 @@ Apply the brand book quick checklist to every email:
 | Post-purchase | 40–55% | 5–9% | $0.30–$0.80 (cross-sell) |
 | Winback | 20–30% | 3–6% | $0.50–$1.50 (depends on time since last order) |
 
-These get refined as Hayden's flow performance data accumulates.
+These get refined as the {{roles.founder}}'s flow performance data accumulates.

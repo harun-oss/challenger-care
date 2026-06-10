@@ -13,7 +13,7 @@ Runs every Friday (or scheduled task). The cadence between the daily briefing an
 
 The daily briefing tells you what's happening *today*. The monthly LPA tells you *where to focus*. The weekly review is the retrospective + planning step in between: what shipped, what tested, what we learned, what's queued.
 
-The marketing coordinator runs this most weeks; the founder reads it Monday morning.
+The marketing coordinator runs this most weeks; the {{roles.founder}} reads it Monday morning.
 
 ## What you need
 
