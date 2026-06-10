@@ -1,6 +1,6 @@
 ---
 name: diagnose-checkout-funnel
-description: 'Investigates a specific funnel-stage problem — cart abandonment, checkout drop-off, device-specific CVR issues — surfaces top causes with evidence. MANDATORY TRIGGER: any mention of "Why is checkout abandonment at 77%?", "Desktop converting at 0% — what''s broken?", "Diagnose the cart-to-checkout drop", "Where are we leaking customers?". Do NOT use this for: Generic "sales dropped" (use `why-sales-dropped` — broader). Email funnel issues (use `fix-broken-flow`). Product-page-specific issues with no funnel data context (use `refresh-pdp` once it''s available).'
+description: 'Investigates a specific funnel-stage problem - cart abandonment, checkout drop-off, device-specific CVR issues - surfaces top causes with evidence. MANDATORY TRIGGER: any mention of "Why is checkout abandonment at 77%?", "Desktop converting at 0% - what''s broken?", "Diagnose the cart-to-checkout drop", "Where are we leaking customers?". Do NOT use this for: Generic "sales dropped" (use `why-sales-dropped` - broader). Email funnel issues (use `fix-broken-flow`). Product-page-specific issues with no funnel data context (use `refresh-pdp` once it''s available).'
 ---
 
 > **Permission tier:** generate · **Time:** 3min · **Tools/context:** mcp:shopify, mcp:ga4 (optional), assets/unit-economics.md

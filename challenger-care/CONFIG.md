@@ -212,7 +212,7 @@ model:
 
 ```yaml
 config:
-  version: "0.2.1"
+  version: "0.2.2"
   last_edited: "2026-06-10"
   schema_version: 1
 ```

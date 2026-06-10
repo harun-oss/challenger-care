@@ -1,6 +1,6 @@
 ---
 name: reddit-ad-builder
-description: 'Builds ad creatives from real customer language · mines Reddit complaints, product reviews, competitor reviews, crawls Facebook Ad Library, produces ready-to-use ad concepts. Pairs with `create-this-weeks-ad-creative`. MANDATORY TRIGGER: any mention of "build ads from reviews", "Reddit ad research", "competitor review mining", "ad copy from customer voice", "VOC ads", "ad creative research", "mine reviews for ads". Do NOT use for: Generic ad copy (use `meta-ads-copywriting`). Live Meta performance (use `meta-ads-creative-testing`).'
+description: 'Builds ad creatives from real customer language - mines Reddit complaints, product reviews, competitor reviews, crawls Facebook Ad Library, produces ready-to-use ad concepts. Pairs with `create-this-weeks-ad-creative`. MANDATORY TRIGGER: any mention of "build ads from reviews", "Reddit ad research", "competitor review mining", "ad copy from customer voice", "VOC ads", "ad creative research", "mine reviews for ads". Do NOT use for: Generic ad copy (use `meta-ads-copywriting`). Live Meta performance (use `meta-ads-creative-testing`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/customer-archetypes.md, assets/voc/quote-library.md, assets/competitor-map.md, assets/team-roles.md, CONFIG.md

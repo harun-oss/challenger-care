@@ -1,6 +1,6 @@
 ---
 name: reddit-ads
-description: 'Reddit advertising · campaign setup, subreddit + interest targeting, Reddit-native creative tone, pixel + conversion tracking, weekly performance, subreddit-level optimisation. MANDATORY TRIGGER: any mention of "Reddit Ads", "Reddit campaign", "Reddit advertising", "Reddit targeting", "subreddit targeting", "Reddit promoted post", "Reddit pixel", "advertise on Reddit". Do NOT use for: Organic Reddit posts (use `reddit-founder-post`). Reddit ad concepts from customer language (use `reddit-ad-builder`).'
+description: 'Reddit advertising - campaign setup, subreddit + interest targeting, Reddit-native creative tone, pixel + conversion tracking, weekly performance, subreddit-level optimisation. MANDATORY TRIGGER: any mention of "Reddit Ads", "Reddit campaign", "Reddit advertising", "Reddit targeting", "subreddit targeting", "Reddit promoted post", "Reddit pixel", "advertise on Reddit". Do NOT use for: Organic Reddit posts (use `reddit-founder-post`). Reddit ad concepts from customer language (use `reddit-ad-builder`).'
 ---
 
 > **Permission tier:** execute · **Tools/context:** assets/brand-strategy.md, assets/customer-archetypes.md, assets/voc/quote-library.md, assets/team-roles.md, CONFIG.md

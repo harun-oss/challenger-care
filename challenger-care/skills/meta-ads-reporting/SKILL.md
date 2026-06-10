@@ -1,6 +1,6 @@
 ---
 name: meta-ads-reporting
-description: 'Weekly + monthly Meta Ads performance reporting · key metrics, creative winners, what to test next. Markdown output (not PPTX). MANDATORY TRIGGER: any mention of "Meta Ads weekly report", "Meta monthly report", "Meta performance update", "weekly Meta performance", "monthly Meta report", "Meta Ads results". Do NOT use for: Scaling decisions. Creative testing decisions (use `meta-ads-creative-testing`). Account onboarding.'
+description: 'Weekly + monthly Meta Ads performance reporting - key metrics, creative winners, what to test next. Markdown output (not PPTX). MANDATORY TRIGGER: any mention of "Meta Ads weekly report", "Meta monthly report", "Meta performance update", "weekly Meta performance", "monthly Meta report", "Meta Ads results". Do NOT use for: Scaling decisions. Creative testing decisions (use `meta-ads-creative-testing`). Account onboarding.'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/goals-targets.md, assets/team-roles.md, CONFIG.md

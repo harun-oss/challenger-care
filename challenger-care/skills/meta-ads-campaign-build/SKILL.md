@@ -1,6 +1,6 @@
 ---
 name: meta-ads-campaign-build
-description: 'Stands up the Meta Ads account structure · 1-2 campaigns, DCT/Flexible Ads ad sets, DPA retargeting, ADV+ setup, pixel training, Canva creative workflow, ad creative overview for review. MANDATORY TRIGGER: any mention of "build Meta Ads campaign", "set up Meta Ads", "stand up Meta", "DCT setup", "Meta campaign structure", "first Meta campaign". Do NOT use for: Account onboarding/BM access (one-time, done). Weekly creative testing cadence (use `meta-ads-creative-testing`). Scaling decisions (no skill · single rule).'
+description: 'Stands up the Meta Ads account structure - 1-2 campaigns, DCT/Flexible Ads ad sets, DPA retargeting, ADV+ setup, pixel training, Canva creative workflow, ad creative overview for review. MANDATORY TRIGGER: any mention of "build Meta Ads campaign", "set up Meta Ads", "stand up Meta", "DCT setup", "Meta campaign structure", "first Meta campaign". Do NOT use for: Account onboarding/BM access (one-time, done). Weekly creative testing cadence (use `meta-ads-creative-testing`). Scaling decisions (no skill - single rule).'
 ---
 
 > **Permission tier:** execute · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/customer-archetypes.md, assets/voc/quote-library.md, assets/unit-economics.md, assets/team-roles.md, CONFIG.md

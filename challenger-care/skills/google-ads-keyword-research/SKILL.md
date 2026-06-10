@@ -1,6 +1,6 @@
 ---
 name: google-ads-keyword-research
-description: 'Full Google Ads keyword research · seed terms, intent classification (Info/Trans/Nav + Top/Mid/Bottom funnel), semantic ad groups, brand/competitor/negative lists, import-ready output. MANDATORY TRIGGER: any mention of "Google Ads keyword research", "Google Ads keyword list", "Google Keyword Planner", "find keywords for Google Ads", "ad group keyword research", "keyword intent classification". Do NOT use for: SEO keyword research (use `keyword-research`). Meta or Reddit targeting.'
+description: 'Full Google Ads keyword research - seed terms, intent classification (Info/Trans/Nav + Top/Mid/Bottom funnel), semantic ad groups, brand/competitor/negative lists, import-ready output. MANDATORY TRIGGER: any mention of "Google Ads keyword research", "Google Ads keyword list", "Google Keyword Planner", "find keywords for Google Ads", "ad group keyword research", "keyword intent classification". Do NOT use for: SEO keyword research (use `keyword-research`). Meta or Reddit targeting.'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/competitor-map.md, assets/customer-archetypes.md, assets/team-roles.md, CONFIG.md

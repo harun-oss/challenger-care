@@ -1,6 +1,6 @@
 ---
 name: klaviyo-campaigns
-description: 'Builds, schedules, segments, and optimises one-time Klaviyo campaign sends · newsletters, promotional campaigns, product launches, BFCM, SMS campaigns. Covers A/B testing, Smart Send Time, send-time analytics. MANDATORY TRIGGER: any mention of "Klaviyo campaign", "send a campaign", "Klaviyo newsletter", "Klaviyo promotional email", "BFCM campaign", "Klaviyo SMS", "schedule a Klaviyo email", "Klaviyo broadcast", "subject line test Klaviyo". Do NOT use for: Klaviyo flows or automations (use `klaviyo-flows` or `build-next-email-flow`). Email strategy (use `email-strategy`).'
+description: 'Builds, schedules, segments, and optimises one-time Klaviyo campaign sends - newsletters, promotional campaigns, product launches, BFCM, SMS campaigns. Covers A/B testing, Smart Send Time, send-time analytics. MANDATORY TRIGGER: any mention of "Klaviyo campaign", "send a campaign", "Klaviyo newsletter", "Klaviyo promotional email", "BFCM campaign", "Klaviyo SMS", "schedule a Klaviyo email", "Klaviyo broadcast", "subject line test Klaviyo". Do NOT use for: Klaviyo flows or automations (use `klaviyo-flows` or `build-next-email-flow`). Email strategy (use `email-strategy`).'
 ---
 
 > **Permission tier:** stage · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/customer-archetypes.md, assets/voc/quote-library.md, assets/team-roles.md, CONFIG.md, mcp:klaviyo

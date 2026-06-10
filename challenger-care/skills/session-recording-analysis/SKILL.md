@@ -1,6 +1,6 @@
 ---
 name: session-recording-analysis
-description: 'Structured session recording analysis · what to filter, what to watch for, observations → Successful/Unsuccessful/Takeaways format. Available when recording tool is installed. MANDATORY TRIGGER: any mention of "session recordings", "session replays", "user sessions", "Hotjar recordings", "Clarity recordings", "FullStory analysis", "watch user sessions". Do NOT use for: Heatmaps (use `heatmap-scrollmap-analysis`). Heuristic audits (use `heuristic-analysis`).'
+description: 'Structured session recording analysis - what to filter, what to watch for, observations Successful/Unsuccessful/Takeaways format. Available when recording tool is installed. MANDATORY TRIGGER: any mention of "session recordings", "session replays", "user sessions", "Hotjar recordings", "Clarity recordings", "FullStory analysis", "watch user sessions". Do NOT use for: Heatmaps (use `heatmap-scrollmap-analysis`). Heuristic audits (use `heuristic-analysis`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/customer-archetypes.md, assets/team-roles.md, CONFIG.md

@@ -1,6 +1,6 @@
 ---
 name: seo-audit
-description: 'Technical + on-page + content SEO audit · crawlability, Core Web Vitals (LCP/INP/CLS), indexability, site architecture, E-E-A-T signals, schema, AI Overviews visibility, internal linking. Produces a prioritised fix list. MANDATORY TRIGGER: any mention of "SEO audit", "technical SEO audit", "site audit SEO", "SEO health check", "SEO review", "why arent we ranking", "SEO issues", "audit our SEO". Do NOT use for: Keyword strategy (use `keyword-research`). Content writing (use `seo-content-writing`).'
+description: 'Technical + on-page + content SEO audit - crawlability, Core Web Vitals (LCP/INP/CLS), indexability, site architecture, E-E-A-T signals, schema, AI Overviews visibility, internal linking. Produces a prioritised fix list. MANDATORY TRIGGER: any mention of "SEO audit", "technical SEO audit", "site audit SEO", "SEO health check", "SEO review", "why arent we ranking", "SEO issues", "audit our SEO". Do NOT use for: Keyword strategy (use `keyword-research`). Content writing (use `seo-content-writing`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/goals-targets.md, assets/team-roles.md, CONFIG.md

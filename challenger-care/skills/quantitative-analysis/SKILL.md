@@ -1,6 +1,6 @@
 ---
 name: quantitative-analysis
-description: 'GA4-based quantitative site analysis · funnel, entry points, traffic sources, device, new vs returning, top pages. Markdown output. MANDATORY TRIGGER: any mention of "quantitative analysis", "quant analysis", "GA4 analysis", "site analytics deep dive", "traffic analysis", "conversion funnel analysis", "run the numbers for the site". Do NOT use for: Heatmaps (use `heatmap-scrollmap-analysis`). VoC analysis (use `customer-voice`).'
+description: 'GA4-based quantitative site analysis - funnel, entry points, traffic sources, device, new vs returning, top pages. Markdown output. MANDATORY TRIGGER: any mention of "quantitative analysis", "quant analysis", "GA4 analysis", "site analytics deep dive", "traffic analysis", "conversion funnel analysis", "run the numbers for the site". Do NOT use for: Heatmaps (use `heatmap-scrollmap-analysis`). VoC analysis (use `customer-voice`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/goals-targets.md, assets/team-roles.md, CONFIG.md

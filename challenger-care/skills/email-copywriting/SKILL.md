@@ -1,6 +1,6 @@
 ---
 name: email-copywriting
-description: 'Writes, critiques, and optimises email copy for every type of email · welcome flows, abandoned cart, nurture sequences, re-engagement, promotional campaigns, transactional. Subject lines, preview text, body, CTAs. MANDATORY TRIGGER: any mention of "write email copy", "write a subject line", "preview text", "email CTA", "write this email", "improve this email", "abandoned cart copy", "welcome email copy", "winback email", "promotional email copy". Do NOT use for: ESP setup or flow configuration (use `klaviyo-flows` or `klaviyo-campaigns`). Email strategy (use `email-strategy`).'
+description: 'Writes, critiques, and optimises email copy for every type of email - welcome flows, abandoned cart, nurture sequences, re-engagement, promotional campaigns, transactional. Subject lines, preview text, body, CTAs. MANDATORY TRIGGER: any mention of "write email copy", "write a subject line", "preview text", "email CTA", "write this email", "improve this email", "abandoned cart copy", "welcome email copy", "winback email", "promotional email copy". Do NOT use for: ESP setup or flow configuration (use `klaviyo-flows` or `klaviyo-campaigns`). Email strategy (use `email-strategy`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/customer-archetypes.md, assets/voc/quote-library.md, assets/team-roles.md, CONFIG.md

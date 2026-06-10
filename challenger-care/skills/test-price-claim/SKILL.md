@@ -1,6 +1,6 @@
 ---
 name: test-price-claim
-description: 'Designs an A/B test for a price point or product claim — variants, segment, duration, success metric — stages it for review. MANDATORY TRIGGER: any mention of "Should we test $50 vs $65 for the 3-pack?", "Test fragrance-free vs unscented as the hero claim", "I want to A/B the PDP hero image". Do NOT use this for: Email subject line tests inside Klaviyo (that''s a Klaviyo-internal test, handled in `launch-sale-promo` or flow workflows). Multi-variable experiments (each variable should be its own test).'
+description: 'Designs an A/B test for a price point or product claim - variants, segment, duration, success metric - stages it for review. MANDATORY TRIGGER: any mention of "Should we test $50 vs $65 for the 3-pack?", "Test fragrance-free vs unscented as the hero claim", "I want to A/B the PDP hero image". Do NOT use this for: Email subject line tests inside Klaviyo (that''s a Klaviyo-internal test, handled in `launch-sale-promo` or flow workflows). Multi-variable experiments (each variable should be its own test).'
 ---
 
 > **Permission tier:** stage · **Time:** 3min · **Tools/context:** assets/unit-economics.md, assets/claim-library.md, CONFIG.md

@@ -1,6 +1,6 @@
 ---
 name: orchestrator
-description: 'Routes free-form user input to the right Library entry card or directly to a spoke skill. Builds custom chains when no single skill fits. Loads brand context automatically. Appends to assets/usage-log.md after every routed skill. Maintains transparency about what''s running. Not invoked directly by users · runs on every chat message.'
+description: 'Routes free-form user input to the right Library entry card or directly to a spoke skill. Builds custom chains when no single skill fits. Loads brand context automatically. Appends to assets/usage-log.md after every routed skill. Maintains transparency about what''s running. Not invoked directly by users - runs on every chat message.'
 ---
 
 > **Permission tier:** varies (matches the underlying skill's tier) · **Time:** depends on routed skill · **Tools/context:** assets/ (all files), skills/ (all 69 user-facing + system skills), CONFIG.md, mcp:* (any connector the routed workflow needs)

@@ -1,6 +1,6 @@
 ---
 name: meta-ads-audience-research
-description: 'Builds Meta audience strategy · target customer research, interest categories, lookalikes, exclusions, refresh cadence. MANDATORY TRIGGER: any mention of "Meta audience research", "Meta audience strategy", "interest targeting", "build audiences for Meta", "lookalike audience setup", "Meta audience refresh", "targeting strategy Meta". Do NOT use for: Campaign structure (use `meta-ads-campaign-build`). Scaling/budget decisions.'
+description: 'Builds Meta audience strategy - target customer research, interest categories, lookalikes, exclusions, refresh cadence. MANDATORY TRIGGER: any mention of "Meta audience research", "Meta audience strategy", "interest targeting", "build audiences for Meta", "lookalike audience setup", "Meta audience refresh", "targeting strategy Meta". Do NOT use for: Campaign structure (use `meta-ads-campaign-build`). Scaling/budget decisions.'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/customer-archetypes.md, assets/voc/quote-library.md, assets/team-roles.md, CONFIG.md

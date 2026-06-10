@@ -1,6 +1,6 @@
 ---
 name: exit-intent-poll
-description: 'Analyses single-question exit-intent poll responses · category % breakdown, curated quotes, results table. Available when exit-intent poll is installed (e.g., Zigpoll). MANDATORY TRIGGER: any mention of "exit-intent poll", "exit poll", "exit survey", "Hotjar poll", "poll responses", "purchase barriers", "what stopped them from buying". Do NOT use for: Multi-question surveys (use `voc-analysis`). Session recordings.'
+description: 'Analyses single-question exit-intent poll responses - category % breakdown, curated quotes, results table. Available when exit-intent poll is installed (e.g., Zigpoll). MANDATORY TRIGGER: any mention of "exit-intent poll", "exit poll", "exit survey", "Hotjar poll", "poll responses", "purchase barriers", "what stopped them from buying". Do NOT use for: Multi-question surveys (use `voc-analysis`). Session recordings.'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/customer-archetypes.md, assets/voc/quote-library.md, assets/team-roles.md, CONFIG.md

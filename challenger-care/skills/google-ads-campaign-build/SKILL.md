@@ -1,6 +1,6 @@
 ---
 name: google-ads-campaign-build
-description: 'Builds RSA + PMAX campaigns from scratch · account setup, branded vs non-branded split, ad copy (55-headline system), bid strategy, PMAX eligibility, extensions, change log. MANDATORY TRIGGER: any mention of "build Google Ads campaign", "set up Google Ads", "stand up Google", "create RSA campaign", "create PMAX", "build ad groups", "write Google Ads copy". Do NOT use for: Account audit (use `google-ads-account-audit`). Pre-launch QA (use `google-ads-prelaunch-qa`).'
+description: 'Builds RSA + PMAX campaigns from scratch - account setup, branded vs non-branded split, ad copy (55-headline system), bid strategy, PMAX eligibility, extensions, change log. MANDATORY TRIGGER: any mention of "build Google Ads campaign", "set up Google Ads", "stand up Google", "create RSA campaign", "create PMAX", "build ad groups", "write Google Ads copy". Do NOT use for: Account audit (use `google-ads-account-audit`). Pre-launch QA (use `google-ads-prelaunch-qa`).'
 ---
 
 > **Permission tier:** execute · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/customer-archetypes.md, assets/voc/quote-library.md, assets/unit-economics.md, assets/team-roles.md, CONFIG.md

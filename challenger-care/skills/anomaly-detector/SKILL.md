@@ -1,6 +1,6 @@
 ---
 name: anomaly-detector
-description: 'System skill · runs on schedule to detect anomalies in live Shopify/Klaviyo data. Produces the ''On your plate'' alert feed read by the dashboard. Not invoked by users directly. Invoked by scheduled task every 4 hours.'
+description: 'System skill - runs on schedule to detect anomalies in live Shopify/Klaviyo data. Produces the ''On your plate'' alert feed read by the dashboard. Not invoked by users directly. Invoked by scheduled task every 4 hours.'
 ---
 
 > **Permission tier:** n/a (system skill · invoked by scheduled task) · **Tools/context:** assets/goals-targets.md, assets/team-roles.md, assets/unit-economics.md, CONFIG.md, mcp:shopify, mcp:klaviyo

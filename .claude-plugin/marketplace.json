@@ -1,13 +1,13 @@
 {
   "name": "challenger-care",
   "owner": {
-    "name": "GrowthHit · Challenger Care"
+    "name": "GrowthHit"
   },
   "plugins": [
     {
       "name": "challenger-care",
       "source": "./challenger-care",
-      "description": "Challenger Care AI operating system — daily briefing, command bar, and 21 workflows tuned to Challenger's brand voice, VOC, and unit economics. Connects Shopify + Klaviyo + Drive. Includes the Command dashboard artifact."
+      "description": "Challenger Care AI operating system. Daily briefing, command bar, 70+ skills tuned to Challenger's brand voice, VOC, and unit economics. Connects Shopify, Klaviyo, Drive, Asana."
     }
   ]
 }

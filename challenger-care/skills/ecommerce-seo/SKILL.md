@@ -1,6 +1,6 @@
 ---
 name: ecommerce-seo
-description: 'Shopify-specific SEO execution · canonical tags, faceted navigation, product page optimisation (title, meta, schema, alt), collection page SEO, breadcrumbs, Core Web Vitals, OOS handling. MANDATORY TRIGGER: any mention of "Shopify SEO", "eCommerce SEO", "product page SEO", "collection page SEO", "Shopify canonical", "Shopify speed", "product schema", "ecommerce site architecture". Do NOT use for: Generic keyword research (use `keyword-research`). Content writing (use `seo-content-writing`).'
+description: 'Shopify-specific SEO execution - canonical tags, faceted navigation, product page optimisation (title, meta, schema, alt), collection page SEO, breadcrumbs, Core Web Vitals, OOS handling. MANDATORY TRIGGER: any mention of "Shopify SEO", "eCommerce SEO", "product page SEO", "collection page SEO", "Shopify canonical", "Shopify speed", "product schema", "ecommerce site architecture". Do NOT use for: Generic keyword research (use `keyword-research`). Content writing (use `seo-content-writing`).'
 ---
 
 > **Permission tier:** stage · **Tools/context:** assets/brand-strategy.md, assets/team-roles.md, CONFIG.md

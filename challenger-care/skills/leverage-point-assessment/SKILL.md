@@ -1,6 +1,6 @@
 ---
 name: leverage-point-assessment
-description: 'Grades the business across 7 leverage points (Market · Product · Money · Position · Reach · Convert · Expand) on A-F scale with findings, quotes, recommendations. Pairs with `highest-leverage` (the lighter monthly Challenger version). This is the quarterly deep grade. MANDATORY TRIGGER: any mention of "leverage point assessment", "LPA", "strategic assessment", "growth audit", "grade the business", "quarterly LPA", "7 leverage points". Do NOT use for: Monthly priority check (use `highest-leverage`). Single-metric review. Channel-specific audits.'
+description: 'Grades the business across 7 leverage points (Market - Product - Money - Position - Reach - Convert - Expand) on A-F scale with findings, quotes, recommendations. Pairs with `highest-leverage` (the lighter monthly Challenger version). This is the quarterly deep grade. MANDATORY TRIGGER: any mention of "leverage point assessment", "LPA", "strategic assessment", "growth audit", "grade the business", "quarterly LPA", "7 leverage points". Do NOT use for: Monthly priority check (use `highest-leverage`). Single-metric review. Channel-specific audits.'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/unit-economics.md, assets/goals-targets.md, assets/competitor-map.md, assets/customer-archetypes.md, assets/voc/quote-library.md, assets/team-roles.md, CONFIG.md

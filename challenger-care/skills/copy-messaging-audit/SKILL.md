@@ -1,6 +1,6 @@
 ---
 name: copy-messaging-audit
-description: 'Audits website copy using Joanna Wiebe Seven Sweeps (Clarity · Voice · So What · Proof · Specificity · Emotion · Zero Risk). Pairs with `refresh-underperforming-pdp` as the diagnosis layer before rewriting. MANDATORY TRIGGER: any mention of "copy audit", "messaging audit", "Seven Sweeps", "audit my copy", "audit a page''s copy", "value proposition review", "CTA copy audit", "review this PDP copy". Do NOT use for: Writing the rewrite itself (use `refresh-underperforming-pdp`). Ad copy (use `meta-ads-copywriting`). Email copy (use `email-copywriting`).'
+description: 'Audits website copy using Joanna Wiebe Seven Sweeps (Clarity - Voice - So What - Proof - Specificity - Emotion - Zero Risk). Pairs with `refresh-underperforming-pdp` as the diagnosis layer before rewriting. MANDATORY TRIGGER: any mention of "copy audit", "messaging audit", "Seven Sweeps", "audit my copy", "audit a page''s copy", "value proposition review", "CTA copy audit", "review this PDP copy". Do NOT use for: Writing the rewrite itself (use `refresh-underperforming-pdp`). Ad copy (use `meta-ads-copywriting`). Email copy (use `email-copywriting`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/voc/quote-library.md, assets/customer-archetypes.md, assets/team-roles.md, CONFIG.md

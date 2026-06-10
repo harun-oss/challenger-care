@@ -1,6 +1,6 @@
 ---
 name: voc-analysis
-description: 'Analyse open-ended customer feedback · survey responses, exit-intent poll answers, post-purchase questionnaires. Theme coding, sentiment, ad-ready quote scoring. Paired with `customer-voice` (which is the Challenger-tuned review-mining version). MANDATORY TRIGGER: any mention of "survey response analysis", "exit-intent poll analysis", "open-ended VoC", "NPS open-ends", "why didn''t you buy poll", "checkout abandonment poll responses", "theme code these responses". Do NOT use for: Review mining from JudgeMe/Amazon (use `customer-voice`). Heatmap or scroll-map (use `heatmap-scrollmap-analysis`). A/B test results (use `ab-test-reporting`).'
+description: 'Analyse open-ended customer feedback - survey responses, exit-intent poll answers, post-purchase questionnaires. Theme coding, sentiment, ad-ready quote scoring. Paired with `customer-voice` (which is the Challenger-tuned review-mining version). MANDATORY TRIGGER: any mention of "survey response analysis", "exit-intent poll analysis", "open-ended VoC", "NPS open-ends", "why didn''t you buy poll", "checkout abandonment poll responses", "theme code these responses". Do NOT use for: Review mining from JudgeMe/Amazon (use `customer-voice`). Heatmap or scroll-map (use `heatmap-scrollmap-analysis`). A/B test results (use `ab-test-reporting`).'
 ---
 
 > **Permission tier:** generate · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/customer-archetypes.md, assets/voc/quote-library.md, assets/team-roles.md, CONFIG.md
