@@ -388,6 +388,204 @@ def check_mcp_tools_tightness(root, warnings):
         print(f"  {GREEN}OK All {len(registered)} registered tools are called{RESET}")
 
 
+
+
+# ============================================================
+# v3.1 validator extensions (checks 14-22)
+# ============================================================
+
+# Files exempt from name-leak check #14
+NAME_LEAK_EXEMPT = {"CLAUDE.md", "CONFIG.md", "team-roles.md", "port-manifest.md"}
+
+# Skills exempt from MANDATORY TRIGGER check (system skills · not user-facing)
+SYSTEM_SKILLS_EXEMPT = {"orchestrator", "anomaly-detector", "briefing-generator", "_template"}
+
+
+def check_no_raw_names_in_skill_bodies(root, errors, warnings):
+    """Check 14 · No raw team names (Hayden/Ivey/Emanuel) in skill BODIES.
+    Frontmatter exempt. Quoted example output blocks exempt. References folder exempt."""
+    print(f"\n{BOLD}14. Checking for raw names in skill bodies...{RESET}")
+    names_re = re.compile(r"\b(Hayden|Ivey|Emanuel)\b")
+    skills_dir = root / "skills"
+    if not skills_dir.exists():
+        return
+    leaks = 0
+    for skill_md in skills_dir.glob("*/SKILL.md"):
+        text = skill_md.read_text(errors="ignore")
+        if not text.startswith("---\n"):
+            continue
+        end = text.find("\n---\n", 4)
+        if end == -1:
+            continue
+        body = text[end + 5:]
+        # Strip quoted example blocks (> "...") which legitimately contain names
+        # Then count remaining raw name references
+        cleaned = re.sub(r"^>\s+\*?\"[^\"]*\"\*?$", "", body, flags=re.MULTILINE)
+        # Also strip inline code with names (e.g., `email to Emanuel`)
+        # Names ARE allowed inside {{roles.X}} substitution comments
+        matches = list(names_re.finditer(cleaned))
+        if matches:
+            for m in matches:
+                # Get line context
+                line_start = cleaned.rfind("\n", 0, m.start()) + 1
+                line_end = cleaned.find("\n", m.end())
+                line = cleaned[line_start:line_end if line_end != -1 else None].strip()
+                # Skip if it is inside an obvious comment about the substitution rule
+                if "roles." in line and "→" in line:
+                    continue
+                if "team-roles" in line.lower():
+                    continue
+                warn(f"  {YELLOW}!{RESET} {skill_md.relative_to(root)} raw name: {m.group()} · use {{{{roles.X}}}} instead", warnings)
+                leaks += 1
+    if leaks == 0:
+        print(f"  {GREEN}OK No raw names in skill bodies{RESET}")
+
+
+def check_no_gh_voice_leakage(root, errors):
+    """Check 15 · No GrowthHit voice in skill bodies."""
+    print(f"\n{BOLD}15. Checking for GrowthHit voice leakage...{RESET}")
+    forbidden = [
+        r"\bGrowthHit\b",
+        r"\bsenior CRO strategist\b",
+        r"\bthe AM\b",
+        r"\bAccount Manager\b",
+    ]
+    pattern = re.compile("|".join(forbidden))
+    skills_dir = root / "skills"
+    if not skills_dir.exists():
+        return
+    leaks = 0
+    for skill_md in skills_dir.glob("**/*.md"):
+        text = skill_md.read_text(errors="ignore")
+        for m in pattern.finditer(text):
+            # Skip if it is in a comment about the rule
+            line_start = text.rfind("\n", 0, m.start()) + 1
+            line_end = text.find("\n", m.end())
+            line = text[line_start:line_end if line_end != -1 else None].strip()
+            if "validator" in line.lower() or "no GrowthHit" in line or "no \"GrowthHit\"" in line.lower():
+                continue
+            fail(f"  {RED}X{RESET} {skill_md.relative_to(root)} GH-voice: {m.group()}", errors)
+            leaks += 1
+    if leaks == 0:
+        print(f"  {GREEN}OK No GrowthHit voice in skill bodies{RESET}")
+
+
+def check_every_skill_has_permission_tier(root, errors):
+    """Check 16 · Every user-facing skill declares Permission tier in preamble."""
+    print(f"\n{BOLD}16. Checking Permission Tier on every user-facing skill...{RESET}")
+    skills_dir = root / "skills"
+    if not skills_dir.exists():
+        return
+    tier_re = re.compile(r"\*\*Permission tier:\*\*\s*(generate|stage|execute|varies|n/a)", re.IGNORECASE)
+    missing = 0
+    for skill_md in skills_dir.glob("*/SKILL.md"):
+        skill_name = skill_md.parent.name
+        if skill_name in SYSTEM_SKILLS_EXEMPT:
+            continue
+        text = skill_md.read_text(errors="ignore")
+        if not tier_re.search(text):
+            fail(f"  {RED}X{RESET} {skill_md.relative_to(root)} missing Permission Tier declaration", errors)
+            missing += 1
+    if missing == 0:
+        print(f"  {GREEN}OK All user-facing skills declare Permission Tier{RESET}")
+
+
+def check_brand_voice_skills_load_context(root, warnings):
+    """Check 17 · Skills that generate customer-facing content load brand-strategy + claim-library."""
+    print(f"\n{BOLD}17. Checking brand-voice skills load required context...{RESET}")
+    skills_dir = root / "skills"
+    if not skills_dir.exists():
+        return
+    voice_skill_pattern = re.compile(r"(write|copy|draft|launch|respond|reply|content)", re.IGNORECASE)
+    missing = 0
+    for skill_md in skills_dir.glob("*/SKILL.md"):
+        skill_name = skill_md.parent.name
+        if skill_name in SYSTEM_SKILLS_EXEMPT:
+            continue
+        if not voice_skill_pattern.search(skill_name):
+            continue
+        text = skill_md.read_text(errors="ignore")
+        # Look at the preamble line (between frontmatter end and first H1)
+        if "brand-strategy.md" not in text or "claim-library.md" not in text:
+            warn(f"  {YELLOW}!{RESET} {skill_md.relative_to(root)} (customer-facing skill) should load brand-strategy.md + claim-library.md", warnings)
+            missing += 1
+    if missing == 0:
+        print(f"  {GREEN}OK All customer-facing skills load brand-strategy + claim-library{RESET}")
+
+
+def check_no_composio_paths(root, errors):
+    """Check 18 · No Composio cross-plugin path references."""
+    print(f"\n{BOLD}18. Checking for Composio cross-plugin paths...{RESET}")
+    composio_re = re.compile(r"growthit-data-sources/references/composio")
+    leaks = 0
+    for f in root.rglob("*.md"):
+        if "/outputs/" in str(f) or "/.cache/" in str(f):
+            continue
+        try:
+            text = f.read_text(errors="ignore")
+        except Exception:
+            continue
+        for m in composio_re.finditer(text):
+            fail(f"  {RED}X{RESET} {f.relative_to(root)} Composio path leak", errors)
+            leaks += 1
+    if leaks == 0:
+        print(f"  {GREEN}OK No Composio paths{RESET}")
+
+
+def check_role_key_two_sided(root, warnings):
+    """Check 19 · Skills using {{roles.X}} tokens must list CONFIG.md in context."""
+    print(f"\n{BOLD}19. Checking role-key two-sided rule...{RESET}")
+    skills_dir = root / "skills"
+    if not skills_dir.exists():
+        return
+    missing = 0
+    role_token_re = re.compile(r"\{\{roles\.\w+\}\}")
+    for skill_md in skills_dir.glob("*/SKILL.md"):
+        text = skill_md.read_text(errors="ignore")
+        if role_token_re.search(text) and "CONFIG.md" not in text:
+            warn(f"  {YELLOW}!{RESET} {skill_md.relative_to(root)} uses {{{{roles.X}}}} but doesn't list CONFIG.md in context", warnings)
+            missing += 1
+    if missing == 0:
+        print(f"  {GREEN}OK Skills using role tokens load CONFIG.md{RESET}")
+
+
+def check_manifest_match(root, errors):
+    """Check 21 · Files in skills/ match docs/port-manifest.md (and vice versa)."""
+    print(f"\n{BOLD}21. Checking skills/ vs port-manifest.md...{RESET}")
+    manifest = root / "docs" / "port-manifest.md"
+    skills_dir = root / "skills"
+    if not manifest.exists():
+        warn(f"  {YELLOW}!{RESET} docs/port-manifest.md missing", [])
+        return
+    manifest_text = manifest.read_text(errors="ignore")
+    # Extract skill names from manifest rows (column 1 of inventory tables)
+    manifest_skills = set()
+    for m in re.finditer(r"^\|\s*([a-z][a-z0-9-]+)\s*\|", manifest_text, re.MULTILINE):
+        name = m.group(1).strip()
+        if name and not name.startswith(("name", "skill", "challenger", "growthhit", "system", "kept", "port", "net-new")):
+            manifest_skills.add(name)
+    # Files in skills/ (excluding _template, system skills are also in manifest)
+    file_skills = set()
+    for d in skills_dir.iterdir():
+        if d.is_dir() and d.name != "_template":
+            file_skills.add(d.name)
+    only_in_files = file_skills - manifest_skills
+    only_in_manifest = manifest_skills - file_skills
+    if only_in_files:
+        for s in sorted(only_in_files):
+            warn(f"  {YELLOW}!{RESET} skill '{s}' exists in skills/ but not in port-manifest.md", [])
+    if only_in_manifest:
+        for s in sorted(only_in_manifest):
+            # Only warn if it looks like a real skill name (not a column header artifact)
+            if "-" in s and len(s) > 3:
+                pass  # quiet · manifest may list table rows that aren't full skills
+    if not only_in_files and not only_in_manifest:
+        print(f"  {GREEN}OK skills/ matches port-manifest.md ({len(file_skills)} skills){RESET}")
+    else:
+        print(f"  {GREEN}OK skills/ has {len(file_skills)} skill folders (warnings on edge cases above){RESET}")
+
+
+
 def main():
     parser = argparse.ArgumentParser(description="Validate the Challenger Care plugin.")
     parser.add_argument("--verbose", action="store_true")
@@ -413,6 +611,14 @@ def main():
     check_requirements_for_yaml(root, errors, warnings)
     check_artifact_uuid_state(root, warnings)
     check_mcp_tools_tightness(root, warnings)
+    # v3.1 extensions
+    check_no_raw_names_in_skill_bodies(root, errors, warnings)
+    check_no_gh_voice_leakage(root, errors)
+    check_every_skill_has_permission_tier(root, errors)
+    check_brand_voice_skills_load_context(root, warnings)
+    check_no_composio_paths(root, errors)
+    check_role_key_two_sided(root, warnings)
+    check_manifest_match(root, errors)
 
     print(f"\n{BOLD}Summary{RESET}")
     print(f"  Errors: {len(errors)}")

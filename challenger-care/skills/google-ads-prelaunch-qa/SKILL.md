@@ -3,7 +3,7 @@ name: google-ads-prelaunch-qa
 description: Pre-launch QA checklist before Google Ads goes live · conversion tracking, campaign settings, keywords + ad groups, extension completeness, Quality Score alignment, PMAX readiness, change log setup. Saves wasted budget from bad launches. MANDATORY TRIGGER: any mention of "Google Ads pre-launch check", "QA Google Ads", "Google Ads launch checklist", "pre-launch Google Ads", "is Google Ads ready to launch", "Google Ads readiness check". Do NOT use for: Auditing live campaigns (use `google-ads-account-audit`). Building campaigns (use `google-ads-campaign-build`).
 ---
 
-> **Permission tier:** stage · **Tools/context:** assets/team-roles.md, CONFIG.md
+> **Permission tier:** stage · **Tools/context:** assets/team-roles.md, CONFIG.md, assets/brand-strategy.md, assets/claim-library.md
 
 
 # Google Ads Pre-Launch QA

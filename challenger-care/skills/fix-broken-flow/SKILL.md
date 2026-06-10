@@ -3,7 +3,7 @@ name: fix-broken-flow
 description: Pauses an underperforming email or ad, audits why, builds the replacement, stages for review. MANDATORY TRIGGER: any mention of "Welcome flow email 2 is underperforming, fix it", "The post-purchase flow CTR dropped — rebuild it", "Pause the browse abandonment flow until we have a replacement". Do NOT use this for: New flows (use `build-next-email-flow`). Single campaign sends (use `launch-sale-promo`). Flow performance reporting (handled by the briefing / anomaly detector).
 ---
 
-> **Permission tier:** stage · **Time:** 5min · **Tools/context:** mcp:klaviyo (when connected), assets/claim-library.md
+> **Permission tier:** stage · **Time:** 5min · **Tools/context:** mcp:klaviyo (when connected), assets/claim-library.md, CONFIG.md
 
 # Pause and rebuild a broken flow
 

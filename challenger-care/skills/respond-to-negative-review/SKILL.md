@@ -3,7 +3,7 @@ name: respond-to-negative-review
 description: Drafts the right response to a negative review on Amazon or JudgeMe. Protects the 84% 5-star moat. Addresses the issue, offers a path forward, doesn't grovel. MANDATORY TRIGGER: any mention of "Negative review just came in on Amazon: [paste]", "1-star JudgeMe review · draft a response", "Reply to this 3-star: [paste]". Do NOT use this for: Positive reviews (different flow — usually a brief thank-you, not a response). Customer support emails / DMs (use `reply-to-customer-issue` — private channel, different stakes). Reddit threads (Hayden in founder voice).
 ---
 
-> **Permission tier:** stage · **Time:** 1min · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/team-roles.md
+> **Permission tier:** stage · **Time:** 1min · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/team-roles.md, CONFIG.md
 
 # Respond to a negative review
 

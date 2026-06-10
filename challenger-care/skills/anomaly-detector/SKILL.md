@@ -2,6 +2,9 @@
 name: anomaly-detector
 description: System skill · runs on schedule to detect anomalies in live Shopify/Klaviyo data. Produces the 'On your plate' alert feed read by the dashboard. Not invoked by users directly. Invoked by scheduled task every 4 hours.
 ---
+
+> **Permission tier:** n/a (system skill · invoked by scheduled task) · **Tools/context:** assets/goals-targets.md, assets/team-roles.md, assets/unit-economics.md, CONFIG.md, mcp:shopify, mcp:klaviyo
+
 # Anomaly Detector — Logic & Thresholds
 
 The rules that produce "On your plate" alerts in the dashboard. Run on a schedule (every 4 hours, ideally) against live data from connected MCPs. Output a JSON list of alerts that the artifact reads.
@@ -241,7 +244,7 @@ When the scheduled task fires:
 
 - **Inventory rules:** Lead times vary by SKU. Pomade lead time = 21 days per past PO. Update per SKU as data accumulates.
 - **AOV target = $50** per [unit-economics.md](../../assets/unit-economics.md). When that target shifts, update the multipliers here.
-- **Klaviyo benchmarks** by flow type are documented inside the GrowthHit email skills. Pull from there at runtime.
+- **Klaviyo benchmarks** by flow type are documented inside the the operating team email skills. Pull from there at runtime.
 - **Baselines for traffic, Reddit mentions, etc.** are rolling 30-day averages. Recalculate weekly.
 
 ---

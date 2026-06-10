@@ -3,7 +3,7 @@ name: refresh-underperforming-pdp
 description: Diagnoses why a PDP isn't converting, then rebuilds the hero + benefits + FAQ + CTAs in Challenger voice anchored to real VOC quotes. MANDATORY TRIGGER: any mention of "Refresh the Clean Cream Pomade PDP", "Rebuild the Matte 3oz PDP — it's converting badly", "Update the Body Wash PDP — it's a slow mover". Do NOT use this for: A new product (use `launch-new-product`). Collection / category pages (PDP only). General website copy refresh (different scope).
 ---
 
-> **Permission tier:** stage · **Time:** 5min · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/customer-archetypes.md, voc/quote-library.md, mcp:shopify
+> **Permission tier:** stage · **Time:** 5min · **Tools/context:** assets/brand-strategy.md, assets/claim-library.md, assets/customer-archetypes.md, voc/quote-library.md, mcp:shopify, CONFIG.md
 
 # Refresh an underperforming PDP
 
